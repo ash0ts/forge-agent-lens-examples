@@ -264,7 +264,8 @@ def run_evaluation(project_path: str, model_id: str) -> dict[str, Any]:
                         {"role": "system", "content": f"Diagnostic tool output: {json.dumps(diag)}"},
                     ],
                     temperature=0.0,
-                    max_tokens=300,
+                    max_tokens=1600,
+                    response_format={"type": "json_object"},
                 )
                 raw_reply = (resp.choices[0].message.content or "").strip()
                 in_tok = int(getattr(resp.usage, "prompt_tokens", 0) or 0)

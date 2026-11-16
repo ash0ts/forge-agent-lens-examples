@@ -23,7 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 forge = [
   "coreweave==0.1.0b0",
-  "wandb>=0.20",
+  "wandb[eval-table]>=0.31.0",
 ]
 dev = [
   "pytest>=8.3,<10",

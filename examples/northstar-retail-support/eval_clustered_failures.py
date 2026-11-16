@@ -218,7 +218,7 @@ def run_live(project_path: str, model_id: str) -> dict[str, Any]:
                     model=model_id,
                     messages=messages,
                     temperature=0.0,
-                    max_tokens=350,
+                    max_tokens=1600,
                 )
                 reply = (resp.choices[0].message.content or "").strip()
                 in_tok = int(getattr(resp.usage, "prompt_tokens", 0) or 0)

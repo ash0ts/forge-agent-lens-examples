@@ -1,4 +1,4 @@
 coreweave==0.1.0b0
 openai>=1.99.9,<3
-wandb>=0.20
+wandb[eval-table]>=0.31.0
 pytest==8.4.2
