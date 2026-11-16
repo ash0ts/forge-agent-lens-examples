@@ -1,0 +1,12 @@
+[submodule "studies/harness2-wandb"]
+	path = studies/harness2-wandb
+	url = https://github.com/ash0ts/harness2-wandb.git
+	branch = showcase/wandb-agent-lens
+[submodule "studies/tradingagents-election-lab"]
+	path = studies/tradingagents-election-lab
+	url = https://github.com/ash0ts/TradingAgents.git
+	branch = showcase/forge-election-lab
+[submodule "studies/rea-forge-recovery"]
+	path = studies/rea-forge-recovery
+	url = https://github.com/ash0ts/rea.git
+	branch = showcase/forge-recovery
