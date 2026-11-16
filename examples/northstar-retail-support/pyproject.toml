@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "retail-support-study-v1"
+version = "0.1.0"
+description = "Multi-agent retail support demo with MCP tools and Agent Lens telemetry"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.116,<1",
+  "httpx>=0.27,<1",
+  "openai>=1.100,<3",
+  "opentelemetry-api>=1.30,<2",
+  "opentelemetry-exporter-otlp-proto-http>=1.30,<2",
+  "opentelemetry-sdk>=1.30,<2",
+  "pydantic>=2.10,<3",
+  "tau2 @ git+https://github.com/sierra-research/tau2-bench@fc0055dc4e0a316c3f83133267fbd6faaa770992",
+  "typesafe-sdk>=0.7,<1",
+  "uvicorn[standard]>=0.35,<1",
+]
+
+[project.optional-dependencies]
+forge = [
+  "coreweave==0.1.0b0",
+  "wandb>=0.20",
+]
+dev = [
+  "pytest>=8.3,<10",
+  "ruff>=0.9,<1",
+]
+
+[project.scripts]
+retail-support-study = "retail_support_study_v1.cli:main"
+retail-support-chat = "retail_support_study_v1.web:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/retail_support_study_v1"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

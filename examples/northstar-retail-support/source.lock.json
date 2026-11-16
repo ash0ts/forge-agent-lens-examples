@@ -1,0 +1,75 @@
+{
+  "counts": {
+    "orders": 1000,
+    "products": 50,
+    "tasks": 114,
+    "users": 500
+  },
+  "prepared_files": {
+    "db.json": "c7db392d0e4ce56125bf77493aa1b94c8ff1c70ab3a5e254a5191de90133f59f",
+    "policy.md": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467",
+    "task_splits.json": "05527b9e6748b74c3e7c0b88bab42474cef2232549d77ae0b18a46dd48034c87",
+    "tasks.runtime.json": "d9bab1144db0b31e14eeb324a123467c83a0c34f9416b0e02b8a516fe2fb0254",
+    "user-guidelines.md": "740a29dfa64d7bc08eea3bf7493575b914a63f744acbaf7f199ee07eddaf72d3"
+  },
+  "private_files": {
+    "replacements.json": "60cb8fa1c62701a92b0f37f2275ed98dc69ed9649d511f80de7f275953480a9f",
+    "task-truth.json": "602fd86d0030dbadbd91094f206964e64a64dd3ea40b8a3b8adb6eb473df9569"
+  },
+  "remap": {
+    "algorithm": "retail-support-public-safe-v3",
+    "replacement_count": 7016,
+    "replacement_digest": "86117e95f845dcef0024522073e5477674ca753acaf1b6c47e817d0d424efd81"
+  },
+  "runtime_compatibility": [
+    {
+      "behavior": "bind each replacement item's price and options to its own variant instead of reusing the final validated variant",
+      "id": "tau3-v1.0.1-multi-item-variant-binding",
+      "tool": "modify_pending_order_items",
+      "upstream_version": "1.0.1"
+    }
+  ],
+  "schema_version": 2,
+  "source": {
+    "commit": "fc0055dc4e0a316c3f83133267fbd6faaa770992",
+    "files": {
+      "database": {
+        "path": "data/tau2/domains/retail/db.json",
+        "sha256": "413a65160adbdb5fde0ffc0015c49b6d70250b10c18128de169b597af7766765"
+      },
+      "policy": {
+        "path": "data/tau2/domains/retail/policy.md",
+        "sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "task_splits": {
+        "path": "data/tau2/domains/retail/split_tasks.json",
+        "sha256": "ed0580ec52575b63fbf76568af42490da6ee7783ecb4aa81af46961291358f20"
+      },
+      "tasks": {
+        "path": "data/tau2/domains/retail/tasks.json",
+        "sha256": "8e03ebce7901bd6218e7a7dc3105faa9324091a68058f7fe61c65262868812e8"
+      },
+      "user_guidelines": {
+        "path": "data/tau2/user_simulator/simulation_guidelines.md",
+        "sha256": "740a29dfa64d7bc08eea3bf7493575b914a63f744acbaf7f199ee07eddaf72d3"
+      }
+    },
+    "license": "MIT",
+    "repository": "https://github.com/sierra-research/tau2-bench",
+    "tag_object": "b711c1ead46f55111bf765cf44d5da8bacc2d28c",
+    "version": "1.0.1"
+  },
+  "source_lock_sha256": "af279db6b611a31fbcc1975fe6ab660b6ba8c6d9e1739d876beb7956869f1748",
+  "validation": {
+    "error_class_mismatches": 0,
+    "final_state_mismatches": 0,
+    "final_states_checked": 114,
+    "intentional_errors_checked": 18,
+    "outcome_digest": "03ab5a824643dba6713522b1a24c4ce80f7f044ac74041b3b8e827d4460ebc06",
+    "reference_actions_checked": 550,
+    "result_mismatches": 0,
+    "semantic_mismatches": 0,
+    "successful_results_checked": 532,
+    "tasks_checked": 114
+  }
+}

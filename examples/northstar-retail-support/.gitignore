@@ -1,0 +1,30 @@
+.venv/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.pyc
+
+# These contain benchmark truth, simulator instructions, or paid outputs.
+private/
+runs/
+
+# The reusable chat app ships only its public-safe fictional store and policy.
+prepared/*
+!prepared/db.json
+!prepared/policy.md
+
+prompts/*
+!prompts/support-agent.md
+
+# Written only after an explicitly approved remote operation.
+receipts/
+runtime-snapshots/
+
+# Generated study control-plane artifacts are intentionally not part of the
+# reusable chat demo repository.
+preview*.json
+model-probe*.json
+canary-execution.lock.json

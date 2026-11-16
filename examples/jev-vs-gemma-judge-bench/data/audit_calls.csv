@@ -1,0 +1,54 @@
+turn,field,gemma,jev,winner
+1,intents,information_request,+ refinement (0.92),Gemma
+2,intents,action_request,action + information (primary information),tie
+2,sentiment,neutral,dissatisfied (0.74),Gemma
+6,failure,clean,tool_failure,Jev
+7,failure category,tool_misuse:minor,tool_failure,tie
+10,intents,action_request,information_request,Gemma
+14,failure category,requirement_violation:major,"failed 0.72, no category",Gemma
+20,failure,clean,tool_failure,Jev
+22,failure category,tool_misuse:info,tool_failure,tie
+23,intents,action_request,+ information_request,Gemma
+24,failure,clean,tool_failure (0.78),Gemma
+25,failure,clean,"failed 0.68, no category",Gemma
+26,status,ok,needs_context (0.53),Gemma
+29,intents,information_request,+ action_request,Gemma
+29,failure,clean,failed 0.83,Jev
+36,"status, intents",ok / refinement,needs_context / other,Gemma
+38,intents,information_request,+ refinement (0.90),Jev
+38,"sentiment, target",neutral / unclear,frustrated (0.48) / agent,Jev
+43,failure,clean,failed 0.61,Jev
+44,failure,clean,tool_failure,Jev
+45,failure,clean,tool_failure,Jev
+46,sentiment,neutral,dissatisfied (0.49),Gemma
+47,failure category,tool_misuse:info,tool_failure,tie
+49,intents,approval,+ action_request,Gemma
+52,language,en,zh,tie
+53,failure,clean,failed 0.54,Jev
+54,status,ok,needs_context (0.80),Jev
+56,failure category,requirement_violation:major,"failed 0.51, no category",Gemma
+57,language,ru,other,Gemma
+57,sentiment,neutral,dissatisfied (0.67),Gemma
+59,intents,[],information_request,Jev
+59,failure,clean,tool_failure,Jev
+61,failure,tool_misuse:minor,clean,Jev
+65,"status, intents",ok / bad_faith,needs_context / action_request,Gemma
+66,intents,action_request,+ information_request,Gemma
+66,failure category,requirement_violation:major,"failed 0.88, no category",Gemma
+69,status,ok / other,needs_context (0.72),tie
+69,language,tr,other,Gemma
+74,intents,problem_report,information_request,Gemma
+74,failure,clean,tool_failure,Jev
+75,intents,action_request,"refinement (+ action, information)",tie
+75,target,unclear,agent,Gemma
+79,intents,information_request,action_request,Gemma
+82,sentiment,neutral,dissatisfied / frustrated (0.39 each),Gemma
+83,intents,information_request,+ action_request,Gemma
+87,failure,tool_misuse:major,"failed 0.50, no category",unverifiable
+88,"language, intents",en / [],und / other,tie
+90,failure,clean,tool_failure,Jev
+91,failure category,tool_misuse:info,tool_failure,tie
+92,sentiment,neutral,dissatisfied (0.56),Gemma
+92,failure category,3x tool_misuse:info,tool_failure,tie
+95,failure,clean,tool_failure,Jev
+98,target,own_work,unclear,Gemma

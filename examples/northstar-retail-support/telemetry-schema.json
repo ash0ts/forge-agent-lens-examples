@@ -1,0 +1,105 @@
+{
+  "schema_version": 3,
+  "emission_mode": "live_application_instrumentation",
+  "root": {
+    "name": "invoke_agent {applied_agent}",
+    "cardinality": "one parentless completed root per user-to-agent turn",
+    "conversation_link": "shared gen_ai.conversation.id",
+    "required_attributes": [
+      "gen_ai.conversation.id",
+      "gen_ai.operation.name",
+      "gen_ai.agent.name",
+      "gen_ai.agent.version",
+      "gen_ai.request.model",
+      "gen_ai.request.max_tokens",
+      "gen_ai.request.temperature",
+      "gen_ai.input.messages"
+    ],
+    "success_only_attributes": [
+      "gen_ai.output.messages"
+    ]
+  },
+  "model_call": {
+    "name": "chat {model}",
+    "required_attributes": [
+      "gen_ai.operation.name",
+      "gen_ai.provider.name",
+      "gen_ai.conversation.id",
+      "gen_ai.request.model",
+      "server.address",
+      "server.port",
+      "gen_ai.request.temperature",
+      "gen_ai.request.max_tokens",
+      "gen_ai.input.messages"
+    ],
+    "response_attributes_when_available": [
+      "gen_ai.response.model",
+      "gen_ai.response.id",
+      "gen_ai.response.finish_reasons",
+      "gen_ai.output.messages",
+      "gen_ai.usage.input_tokens",
+      "gen_ai.usage.output_tokens"
+    ]
+  },
+  "tool_call": {
+    "name": "tools/call {tool}",
+    "required_attributes": [
+      "gen_ai.operation.name",
+      "gen_ai.conversation.id",
+      "gen_ai.tool.name",
+      "gen_ai.tool.type",
+      "gen_ai.tool.call.id",
+      "jsonrpc.request.id",
+      "mcp.method.name",
+      "mcp.protocol.version",
+      "mcp.session.id",
+      "network.transport",
+      "gen_ai.tool.call.arguments"
+    ],
+    "success_only_attributes": [
+      "gen_ai.tool.call.result"
+    ],
+    "error_attributes": [
+      "error.type",
+      "rpc.response.status_code when the JSON-RPC response contains an error code"
+    ]
+  },
+  "decision_call": {
+    "names": [
+      "evaluate routing decision with {model}",
+      "evaluate behavior check with {model}"
+    ],
+    "parentage": "child of the same customer-turn root as model and MCP calls",
+    "span_kind": {
+      "live": "CLIENT",
+      "mock": "INTERNAL"
+    },
+    "required_attributes": [
+      "gen_ai.operation.name",
+      "gen_ai.provider.name",
+      "gen_ai.conversation.id",
+      "gen_ai.request.model",
+      "demo.decision.backend",
+      "{provider_prefix}.decision.purpose",
+      "{provider_prefix}.question_set.id",
+      "{provider_prefix}.question_set.sha256",
+      "{provider_prefix}.question.names"
+    ],
+    "response_attributes_when_available": [
+      "gen_ai.response.model",
+      "gen_ai.usage.input_tokens",
+      "gen_ai.usage.output_tokens",
+      "{provider_prefix}.decision.answers"
+    ],
+    "content_policy": "omit the raw decision state; retain only the versioned question identity and typed answer"
+  },
+  "content_policy": {
+    "include_actual_customer_and_agent_messages": true,
+    "include_actual_mcp_arguments_and_results": true,
+    "exclude_simulator_system_prompt": true,
+    "exclude_expected_actions": true,
+    "exclude_task_and_review_labels": true,
+    "exclude_benchmark_identity": true,
+    "exclude_user_simulator_model_calls": true
+  }
+}

@@ -1,0 +1,200 @@
+{"turn": 0, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4718, "completion_tokens": 56}
+{"turn": 0, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 7526, "completion_tokens": 5}
+{"turn": 1, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5351, "completion_tokens": 75}
+{"turn": 1, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 8155, "completion_tokens": 5}
+{"turn": 2, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4674, "completion_tokens": 76}
+{"turn": 2, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 14385, "completion_tokens": 5}
+{"turn": 3, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "frustrated", "sentiment_target": "unclear", "prompt_tokens": 4403, "completion_tokens": 68}
+{"turn": 3, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3273, "completion_tokens": 5}
+{"turn": 4, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request", "action_request", "action_request", "action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5402, "completion_tokens": 158}
+{"turn": 4, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 16281, "completion_tokens": 86}
+{"turn": 5, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4725, "completion_tokens": 69}
+{"turn": 5, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 15669, "completion_tokens": 5}
+{"turn": 6, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4622, "completion_tokens": 58}
+{"turn": 6, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 11407, "completion_tokens": 5}
+{"turn": 7, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6932, "completion_tokens": 57}
+{"turn": 7, "judge": "failure", "failures": [{"category": "tool_misuse", "severity": "minor", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 8000, "completion_tokens": 88}
+{"turn": 8, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4614, "completion_tokens": 52}
+{"turn": 8, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3522, "completion_tokens": 5}
+{"turn": 9, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5679, "completion_tokens": 72}
+{"turn": 9, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5832, "completion_tokens": 5}
+{"turn": 10, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6154, "completion_tokens": 67}
+{"turn": 10, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 6458, "completion_tokens": 5}
+{"turn": 11, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4605, "completion_tokens": 53}
+{"turn": 11, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 9594, "completion_tokens": 111}
+{"turn": 12, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4625, "completion_tokens": 69}
+{"turn": 12, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 11022, "completion_tokens": 5}
+{"turn": 13, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4416, "completion_tokens": 63}
+{"turn": 13, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3297, "completion_tokens": 5}
+{"turn": 14, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4631, "completion_tokens": 54}
+{"turn": 14, "judge": "failure", "failures": [{"category": "requirement_violation", "severity": "major", "evidence_step_count": 0}], "non_contract_keys": [], "prompt_tokens": 13314, "completion_tokens": 82}
+{"turn": 15, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4659, "completion_tokens": 87}
+{"turn": 15, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 9879, "completion_tokens": 5}
+{"turn": 16, "judge": "intent", "status": "ok", "language": "zh", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6334, "completion_tokens": 69}
+{"turn": 16, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 13775, "completion_tokens": 5}
+{"turn": 17, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4587, "completion_tokens": 57}
+{"turn": 17, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3407, "completion_tokens": 5}
+{"turn": 18, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4610, "completion_tokens": 55}
+{"turn": 18, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 15133, "completion_tokens": 113}
+{"turn": 19, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4754, "completion_tokens": 73}
+{"turn": 19, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 9473, "completion_tokens": 5}
+{"turn": 20, "judge": "intent", "status": "ok", "language": "zh", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6531, "completion_tokens": 78}
+{"turn": 20, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 12401, "completion_tokens": 5}
+{"turn": 21, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4709, "completion_tokens": 90}
+{"turn": 21, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 4805, "completion_tokens": 97}
+{"turn": 22, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4502, "completion_tokens": 52}
+{"turn": 22, "judge": "failure", "failures": [{"category": "tool_misuse", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 11497, "completion_tokens": 79}
+{"turn": 23, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4678, "completion_tokens": 52}
+{"turn": 23, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 16111, "completion_tokens": 102}
+{"turn": 24, "judge": "intent", "status": "ok", "language": "zh", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4876, "completion_tokens": 74}
+{"turn": 24, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 16774, "completion_tokens": 5}
+{"turn": 25, "judge": "intent", "status": "ok", "language": "pt", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4425, "completion_tokens": 63}
+{"turn": 25, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 6649, "completion_tokens": 5}
+{"turn": 26, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "dissatisfied", "sentiment_target": "product", "prompt_tokens": 5115, "completion_tokens": 82}
+{"turn": 26, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3554, "completion_tokens": 5}
+{"turn": 27, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5782, "completion_tokens": 72}
+{"turn": 27, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4095, "completion_tokens": 5}
+{"turn": 28, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4379, "completion_tokens": 63}
+{"turn": 28, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3274, "completion_tokens": 5}
+{"turn": 29, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4632, "completion_tokens": 64}
+{"turn": 29, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4714, "completion_tokens": 5}
+{"turn": 30, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4404, "completion_tokens": 47}
+{"turn": 30, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3537, "completion_tokens": 5}
+{"turn": 31, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4350, "completion_tokens": 61}
+{"turn": 31, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3015, "completion_tokens": 5}
+{"turn": 32, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6096, "completion_tokens": 64}
+{"turn": 32, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 6123, "completion_tokens": 5}
+{"turn": 33, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4778, "completion_tokens": 71}
+{"turn": 33, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5498, "completion_tokens": 5}
+{"turn": 34, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4603, "completion_tokens": 56}
+{"turn": 34, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 13112, "completion_tokens": 78}
+{"turn": 35, "judge": "intent", "status": "ok", "language": "de", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4646, "completion_tokens": 60}
+{"turn": 35, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 9942, "completion_tokens": 5}
+{"turn": 36, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["refinement"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6171, "completion_tokens": 73}
+{"turn": 36, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4559, "completion_tokens": 5}
+{"turn": 37, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "dissatisfied", "sentiment_target": "product", "prompt_tokens": 4435, "completion_tokens": 55}
+{"turn": 37, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4491, "completion_tokens": 5}
+{"turn": 38, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5420, "completion_tokens": 71}
+{"turn": 38, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 17785, "completion_tokens": 5}
+{"turn": 39, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4610, "completion_tokens": 68}
+{"turn": 39, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3909, "completion_tokens": 5}
+{"turn": 40, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "dissatisfied", "sentiment_target": "agent", "prompt_tokens": 4890, "completion_tokens": 72}
+{"turn": 40, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5411, "completion_tokens": 5}
+{"turn": 41, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4638, "completion_tokens": 56}
+{"turn": 41, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4984, "completion_tokens": 5}
+{"turn": 42, "judge": "intent", "status": "ok", "language": "zh", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6182, "completion_tokens": 58}
+{"turn": 42, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5818, "completion_tokens": 5}
+{"turn": 43, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4467, "completion_tokens": 71}
+{"turn": 43, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 2940, "completion_tokens": 5}
+{"turn": 44, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request", "information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5735, "completion_tokens": 116}
+{"turn": 44, "judge": "failure", "failures": [], "non_contract_keys": ["info"], "prompt_tokens": 16911, "completion_tokens": 95}
+{"turn": 45, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4642, "completion_tokens": 57}
+{"turn": 45, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 15948, "completion_tokens": 5}
+{"turn": 46, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 8130, "completion_tokens": 82}
+{"turn": 46, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 16215, "completion_tokens": 5}
+{"turn": 47, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4613, "completion_tokens": 76}
+{"turn": 47, "judge": "failure", "failures": [{"category": "tool_misuse", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 12187, "completion_tokens": 88}
+{"turn": 48, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5114, "completion_tokens": 70}
+{"turn": 48, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4357, "completion_tokens": 5}
+{"turn": 49, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["approval"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4836, "completion_tokens": 75}
+{"turn": 49, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4969, "completion_tokens": 5}
+{"turn": 50, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4613, "completion_tokens": 68}
+{"turn": 50, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 13216, "completion_tokens": 5}
+{"turn": 51, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4630, "completion_tokens": 62}
+{"turn": 51, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 11006, "completion_tokens": 85}
+{"turn": 52, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5419, "completion_tokens": 55}
+{"turn": 52, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 9343, "completion_tokens": 86}
+{"turn": 53, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["problem_report"], "sentiment": "dissatisfied", "sentiment_target": "product", "prompt_tokens": 4688, "completion_tokens": 67}
+{"turn": 53, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 10195, "completion_tokens": 5}
+{"turn": 54, "judge": "intent", "status": "ok", "language": "zh", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4687, "completion_tokens": 65}
+{"turn": 54, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4939, "completion_tokens": 5}
+{"turn": 55, "judge": "intent", "status": "ok", "language": "ko", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5127, "completion_tokens": 60}
+{"turn": 55, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3632, "completion_tokens": 5}
+{"turn": 56, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4664, "completion_tokens": 57}
+{"turn": 56, "judge": "failure", "failures": [{"category": "requirement_violation", "severity": "major", "evidence_step_count": 0}], "non_contract_keys": [], "prompt_tokens": 16381, "completion_tokens": 90}
+{"turn": 57, "judge": "intent", "status": "ok", "language": "ru", "intent_categories": ["refinement"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6406, "completion_tokens": 90}
+{"turn": 57, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5561, "completion_tokens": 5}
+{"turn": 58, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5162, "completion_tokens": 70}
+{"turn": 58, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5058, "completion_tokens": 5}
+{"turn": 59, "judge": "intent", "status": "needs_context", "language": "en", "intent_categories": [], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4710, "completion_tokens": 36}
+{"turn": 59, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 16043, "completion_tokens": 5}
+{"turn": 60, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4741, "completion_tokens": 77}
+{"turn": 60, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 6186, "completion_tokens": 5}
+{"turn": 61, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6125, "completion_tokens": 74}
+{"turn": 61, "judge": "failure", "failures": [{"category": "tool_misuse", "severity": "minor", "evidence_step_count": 2}], "non_contract_keys": [], "prompt_tokens": 6269, "completion_tokens": 168}
+{"turn": 62, "judge": "intent", "status": "ok", "language": "de", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5356, "completion_tokens": 69}
+{"turn": 62, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4593, "completion_tokens": 5}
+{"turn": 63, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5159, "completion_tokens": 70}
+{"turn": 63, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4872, "completion_tokens": 5}
+{"turn": 64, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["problem_report"], "sentiment": "dissatisfied", "sentiment_target": "product", "prompt_tokens": 4717, "completion_tokens": 75}
+{"turn": 64, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 11384, "completion_tokens": 5}
+{"turn": 65, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["bad_faith"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6382, "completion_tokens": 76}
+{"turn": 65, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4680, "completion_tokens": 5}
+{"turn": 66, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4651, "completion_tokens": 64}
+{"turn": 66, "judge": "failure", "failures": [{"category": "requirement_violation", "severity": "major", "evidence_step_count": 0}], "non_contract_keys": [], "prompt_tokens": 5474, "completion_tokens": 82}
+{"turn": 67, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5381, "completion_tokens": 69}
+{"turn": 67, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5125, "completion_tokens": 5}
+{"turn": 68, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "satisfied", "sentiment_target": "unclear", "prompt_tokens": 12925, "completion_tokens": 72}
+{"turn": 68, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 14597, "completion_tokens": 5}
+{"turn": 69, "judge": "intent", "status": "ok", "language": "tr", "intent_categories": ["other"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4478, "completion_tokens": 67}
+{"turn": 69, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 2755, "completion_tokens": 5}
+{"turn": 70, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "dissatisfied", "sentiment_target": "agent", "prompt_tokens": 4837, "completion_tokens": 73}
+{"turn": 70, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4387, "completion_tokens": 5}
+{"turn": 71, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4608, "completion_tokens": 65}
+{"turn": 71, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4086, "completion_tokens": 5}
+{"turn": 72, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4935, "completion_tokens": 78}
+{"turn": 72, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4345, "completion_tokens": 6}
+{"turn": 73, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4684, "completion_tokens": 70}
+{"turn": 73, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 15062, "completion_tokens": 5}
+{"turn": 74, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["problem_report"], "sentiment": "dissatisfied", "sentiment_target": "product", "prompt_tokens": 4760, "completion_tokens": 76}
+{"turn": 74, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 14741, "completion_tokens": 5}
+{"turn": 75, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5497, "completion_tokens": 73}
+{"turn": 75, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 10946, "completion_tokens": 5}
+{"turn": 76, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5731, "completion_tokens": 76}
+{"turn": 76, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5680, "completion_tokens": 5}
+{"turn": 77, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4890, "completion_tokens": 72}
+{"turn": 77, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4113, "completion_tokens": 5}
+{"turn": 78, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["refinement"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 6166, "completion_tokens": 86}
+{"turn": 78, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 9592, "completion_tokens": 5}
+{"turn": 79, "judge": "intent", "status": "ok", "language": "ja", "intent_categories": ["information_request"], "sentiment": "dissatisfied", "sentiment_target": "product", "prompt_tokens": 5171, "completion_tokens": 57}
+{"turn": 79, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4956, "completion_tokens": 5}
+{"turn": 80, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4606, "completion_tokens": 55}
+{"turn": 80, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 10889, "completion_tokens": 5}
+{"turn": 81, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4641, "completion_tokens": 66}
+{"turn": 81, "judge": "failure", "failures": [{"category": "tool_failure", "severity": "info", "evidence_step_count": 2}], "non_contract_keys": [], "prompt_tokens": 13460, "completion_tokens": 84}
+{"turn": 82, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["refinement"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5885, "completion_tokens": 85}
+{"turn": 82, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5814, "completion_tokens": 5}
+{"turn": 83, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5567, "completion_tokens": 69}
+{"turn": 83, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 4398, "completion_tokens": 5}
+{"turn": 84, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4604, "completion_tokens": 55}
+{"turn": 84, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 12563, "completion_tokens": 5}
+{"turn": 85, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4579, "completion_tokens": 53}
+{"turn": 85, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3708, "completion_tokens": 5}
+{"turn": 86, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4618, "completion_tokens": 54}
+{"turn": 86, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 10375, "completion_tokens": 5}
+{"turn": 87, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4767, "completion_tokens": 66}
+{"turn": 87, "judge": "failure", "failures": [{"category": "tool_misuse", "severity": "major", "evidence_step_count": 2}], "non_contract_keys": [], "prompt_tokens": 4613, "completion_tokens": 121}
+{"turn": 88, "judge": "intent", "status": "needs_context", "language": "en", "intent_categories": [], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 7380, "completion_tokens": 48}
+{"turn": 88, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5684, "completion_tokens": 5}
+{"turn": 89, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 7339, "completion_tokens": 94}
+{"turn": 89, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 19696, "completion_tokens": 5}
+{"turn": 90, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4695, "completion_tokens": 63}
+{"turn": 90, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 11465, "completion_tokens": 5}
+{"turn": 91, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4944, "completion_tokens": 67}
+{"turn": 91, "judge": "failure", "failures": [{"category": "tool_misuse", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 12214, "completion_tokens": 88}
+{"turn": 92, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4596, "completion_tokens": 62}
+{"turn": 92, "judge": "failure", "failures": [{"category": "tool_misuse", "severity": "info", "evidence_step_count": 2}, {"category": "tool_misuse", "severity": "info", "evidence_step_count": 1}, {"category": "tool_misuse", "severity": "info", "evidence_step_count": 1}], "non_contract_keys": [], "prompt_tokens": 15126, "completion_tokens": 253}
+{"turn": 93, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "dissatisfied", "sentiment_target": "product", "prompt_tokens": 4586, "completion_tokens": 62}
+{"turn": 93, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3010, "completion_tokens": 5}
+{"turn": 94, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4781, "completion_tokens": 66}
+{"turn": 94, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 8040, "completion_tokens": 5}
+{"turn": 95, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 7097, "completion_tokens": 81}
+{"turn": 95, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 17665, "completion_tokens": 5}
+{"turn": 96, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["action_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 5583, "completion_tokens": 76}
+{"turn": 96, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 5585, "completion_tokens": 5}
+{"turn": 97, "judge": "intent", "status": "ok", "language": "ja", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4917, "completion_tokens": 54}
+{"turn": 97, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 3375, "completion_tokens": 5}
+{"turn": 98, "judge": "intent", "status": "ok", "language": "zh", "intent_categories": ["information_request"], "sentiment": "dissatisfied", "sentiment_target": "own_work", "prompt_tokens": 4582, "completion_tokens": 77}
+{"turn": 98, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 16115, "completion_tokens": 5}
+{"turn": 99, "judge": "intent", "status": "ok", "language": "en", "intent_categories": ["information_request"], "sentiment": "neutral", "sentiment_target": "unclear", "prompt_tokens": 4700, "completion_tokens": 54}
+{"turn": 99, "judge": "failure", "failures": [], "non_contract_keys": [], "prompt_tokens": 15611, "completion_tokens": 5}
