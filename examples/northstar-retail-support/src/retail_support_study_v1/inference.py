@@ -356,19 +356,19 @@ class WandbInferenceClient:
                 validation_error: str | None = None
                 if choice is None:
                     validation_error = (
-                        "W&B Inference returned an unusable choice count: "
+                        "Forge Inference returned an unusable choice count: "
                         f"expected=1, returned={len(response.choices)}, "
                         f"response_id={response_id or 'unavailable'}"
                     )
                 elif returned_model != model:
                     validation_error = (
-                        "W&B Inference returned a different model: "
+                        "Forge Inference returned a different model: "
                         f"requested={model!r}, returned={returned_model!r}, "
                         f"response_id={response_id or 'unavailable'}"
                     )
                 elif finish_reason not in {"stop", "tool_calls"}:
                     validation_error = (
-                        "W&B Inference returned an unusable finish reason: "
+                        "Forge Inference returned an unusable finish reason: "
                         f"finish_reason={finish_reason!r}, "
                         f"response_id={response_id or 'unavailable'}"
                     )
@@ -425,7 +425,7 @@ class WandbInferenceClient:
                 time.sleep(_retry_delay_seconds(exc, retry_index=attempt))
         assert last_error is not None
         message = (
-            f"W&B Inference request unavailable after {attempt + 1} attempts: "
+            f"Forge Inference request unavailable after {attempt + 1} attempts: "
             f"{type(last_error).__name__}"
         )
         record = ModelCall(

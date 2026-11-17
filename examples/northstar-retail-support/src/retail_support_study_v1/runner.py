@@ -361,7 +361,7 @@ def _coordinate_inference_clients(
 ) -> _CoordinateInferenceClients:
     """Bind simulator and support clients to one coordinate-level budget.
 
-    The simulator always uses W&B Inference. The support provider is selected
+    The simulator always uses Forge Inference. The support provider is selected
     only from the coordinate's preview-sealed route; there is no runtime model
     substitution or provider fallback.
     """

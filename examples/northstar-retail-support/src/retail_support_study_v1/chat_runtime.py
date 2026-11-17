@@ -113,24 +113,17 @@ def _open_live_telemetry(project: str) -> LiveTelemetrySession | None:
             "Agent Lens telemetry rejects OTLP transport overrides; unset: "
             + ", ".join(configured)
         )
-    encoded = base64.b64encode(f"api:{api_key}".encode()).decode("ascii")
-    exporter = OTLPSpanExporter(
-        endpoint=_OTLP_ENDPOINT,
-        headers={
-            "Authorization": f"Basic {encoded}",
-            "project_id": project,
-        },
-        timeout=_EXPORT_TIMEOUT_SECONDS,
-        compression=Compression.Gzip,
+    from coreweave.forge.agentlens import tracing
+
+    session = tracing.init(
+        project,
+        api_key=api_key,
+        service_name="agent-lens-retail-chat-demo",
+        autopatch_integrations=False,
     )
-    return LiveTelemetrySession.from_exporter(
-        exporter,
+    return LiveTelemetrySession.from_provider(
+        session.provider,
         agent_version="retail-chat-demo-v1",
-        resource_attributes={
-            "service.name": "agent-lens-retail-chat-demo",
-            "service.namespace": "agent-lens-demo",
-            "deployment.environment.name": "demo",
-        },
     )
 
 
@@ -152,9 +145,11 @@ def _default_inference_factory(
 def _route_public(
     route: ModelRoute, *, available: bool | None = None
 ) -> dict[str, Any]:
+    provider_label = "Forge Inference" if route.provider_name == "wandb" else "Anthropic"
     value: dict[str, Any] = {
         "id": route.route_id,
         "provider": route.provider_name,
+        "provider_label": provider_label,
         "model": route.model,
     }
     if available is not None:

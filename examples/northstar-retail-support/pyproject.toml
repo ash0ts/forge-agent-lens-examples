@@ -8,6 +8,7 @@ version = "0.1.0"
 description = "Multi-agent retail support demo with MCP tools and Agent Lens telemetry"
 requires-python = ">=3.12,<3.13"
 dependencies = [
+  "coreweave==0.1.0b0",
   "fastapi>=0.116,<1",
   "httpx>=0.27,<1",
   "openai>=1.100,<3",

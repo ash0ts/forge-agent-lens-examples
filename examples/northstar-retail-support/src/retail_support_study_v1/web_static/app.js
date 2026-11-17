@@ -210,7 +210,7 @@ function applyCustomer(customer = {}) {
 }
 
 function routeLabel(route) {
-  const provider = String(route.provider || "provider");
+  const provider = String(route.provider_label || route.provider || "provider");
   const model = String(route.model || route.label || route.id || "model");
   const shortModel = model.includes("/") ? model.split("/").at(-1) : model;
   return route.label || `${provider} · ${shortModel}`;
@@ -525,7 +525,7 @@ function addReceiptRun(result) {
   dom.receiptList.append(receiptCard({
     kind: "model",
     label: route.model || route.label || "Model response",
-    subtitle: route.provider || "inference",
+    subtitle: route.provider_label || route.provider || "inference",
     status: "ok",
     statusLabel: modelDetails,
     details: usage,

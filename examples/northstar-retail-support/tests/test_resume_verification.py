@@ -630,7 +630,7 @@ def test_relaxed_test_project_policy_continues_after_frozen_cost_ambiguity(
         bundle.model_calls[0].returned_model = ""
         bundle.model_calls[0].finish_reason = "transport_error"
         bundle.model_calls[0].response_validation_error = (
-            "W&B Inference request unavailable after 3 attempts: "
+            "Forge Inference request unavailable after 3 attempts: "
             "InternalServerError"
         )
         bundle.bundle_sha256 = digest_value(bundle.unsigned_payload())
@@ -676,7 +676,7 @@ def test_relaxed_test_project_policy_continues_after_frozen_length_limit(
             return _bundle(
                 coordinate,
                 response_validation_error=(
-                    "W&B Inference returned an unusable finish reason: "
+                    "Forge Inference returned an unusable finish reason: "
                     "finish_reason='length'"
                 ),
             )

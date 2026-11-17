@@ -5,7 +5,7 @@ from typing import Any, Mapping
 from .schemas import ConversationBundle, ModelCall
 
 _RETRY_AMBIGUITY_PREFIX = "retryable transport outcome was ambiguous:"
-_EXHAUSTED_TRANSPORT_PREFIX = "W&B Inference request unavailable after"
+_EXHAUSTED_TRANSPORT_PREFIX = "Forge Inference request unavailable after"
 
 
 def continues_frozen_attempt_failures(preview: Mapping[str, Any]) -> bool:
