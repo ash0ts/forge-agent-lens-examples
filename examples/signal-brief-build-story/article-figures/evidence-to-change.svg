@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 690" role="img" aria-labelledby="title desc">
+  <title id="title">The practitioner workflow from product invariant to verified change</title>
+  <desc id="desc">A five-stage lane shows the human defining an invariant, Weave preserving a runtime failure, Codex replaying the artifact and changing code plus tests, the installed Signal Brief app being checked, and the human choosing to ship, revise, or stop. The flow does not automate approval.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#E4E6EB" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#171A1F"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="690" fill="#FDFDFD"/>
+  <rect width="1000" height="690" fill="url(#grid)"/>
+
+  <text x="60" y="68" fill="#171A1F" font-family="Source Serif Pro, Georgia, serif" font-size="42">What I actually handed the coding agent</text>
+  <text x="60" y="106" fill="#5B616B" font-family="Source Sans 3, Arial, sans-serif" font-size="23">A product rule plus a reproducible failure—not “make the agent better.”</text>
+
+  <g font-family="Source Sans 3, Arial, sans-serif" fill="#171A1F">
+    <rect x="60" y="154" width="880" height="78" rx="10" fill="#FFD39C" stroke="#171A1F" stroke-width="3"/>
+    <text x="86" y="188" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">01 · HUMAN</text>
+    <text x="86" y="216" font-size="25" font-weight="600">State the invariant: source identity cannot drift; a proposal is not approval.</text>
+
+    <line x1="500" y1="232" x2="500" y2="261" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="60" y="276" width="880" height="78" rx="10" fill="#DCC8F3" stroke="#171A1F" stroke-width="3"/>
+    <text x="86" y="310" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">02 · WEAVE</text>
+    <text x="86" y="338" font-size="25" font-weight="600">Preserve the failing span, response, duration, and model route.</text>
+
+    <line x1="500" y1="354" x2="500" y2="383" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="60" y="398" width="880" height="92" rx="10" fill="#10BFCC" stroke="#171A1F" stroke-width="3"/>
+    <text x="86" y="432" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">03 · CODEX</text>
+    <text x="86" y="460" font-size="25" font-weight="600">Replay locally. Change the narrow boundary. Add the regression test.</text>
+    <text x="86" y="482" font-size="19">No extra model call is required to debug captured parser and validator failures.</text>
+
+    <line x1="500" y1="490" x2="500" y2="519" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="60" y="534" width="590" height="92" rx="10" fill="#AFE0C7" stroke="#171A1F" stroke-width="3"/>
+    <text x="86" y="568" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">04 · INSTALLED APP</text>
+    <text x="86" y="596" font-size="25" font-weight="600">Can I see the evidence and take the intended action?</text>
+    <text x="86" y="618" font-size="19">Typed output is necessary. The product state is the real check.</text>
+
+    <line x1="650" y1="580" x2="700" y2="580" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="716" y="534" width="224" height="92" rx="10" fill="#FCBC32" stroke="#171A1F" stroke-width="3"/>
+    <text x="828" y="569" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">05 · HUMAN</text>
+    <text x="828" y="601" text-anchor="middle" font-size="25" font-weight="700">SHIP · REVISE · STOP</text>
+  </g>
+
+  <path d="M828 534 C828 510 828 506 828 503 L828 496" fill="none" stroke="#FFB8AA" stroke-width="0"/>
+  <text x="60" y="670" fill="#5B616B" font-family="Source Sans 3, Arial, sans-serif" font-size="20">The trace informs the next change. It does not choose the fix or approve the release.</text>
+</svg>

@@ -10,3 +10,24 @@
 	path = studies/rea-forge-recovery
 	url = https://github.com/ash0ts/rea.git
 	branch = showcase/forge-recovery
+[submodule "studies/meta-harness-wandb"]
+	path = studies/meta-harness-wandb
+	url = https://github.com/ash0ts/meta-harness-wandb.git
+[submodule "studies/forge-workshop-kit"]
+	path = studies/forge-workshop-kit
+	url = https://github.com/ash0ts/forge-workshop-kit.git
+[submodule "studies/flowblock"]
+	path = studies/flowblock
+	url = https://github.com/ash0ts/flowblock.git
+[submodule "studies/tab-to-pitch"]
+	path = studies/tab-to-pitch
+	url = https://github.com/ash0ts/tab-to-pitch.git
+[submodule "studies/gi-scenario-studio"]
+	path = studies/gi-scenario-studio
+	url = https://github.com/ash0ts/gi-scenario-studio.git
+[submodule "studies/ecocorridor-scenario-studio"]
+	path = studies/ecocorridor-scenario-studio
+	url = https://github.com/ash0ts/gi-scenario-studio.git
+[submodule "studies/fugue"]
+	path = studies/fugue
+	url = https://github.com/ash0ts/fugue.git

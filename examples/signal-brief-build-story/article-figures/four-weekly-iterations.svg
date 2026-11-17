@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760" role="img" aria-labelledby="title desc">
+  <title id="title">Four weekly synthesis iterations and the engineering boundary changed after each</title>
+  <desc id="desc">Four cards show approximate prompt sizes of 107k, 76k, 76k, and 39k characters with durations of 302, 107, 302, and 78 seconds. The first and third timed out into fallback, the second returned a response rejected during replay for schema and identity problems, and the fourth produced a validated map.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#E4E6EB" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#171A1F"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="760" fill="#FDFDFD"/>
+  <rect width="1000" height="760" fill="url(#grid)"/>
+
+  <text x="54" y="64" fill="#171A1F" font-family="Source Serif Pro, Georgia, serif" font-size="42">Four runs. Three different boundaries failed.</text>
+  <text x="54" y="102" fill="#5B616B" font-family="Source Sans 3, Arial, sans-serif" font-size="22">Prompt sizes are approximate. Durations come from the top-level receipts.</text>
+
+  <g font-family="Source Sans 3, Arial, sans-serif" fill="#171A1F">
+    <rect x="54" y="146" width="892" height="116" rx="10" fill="#FFB8AA" stroke="#171A1F" stroke-width="3"/>
+    <text x="80" y="180" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">RUN 01 · 107k CHARS · 302s</text>
+    <text x="80" y="215" font-size="28" font-weight="700">The synthesis call timed out. Deterministic fallback kept the product usable.</text>
+    <text x="80" y="243" font-size="20">Next change: bound history instead of making an oversized request wait longer.</text>
+
+    <line x1="500" y1="262" x2="500" y2="291" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="54" y="306" width="892" height="132" rx="10" fill="#FFB8AA" stroke="#171A1F" stroke-width="3"/>
+    <text x="80" y="340" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">RUN 02 · 76k CHARS · 107s</text>
+    <text x="80" y="375" font-size="28" font-weight="700">A response arrived. Replay rejected the research.</text>
+    <text x="80" y="405" font-size="20">Schema echo · duplicate trusted IDs · headline bound to the wrong source</text>
+    <text x="80" y="428" font-size="20">Next change: narrow semantic repairs plus identity reconciliation.</text>
+
+    <line x1="500" y1="438" x2="500" y2="467" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="54" y="482" width="892" height="116" rx="10" fill="#FFB8AA" stroke="#171A1F" stroke-width="3"/>
+    <text x="80" y="516" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">RUN 03 · 76k CHARS · 302s</text>
+    <text x="80" y="551" font-size="28" font-weight="700">A similarly sized prompt timed out on the next attempt.</text>
+    <text x="80" y="579" font-size="20">Next change: reduce this prompt below 50k and add a prompt-size regression.</text>
+
+    <line x1="500" y1="598" x2="500" y2="627" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="54" y="642" width="892" height="84" rx="10" fill="#AFE0C7" stroke="#171A1F" stroke-width="3"/>
+    <text x="80" y="676" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700">RUN 04 · 39k CHARS · 78s</text>
+    <text x="80" y="710" font-size="28" font-weight="700">Validated ResearchMapV1 · no receipt warnings</text>
+  </g>
+
+  <rect x="714" y="663" width="204" height="42" rx="21" fill="#171A1F"/>
+  <text x="816" y="691" text-anchor="middle" fill="#FDFDFD" font-family="IBM Plex Mono, monospace" font-size="17" font-weight="700">ONE FIELD RUN</text>
+</svg>

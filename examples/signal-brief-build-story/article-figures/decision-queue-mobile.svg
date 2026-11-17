@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 650" role="img" aria-labelledby="title desc">
+  <title id="title">Signal Brief narrows one weekly evidence pool into two review surfaces</title>
+  <desc id="desc">Two hundred forty-five cached items become forty candidates. One research map then branches into five ranked stories for News and three ideas for Content, where a person decides what moves forward.</desc>
+  <defs>
+    <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="#E4E6EB"/></pattern>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#171A1F"/></marker>
+  </defs>
+  <rect width="390" height="650" fill="#FDFDFD"/><rect width="390" height="650" fill="url(#grid)"/>
+  <g fill="#171A1F" font-family="Source Sans 3, Arial, sans-serif">
+    <text x="20" y="38" font-family="Source Serif Pro, Georgia, serif" font-size="25">The week gets smaller.</text>
+    <text x="20" y="65" font-family="Source Serif Pro, Georgia, serif" font-size="25">The receipts stay attached.</text>
+    <text x="20" y="89" fill="#5B616B" font-size="14">One verified weekly run · cached evidence</text>
+
+    <rect x="20" y="116" width="350" height="82" rx="8" fill="#AFCBFF" stroke="#171A1F" stroke-width="2"/>
+    <text x="38" y="164" font-size="38" font-weight="700">245</text>
+    <text x="125" y="151" font-size="22" font-weight="600">cached items</text>
+    <text x="125" y="176" font-size="14">papers · repos · releases · feeds</text>
+
+    <line x1="195" y1="198" x2="195" y2="226" stroke="#171A1F" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="210" y="217" font-family="IBM Plex Mono, monospace" font-size="13">BOUND CONTEXT</text>
+
+    <rect x="45" y="242" width="300" height="78" rx="8" fill="#AFE0C7" stroke="#171A1F" stroke-width="2"/>
+    <text x="64" y="289" font-size="36" font-weight="700">40</text>
+    <text x="132" y="278" font-size="21" font-weight="600">candidates</text>
+    <text x="132" y="301" font-size="14">five evidence lanes</text>
+
+    <line x1="195" y1="320" x2="195" y2="362" stroke="#171A1F" stroke-width="3"/>
+    <line x1="105" y1="362" x2="285" y2="362" stroke="#171A1F" stroke-width="3"/>
+    <line x1="105" y1="362" x2="105" y2="390" stroke="#171A1F" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="285" y1="362" x2="285" y2="390" stroke="#171A1F" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="195" y="346" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12">ONE RESEARCH MAP</text>
+
+    <rect x="20" y="405" width="170" height="126" rx="8" fill="#AFE0C7" stroke="#171A1F" stroke-width="2"/>
+    <text x="38" y="450" font-size="36" font-weight="700">5</text>
+    <text x="75" y="442" font-size="18" font-weight="600">stories</text>
+    <text x="38" y="478" font-size="14">sources + context</text>
+    <text x="38" y="509" font-family="IBM Plex Mono, monospace" font-size="12">NEWS · READ</text>
+
+    <rect x="200" y="405" width="170" height="126" rx="8" fill="#AFE0C7" stroke="#171A1F" stroke-width="2"/>
+    <text x="218" y="450" font-size="36" font-weight="700">3</text>
+    <text x="255" y="442" font-size="18" font-weight="600">ideas</text>
+    <text x="218" y="478" font-size="14">evidence + gaps</text>
+    <text x="218" y="509" font-family="IBM Plex Mono, monospace" font-size="12">CONTENT · REVIEW</text>
+
+    <line x1="285" y1="531" x2="285" y2="557" stroke="#171A1F" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="198" y="570" width="174" height="48" rx="24" fill="#FCBC32" stroke="#171A1F" stroke-width="2"/>
+    <text x="285" y="600" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="700">HUMAN DECIDES</text>
+  </g>
+</svg>

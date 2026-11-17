@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" role="img" aria-labelledby="title desc">
+  <title id="title">Signal Brief narrows one weekly evidence pool into a human review queue</title>
+  <desc id="desc">Two connected blocks show 245 cached evidence items becoming 40 bounded synthesis candidates. The result then branches into five ranked stories for News and three ideas for Content review. The Content branch stops at a human decision gate rather than publication.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#E4E6EB" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#171A1F"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="660" fill="#FDFDFD"/>
+  <rect width="1000" height="660" fill="url(#grid)"/>
+
+  <text x="64" y="70" fill="#171A1F" font-family="Source Serif Pro, Georgia, serif" font-size="42">The week gets smaller. The receipts stay attached.</text>
+  <text x="64" y="108" fill="#5B616B" font-family="Source Sans 3, Arial, sans-serif" font-size="23">One verified weekly run · cached evidence · no new triage calls</text>
+
+  <g font-family="Source Sans 3, Arial, sans-serif" fill="#171A1F">
+    <rect x="64" y="166" width="872" height="94" rx="10" fill="#AFCBFF" stroke="#171A1F" stroke-width="3"/>
+    <text x="94" y="225" font-size="52" font-weight="700">245</text>
+    <text x="222" y="216" font-size="30" font-weight="600">cached evidence items</text>
+    <text x="222" y="242" font-size="20">papers · repositories · releases · trusted feeds</text>
+
+    <line x1="500" y1="260" x2="500" y2="292" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="526" y="285" font-size="19" font-family="IBM Plex Mono, monospace">bound the context</text>
+
+    <rect x="152" y="308" width="696" height="88" rx="10" fill="#AFE0C7" stroke="#171A1F" stroke-width="3"/>
+    <text x="182" y="364" font-size="50" font-weight="700">40</text>
+    <text x="286" y="357" font-size="29" font-weight="600">synthesis candidates</text>
+    <text x="286" y="382" font-size="20">balanced across five evidence lanes</text>
+
+    <line x1="500" y1="396" x2="500" y2="440" stroke="#171A1F" stroke-width="4"/>
+    <text x="526" y="425" font-size="19" font-family="IBM Plex Mono, monospace">build one ResearchMapV1</text>
+    <line x1="284" y1="440" x2="716" y2="440" stroke="#171A1F" stroke-width="4"/>
+    <line x1="284" y1="440" x2="284" y2="475" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="716" y1="440" x2="716" y2="475" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="74" y="490" width="420" height="100" rx="10" fill="#AFE0C7" stroke="#171A1F" stroke-width="3"/>
+    <text x="100" y="535" font-size="46" font-weight="700">5</text>
+    <text x="164" y="530" font-size="28" font-weight="600">ranked stories</text>
+    <text x="164" y="558" font-size="20">sources · context · why it matters</text>
+    <text x="100" y="579" font-size="18" font-family="IBM Plex Mono, monospace">NEWS · READING QUEUE</text>
+
+    <rect x="506" y="490" width="420" height="100" rx="10" fill="#AFE0C7" stroke="#171A1F" stroke-width="3"/>
+    <text x="532" y="535" font-size="46" font-weight="700">3</text>
+    <text x="596" y="530" font-size="28" font-weight="600">ideas for review</text>
+    <text x="596" y="558" font-size="20">evidence · gaps · next action</text>
+    <text x="532" y="579" font-size="18" font-family="IBM Plex Mono, monospace">CONTENT · DECISION QUEUE</text>
+  </g>
+
+  <line x1="716" y1="590" x2="716" y2="604" stroke="#171A1F" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="596" y="610" width="240" height="42" rx="21" fill="#FCBC32" stroke="#171A1F" stroke-width="3"/>
+  <text x="716" y="638" text-anchor="middle" fill="#171A1F" font-family="IBM Plex Mono, monospace" font-size="19" font-weight="700">HUMAN DECIDES</text>
+</svg>

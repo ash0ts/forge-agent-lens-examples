@@ -1,47 +1,41 @@
-# CoreWeave Forge & Agent Lens — Field Studies, Benchmarks & Examples
+# CoreWeave Forge & Agent Lens — Centralized Public Code Hub, Benchmarks & Field Studies
 
-Canonical companion code, reproducible datasets, and linked multi-product studies for Anish Shah's **Agent Lens** and **CoreWeave Forge** engineering series.
+Centralized public code, reproducible datasets, evaluation suites, and pinned Git submodules for Anish Shah's **Agent Lens** and **CoreWeave Forge** technical articles and hands-on workshops.
 
-Every example in this repository connects **Agent Lens** (`https://forge.coreweave.com/agent-lens/{entity}/{project}`) to the rest of **CoreWeave Forge**:
+Every study in this repository connects **Agent Lens** (`https://forge.coreweave.com/agent-lens/{entity}/{project}`) to the rest of **CoreWeave Forge**:
 - **Ingest**: Shipped Python (`pip install coreweave`, `from coreweave.forge.agentlens import tracing`) and TypeScript (`@coreweave/forge-sdk@beta`) OpenTelemetry GenAI spans (`invoke_agent`, `chat`, `execute_tool`, `gen_ai.conversation.id`).
 - **Observe & Triage**: Runtime errors, online LLM-judge **Tags** (`Nemotron-3.5-Lightning-30B-A3B`), **Saved Views**, and **Insights** signature clustering (`gemma-4-31B-it` + `Qwen3-Embedding-0.6B` UMAP/HDBSCAN).
-- **Investigate & Verify Across Forge**: Native **ARIA** actions inside Agent Lens (`Add filters with ARIA`, `Summarize with ARIA`, `Create tag with ARIA`), the **W&B MCP Server**'s 17 read-only agent tools, **Forge Serverless Inference**, **Forge Notebooks** (Marimo), and side-by-side **Evaluation Tables (`wandb.EvalTable`)** in shared `{entity}/{project}` Forge Workspaces.
+- **Investigate, Train & Verify Across Forge**: Native **ARIA** actions inside Agent Lens (`Add filters with ARIA`, `Summarize with ARIA`, `Create tag with ARIA`), the **W&B MCP Server**'s 17 read-only agent tools, **Forge Serverless Inference**, **Forge Serverless SFT**, **CoreWeave Sandboxes**, **Forge Notebooks** (Marimo), **Registry**, and side-by-side **Evaluation Tables (`wandb.EvalTable`)** in shared `{entity}/{project}` Forge Workspaces.
 
 ---
 
-## Article-to-Code & Live Forge Index
+## Complete Article-to-Code & Live Forge Index
 
-### A. Consolidated Examples in This Repository (`examples/`)
+### A. Consolidated Examples & Reproducibility Bundles in This Repository (`examples/`)
 
-| Article | Code Directory | Forge Report & Workspace Surfaces |
+| Article | Code Directory | Live Forge Report & Workspace Surfaces |
 |---|---|---|
-| **Where Do Agent Lens Insights Come From?** | [`examples/northstar-retail-support/`](examples/northstar-retail-support/) | [Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Where-Do-Agent-Lens-Insights-Come-From--VmlldzoxNzk5OTk0NA==) · [Agent Lens Demo (`wandb/agent-lens-retail-support-live-v10`)](https://forge.coreweave.com/agent-lens/wandb/agent-lens-retail-support-live-v10) · [`eval_clustered_failures.py`](examples/northstar-retail-support/eval_clustered_failures.py) (`wandb.EvalTable` loop) |
-| **We Benchmarked Jev Against Gemma Inside Agent Lens** | [`examples/jev-vs-gemma-judge-bench/`](examples/jev-vs-gemma-judge-bench/) | [Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/We-Benchmarked-Jev-Against-Gemma-Inside-Agent-Lens--VmlldzoxNzk5OTk1MA==) · [`reproduce_metrics.py`](examples/jev-vs-gemma-judge-bench/scripts/reproduce_metrics.py) · [`replay_to_agent_lens.py`](examples/jev-vs-gemma-judge-bench/scripts/replay_to_agent_lens.py) |
-| **Find Your Agent’s Capability Gaps with Agent Lens Insights** | [`examples/capability-gaps/`](examples/capability-gaps/) | [Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Find-Your-Agents-Capability-Gaps-with-Agent-Lens-Insights--VmlldzoxODMxOTg5MQ==) · [Agent Lens & Forge Workspace (`wandb/agent-lens-capability-gaps-demo`)](https://forge.coreweave.com/agent-lens/wandb/agent-lens-capability-gaps-demo) · [`emit_capability_gap_turns.py`](examples/capability-gaps/emit_capability_gap_turns.py) · [`evaluate_restart_capability.py`](examples/capability-gaps/evaluate_restart_capability.py) |
+| **Where Do Agent Lens Insights Come From?** | [`examples/northstar-retail-support/`](examples/northstar-retail-support/) | [Forge Report (`VmlldzoxNzk5OTk0NA==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Where-Do-Agent-Lens-Insights-Come-From--VmlldzoxNzk5OTk0NA==) · [`eval_clustered_failures.py`](examples/northstar-retail-support/eval_clustered_failures.py) (`wandb.EvalTable` loop) |
+| **We Benchmarked Jev Against Gemma Inside Agent Lens** | [`examples/jev-vs-gemma-judge-bench/`](examples/jev-vs-gemma-judge-bench/) | [Forge Report (`VmlldzoxNzk5OTk1MA==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/We-Benchmarked-Jev-Against-Gemma-Inside-Agent-Lens--VmlldzoxNzk5OTk1MA==) · [Paired EvalTables](https://forge.coreweave.com/wandb/wandb/agent-lens-insights-judge-bench) · [`reproduce_metrics.py`](examples/jev-vs-gemma-judge-bench/scripts/reproduce_metrics.py) |
+| **Find Your Agent’s Capability Gaps with Agent Lens Insights** | [`examples/capability-gaps/`](examples/capability-gaps/) | [Forge Report (`VmlldzoxODMxOTg5MQ==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Find-Your-Agents-Capability-Gaps-with-Agent-Lens-Insights--VmlldzoxODMxOTg5MQ==) · [`emit_capability_gap_turns.py`](examples/capability-gaps/emit_capability_gap_turns.py) · [`evaluate_restart_capability.py`](examples/capability-gaps/evaluate_restart_capability.py) |
+| **How I Built Signal Brief With Coding Agents** | [`examples/signal-brief-build-story/`](examples/signal-brief-build-story/) | [Forge Report (`VmlldzoxNzU0OTcyMA==`)](https://forge.coreweave.com/wandb/wandb/news-research-agent/reports/Building-Signal-Brief-With-Coding-Agents:-A-Trace-Backed-Engineering-Field-Report--VmlldzoxNzU0OTcyMA==) · [`editorial-snapshot.json`](examples/signal-brief-build-story/editorial-snapshot.json) |
 
-### B. Linked Flagship Multi-Product Forge Studies (`studies/` Git Submodules)
+### B. Centralized Public Multi-Product Forge Repositories (`studies/` Git Submodules)
 
-Standalone research forks and multi-product experiments remain in their dedicated repositories and are pinned here as Git submodules (`git clone --recurse-submodules`):
+All standalone engineering forks, applications, and workshops are public on GitHub and pinned here under `studies/` (`git clone --recurse-submodules`):
 
-| Article / Series | Submodule & Standalone Repo | Live Forge Reports, Workspaces & Notebooks |
+| Article / Series | Submodule Path → Public GitHub Repo | Live Forge Reports, Workspaces & Interactive Viewers |
 |---|---|---|
-| **Recreating Harness²** & **Testing structured diagnostics in Harness²** | `studies/harness2-wandb` → [`ash0ts/harness2-wandb` (`study-v4`)](https://github.com/ash0ts/harness2-wandb/tree/study-v4) | [Part 1 Report](https://forge.coreweave.com/wandb/wandb/harness2-agent-lens-v4/reports/Recreating-Harness%C2%B2--VmlldzoxODE5OTAxNQ) · [Part 2 Report](https://forge.coreweave.com/wandb/wandb/harness2-agent-lens-v4/reports/Testing-structured-diagnostics-in-Harness%C2%B2--VmlldzoxODE4NDczNA==) · [EvalTables Workspace](https://forge.coreweave.com/wandb/wandb/harness2-agent-lens-v4?nw=4o9wknfo8yi) · [Agent Lens](https://forge.coreweave.com/agent-lens/wandb/harness2-agent-lens-v4) |
-| **Would you give this investment committee money?** (*TradingAgents*) | `studies/tradingagents-election-lab` → [`ash0ts/TradingAgents` (`forge-showcase-v1`)](https://github.com/ash0ts/TradingAgents/tree/forge-showcase-v1) | [Forge Report](https://forge.coreweave.com/wandb/wandb/tradingagents-election-lab/reports/Would-you-give-this-investment-committee-money--VmlldzoxODI2MzIwNQ==) · [Forge Workspace](https://forge.coreweave.com/wandb/wandb/tradingagents-election-lab?nw=71cv89hjh9u) · [Notebooks (`15260`, `15271`, `15272`)](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUyNzI%3D) |
-| **Recovering app behavior, and measuring what REA adds** (*REA*) | `studies/rea-forge-recovery` → [`ash0ts/rea/examples/forge-recovery` (`forge-recovery-v1`)](https://github.com/ash0ts/rea/tree/forge-recovery-v1/examples/forge-recovery) | [Unified Public Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Recovering-app-behavior-and-measuring-what-REA-adds--VmlldzoxODMyMDIwMA==) · [Interactive Frame Viewer](https://ash0ts.github.io/forge-agent-lens-examples/rea-animation-demo/) · [Team Workspace](https://forge.coreweave.com/wandb/wandb/rea-showcase?nw=xuxkzunn5gq) |
-
-### D. Additional Public CoreWeave Forge Engineering Reports
-
-- **Before we let an agent optimize the harness** (*Meta-Harness Controls*): [Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Before-we-let-an-agent-optimize-the-harness--VmlldzoxODMyMDIwMQ==) · [Paired EvalTables](https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110)
-- **Building FlowBlock: from a camera move to a measured correction**: [Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Building-FlowBlock-from-a-camera-move-to-a-measured-correction--VmlldzoxODMyMDIwMg==)
-- **Building TabToPitch: from guitar voicings to a teaching agent**: [Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Building-TabToPitch-from-guitar-voicings-to-a-teaching-agent--VmlldzoxODMyMDIwNA==) · [Practice Companion Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/TabToPitch-learn-the-fretboard-through-a-song-you-can-already-play--VmlldzoxODMyMDIwNQ==)
-- **Evals Are How We Make our Slop Safe and Tasty** (*Fugue*): [Forge Report](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Evals-Are-How-We-Make-our-Slop-Safe-and-Tasty--VmlldzoxODMyMDIwNg==) · [`ash0ts/fugue`](https://github.com/ash0ts/fugue)
-
-### C. Hands-On Reactive Python Workshops ([`ash0ts/forge-workshop-kit`](https://github.com/ash0ts/forge-workshop-kit))
-
-For self-serve reactive Marimo workshops combining Agent Lens, `wandb.EvalTable`, W&B Artifacts, and **ARIA** investigations:
-- **Workshop Hub & Decks**: [https://ash0ts.github.io/forge-workshop-kit/](https://ash0ts.github.io/forge-workshop-kit/) ([Release `v0.12.0`](https://github.com/ash0ts/forge-workshop-kit/releases/tag/v0.12.0))
-- **Pending, Inc. (Agent harnesses, tool verification & Harness²)**: [Forge Report](https://forge.coreweave.com/wandb/wandb/forge-workshop-kit/reports/Build-an-agent-you-can-inspect%2C-then-test-changes-to-its-harness--VmlldzoxODMxMzUzMQ==) · [EvalTables](https://forge.coreweave.com/wandb/wandb/forge-workshop-kit?nw=qeo6ytk9yxz)
-- **Airline Monitoring (Saved Views, scoped AI Tags, Alignment & regression gates)**: [Forge Report](https://forge.coreweave.com/wandb/wandb/forge-workshop-kit/reports/Turn-an-airline-agent%27s-behavior-into-monitoring-rules-and-regression-tests--VmlldzoxODMxMzU0MA==) · [EvalTables](https://forge.coreweave.com/wandb/wandb/forge-workshop-kit?nw=4wzxelfxod1)
+| **Recreating Harness²** & **Testing structured diagnostics in Harness²** | `studies/harness2-wandb` → [`ash0ts/harness2-wandb` (`study-v4`)](https://github.com/ash0ts/harness2-wandb/tree/study-v4) | [Part 1 Report (`VmlldzoxODE5OTAxNQ`)](https://forge.coreweave.com/wandb/wandb/harness2-agent-lens-v4/reports/Recreating-Harness%C2%B2--VmlldzoxODE5OTAxNQ) · [Part 2 Report (`VmlldzoxODE4NDczNA==`)](https://forge.coreweave.com/wandb/wandb/harness2-agent-lens-v4/reports/Testing-structured-diagnostics-in-Harness%C2%B2--VmlldzoxODE4NDczNA==) · [EvalTables](https://forge.coreweave.com/wandb/wandb/harness2-agent-lens-v4?nw=4o9wknfo8yi) |
+| **Before we let an agent optimize the harness** (*Meta-Harness Controls*) | `studies/meta-harness-wandb` → [`ash0ts/meta-harness-wandb` (`forge-controls-v1`)](https://github.com/ash0ts/meta-harness-wandb/tree/forge-controls-v1) | [Forge Report (`VmlldzoxODMyMDIwMQ==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Before-we-let-an-agent-optimize-the-harness--VmlldzoxODMyMDIwMQ==) · [4 Weave EvalTables (`1,648` cells)](https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110) |
+| **Would you give this investment committee money?** (*TradingAgents*) | `studies/tradingagents-election-lab` → [`ash0ts/TradingAgents` (`forge-showcase-v1`)](https://github.com/ash0ts/TradingAgents/tree/forge-showcase-v1) | [Forge Report (`VmlldzoxODI2MzIwNQ==`)](https://forge.coreweave.com/wandb/wandb/tradingagents-election-lab/reports/Would-you-give-this-investment-committee-money--VmlldzoxODI2MzIwNQ==) · [Workspace](https://forge.coreweave.com/wandb/wandb/tradingagents-election-lab?nw=71cv89hjh9u) · [Notebooks](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUyNzI%3D) |
+| **Recovering app behavior, and measuring what REA adds** (*REA*) | `studies/rea-forge-recovery` → [`ash0ts/rea` (`forge-recovery-v1`)](https://github.com/ash0ts/rea/tree/forge-recovery-v1/examples/forge-recovery) | [Forge Report (`VmlldzoxODMyMDIwMA==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Recovering-app-behavior-and-measuring-what-REA-adds--VmlldzoxODMyMDIwMA==) · [Interactive Sprite Viewer](https://ash0ts.github.io/forge-agent-lens-examples/rea-animation-demo/) |
+| **Forge Workshop Kit** (*Pending, Inc.* & *Airline Monitoring*) | `studies/forge-workshop-kit` → [`ash0ts/forge-workshop-kit` (`v0.12.0`)](https://github.com/ash0ts/forge-workshop-kit/tree/v0.12.0) | [Pending Report (`VmlldzoxODMxMzUzMQ==`)](https://forge.coreweave.com/wandb/wandb/forge-workshop-kit/reports/Build-an-agent-you-can-inspect%2C-then-test-changes-to-its-harness--VmlldzoxODMxMzUzMQ==) · [Airline Report (`VmlldzoxODMxMzU0MA==`)](https://forge.coreweave.com/wandb/wandb/forge-workshop-kit/reports/Turn-an-airline-agent%27s-behavior-into-monitoring-rules-and-regression-tests--VmlldzoxODMxMzU0MA==) · [Workshop Hub](https://ash0ts.github.io/forge-workshop-kit/) |
+| **Building FlowBlock: from a camera move to a measured correction** | `studies/flowblock` → [`ash0ts/flowblock` (`forge-shot-planning-v1`)](https://github.com/ash0ts/flowblock/tree/forge-shot-planning-v1) | [Forge Report (`VmlldzoxODMyMDIwMg==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Building-FlowBlock-from-a-camera-move-to-a-measured-correction--VmlldzoxODMyMDIwMg==) |
+| **Building TabToPitch** & **Learn the fretboard through a song** | `studies/tab-to-pitch` → [`ash0ts/tab-to-pitch` (`forge-voicing-teacher-v1`)](https://github.com/ash0ts/tab-to-pitch/tree/forge-voicing-teacher-v1) | [Builder Report (`VmlldzoxODMyMDIwNA==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Building-TabToPitch-from-guitar-voicings-to-a-teaching-agent--VmlldzoxODMyMDIwNA==) · [Practice Report (`VmlldzoxODMyMDIwNQ==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/TabToPitch-learn-the-fretboard-through-a-song-you-can-already-play--VmlldzoxODMyMDIwNQ==) |
+| **Evals Are How We Make our Slop Safe and Tasty** & **Why I Built Fugue** | `studies/fugue` → [`ash0ts/fugue` (`main`)](https://github.com/ash0ts/fugue) | [Safe & Tasty Report (`VmlldzoxODMyMDIwNg==`)](https://forge.coreweave.com/wandb/wandb/agent-lens-fc/reports/Evals-Are-How-We-Make-our-Slop-Safe-and-Tasty--VmlldzoxODMyMDIwNg==) · [BRC Live Post](https://www.coreweave.com/blog/why-i-built-fugue-controlled-experiments-for-agent-systems) |
+| **Why We Added an AI Guide to a Stormwater Tool** (*GI Scenario Studio*) | `studies/gi-scenario-studio` → [`ash0ts/gi-scenario-studio` (`stormwater-evidence-guide-v1`)](https://github.com/ash0ts/gi-scenario-studio/tree/stormwater-evidence-guide-v1) | [Evidence Guide v2 Study](https://github.com/ash0ts/gi-scenario-studio/blob/stormwater-evidence-guide-v1/docs/evidence-guide-v2-study.md) |
+| **Why I Built EcoCorridor** (*EcoCorridor Scenario Studio*) | `studies/ecocorridor-scenario-studio` → [`ash0ts/gi-scenario-studio` (`ecocorridor-review-brief-v1`)](https://github.com/ash0ts/gi-scenario-studio/tree/ecocorridor-review-brief-v1) | [Forge Report (`VmlldzoxNzY1OTU0MQ==`)](https://forge.coreweave.com/wandb/wandb/ecocorridor-scenario-studio/reports/EcoCorridor-historical-search-benchmark--VmlldzoxNzY1OTU0MQ==) |
 
 ---
 
@@ -51,12 +45,12 @@ For self-serve reactive Marimo workshops combining Agent Lens, `wandb.EvalTable`
    ```bash
    export WANDB_API_KEY=YOUR_WANDB_API_KEY
    ```
-2. Clone with linked study submodules:
+2. Clone with all linked public study submodules:
    ```bash
    git clone --recurse-submodules https://github.com/ash0ts/forge-agent-lens-examples.git
    cd forge-agent-lens-examples
    ```
-3. Run any self-contained offline verification without credentials:
+3. Run offline metric reproductions without credentials:
    ```bash
    python examples/jev-vs-gemma-judge-bench/scripts/reproduce_metrics.py
    python examples/capability-gaps/emit_capability_gap_turns.py --manifest examples/capability-gaps/corpus_manifest_v2.json --dry-run --receipt /tmp/cap-v2-dry.json

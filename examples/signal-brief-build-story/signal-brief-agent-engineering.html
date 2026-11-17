@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How I Built Signal Brief With Coding Agents</title>
+  <style>
+    @font-face { font-family: "Source Serif Pro"; src: url("fonts/source-serif-pro-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+    @font-face { font-family: "Source Sans 3"; src: url("fonts/source-sans-3-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+    @font-face { font-family: "Source Sans 3"; src: url("fonts/source-sans-3-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+    @font-face { font-family: "IBM Plex Mono"; src: url("fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+    @font-face { font-family: "IBM Plex Mono"; src: url("fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: block; }
+    :root { color-scheme: light; --paper:#FDFDFD; --ink:#171A1F; --focus:#10BFCC; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; display: grid; place-items: center; overflow: hidden; background: var(--ink); color: var(--paper); font-family: "Source Sans 3", sans-serif; }
+    main { width: min(100vw, 177.777vh); aspect-ratio: 16 / 9; position: relative; background: var(--paper); box-shadow: 0 32px 90px rgb(0 0 0 / 42%); }
+    canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+    .controls { position: absolute; z-index: 2; left: 4.2%; right: 4.2%; bottom: 1.8%; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; opacity: 0; transform: translateY(8px); transition: opacity .18s ease, transform .18s ease; }
+    main:hover .controls, main:focus-within .controls { opacity: 1; transform: none; }
+    body.rendering .controls { display: none; }
+    button { min-width: 52px; height: 30px; padding: 0 12px; border: 1px solid var(--ink); color: var(--ink); background: var(--paper); font: 600 11px/1 "Source Sans 3", sans-serif; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; }
+    button:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    input[type="range"] { width: 100%; accent-color: var(--ink); cursor: pointer; }
+    output { min-width: 108px; padding: 7px 9px; color: var(--ink); background: var(--paper); font: 600 11px/1 "IBM Plex Mono", monospace; text-align: center; }
+    @media (prefers-reduced-motion: reduce) { .controls { transition: none; } }
+  </style>
+</head>
+<body>
+  <main aria-label="Interactive animation: How I Built Signal Brief With Coding Agents">
+    <canvas id="film" width="1280" height="720" role="img" aria-label="An eight-scene practitioner field note explaining why a research agent is not a news summarizer, using the real Signal Brief app, model pipeline, trace-backed failures, and verified weekly result."></canvas>
+    <div class="controls">
+      <button id="toggle" type="button" aria-label="Pause animation">Pause</button>
+      <input id="scrub" type="range" min="0" max="80" step="0.01" value="0" aria-label="Animation timeline">
+      <output id="clock" for="scrub">00:00 / 01:20</output>
+    </div>
+  </main>
+  <script src="film-data.js"></script>
+  <script>
+    const FILM = Object.freeze({
+      slug: 'signal-brief-agent-engineering',
+      title: 'How I Built Signal Brief With Coding Agents',
+      width: 1280,
+      height: 720,
+      duration: 80,
+      fps: 15,
+      posterTime: 68,
+      reducedMotionTime: 68,
+      silent: true,
+      checkpoints: Object.freeze([
+        Object.freeze({ name: 'practitioner-problem', time: 4 }),
+        Object.freeze({ name: 'signal-brief-app', time: 13 }),
+        Object.freeze({ name: 'two-model-pipeline', time: 23.5 }),
+        Object.freeze({ name: 'useful-workflow', time: 34.5 }),
+        Object.freeze({ name: 'coding-agent-build', time: 45.5 }),
+        Object.freeze({ name: 'trace-backed-iteration', time: 58 }),
+        Object.freeze({ name: 'weekly-result', time: 68 }),
+        Object.freeze({ name: 'two-loop-lesson', time: 76.5 })
+      ])
+    });
+    window.__filmSpec = FILM;
+    const DATA = window.SIGNAL_BRIEF_FACTS;
+    if (!DATA || DATA.snapshotSha256 !== 'aff77cf4312ced691f578c5099f2371cfac6930afe66f6f763366b0c5c9b4a09') throw new Error('Film data does not match the reviewed snapshot.');
+
+    const canvas = document.querySelector('#film');
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const toggle = document.querySelector('#toggle');
+    const scrub = document.querySelector('#scrub');
+    const clock = document.querySelector('#clock');
+    const C = Object.freeze({
+      paper:'#FDFDFD', surface:'#F5F6F7', ink:'#171A1F', muted:'#8F949E', line:'#E4E6EB',
+      gold:'#FCBC32', teal:'#10BFCC', magenta:'#D869FA', blue:'#AFCBFF', mint:'#AFE0C7',
+      apricot:'#FFD39C', lilac:'#DCC8F3', coral:'#FFB8AA', darkSurface:'#252930', white:'#FFFFFF'
+    });
+    const CHAPTERS = Object.freeze([
+      [0, 8, 'DISTINCTION'], [8, 18, 'THE APP'], [18, 29, 'MODEL ROLES'], [29, 40, 'DECISION BOUNDARY'],
+      [40, 51, 'BUILD PROCESS'], [51, 64, 'FAILURE BOUNDARY'], [64, 73, 'FIELD RUN'], [73, 80, 'OPERATING RULE']
+    ]);
+    const images = {};
+    let playing = true;
+    let manualTime = 0;
+    let anchorTime = performance.now();
+    let anchorFilm = 0;
+    let renderMode = false;
+
+    const clamp = (value, minimum = 0, maximum = 1) => Math.max(minimum, Math.min(maximum, value));
+    const easeOut = value => 1 - Math.pow(1 - clamp(value), 3);
+    const easeInOut = value => { const t = clamp(value); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+    const ping = value => .5 + .5 * Math.sin(value * Math.PI * 2);
+    const formatTime = seconds => { const value = Math.max(0, Math.floor(seconds)); return `${String(Math.floor(value / 60)).padStart(2, '0')}:${String(value % 60).padStart(2, '0')}`; };
+    function sceneAlpha(time, start, end) { return time >= start && time < end ? 1 : 0; }
+    function withAlpha(alpha, draw) { if (alpha <= 0) return; ctx.save(); ctx.globalAlpha *= clamp(alpha); draw(); ctx.restore(); }
+    function font(size, family = 'sans', weight = 400) { const face = family === 'serif' ? '"Source Serif Pro"' : family === 'mono' ? '"IBM Plex Mono"' : '"Source Sans 3"'; return `${weight} ${size}px ${face}`; }
+    function text(value, x, y, size = 20, color = C.ink, family = 'sans', weight = 400, align = 'left') { ctx.fillStyle = color; ctx.font = font(size, family, weight); ctx.textAlign = align; ctx.textBaseline = 'alphabetic'; ctx.fillText(String(value), x, y); }
+    function wrap(value, x, y, maxWidth, size = 20, lineHeight = 26, color = C.ink, family = 'sans', weight = 400, maxLines = 4) {
+      ctx.font = font(size, family, weight); const words = String(value).split(/\s+/); const lines = []; let current = '';
+      for (const word of words) { const candidate = current ? `${current} ${word}` : word; if (ctx.measureText(candidate).width > maxWidth && current) { lines.push(current); current = word; } else current = candidate; }
+      if (current) lines.push(current);
+      lines.slice(0, maxLines).forEach((lineValue, index) => text(lineValue, x, y + index * lineHeight, size, color, family, weight));
+      return Math.min(lines.length, maxLines);
+    }
+    function rect(x, y, width, height, fill, stroke = null, lineWidth = 1) { ctx.fillStyle = fill; ctx.fillRect(x, y, width, height); if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lineWidth; ctx.strokeRect(x, y, width, height); } }
+    function line(x1, y1, x2, y2, color = C.line, width = 1) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke(); }
+    function arrow(x1, y1, x2, y2, color = C.ink, width = 2) { line(x1, y1, x2, y2, color, width); const angle = Math.atan2(y2 - y1, x2 - x1); const size = 9; ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo(x2 - size * Math.cos(angle - .45), y2 - size * Math.sin(angle - .45)); ctx.lineTo(x2 - size * Math.cos(angle + .45), y2 - size * Math.sin(angle + .45)); ctx.closePath(); ctx.fillStyle = color; ctx.fill(); }
+    function pixel(x, y, size, color, stroke = null) { rect(Math.round(x), Math.round(y), size, size, color, stroke, stroke ? 2 : 0); }
+    function panel(x, y, width, height, fill = C.surface, stroke = C.ink, lineWidth = 2) { rect(x, y, width, height, fill, stroke, lineWidth); }
+    function pill(label, x, y, fill, width, textColor = C.ink) { rect(x, y, width, 34, fill, C.ink, 1.5); text(label, x + width / 2, y + 23, 16, textColor, 'mono', 600, 'center'); }
+    function chapter(label, index) { text('HOW AGENT ENGINEERS WORK / FIELD NOTE 01', 54, 65, 16, C.muted, 'mono', 600); text(`${String(index).padStart(2, '0')} / 08  ${label}`, 1226, 65, 16, C.muted, 'mono', 600, 'right'); }
+    function background() {
+      rect(0, 0, FILM.width, FILM.height, C.paper);
+      for (let x = 0; x <= FILM.width; x += 40) line(x, 0, x, FILM.height, C.line, 1);
+      for (let y = 0; y <= FILM.height; y += 40) line(0, y, FILM.width, y, C.line, 1);
+      rect(0, 0, FILM.width, 10, C.ink);
+      [[20,120],[1240,160],[20,520],[1240,560]].forEach(([x,y], index) => pixel(x, y, 7, index % 2 ? C.line : C.muted));
+    }
+    function progress(time) {
+      const totalWidth = 1172; const gap = 8; const width = (totalWidth - gap * 7) / 8;
+      CHAPTERS.forEach(([start, end], index) => { const x = 54 + index * (width + gap); rect(x, 674, width, 4, C.line); rect(x, 674, width * clamp((time - start) / (end - start)), 4, C.ink); });
+    }
+    function appShot(image, x, y, width, height, sourceHeight = 790) {
+      panel(x, y, width, height, C.darkSurface, C.ink, 3);
+      ctx.save(); ctx.beginPath(); ctx.rect(x + 8, y + 8, width - 16, height - 16); ctx.clip(); ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(image, 0, 0, 1000, sourceHeight, x + 8, y + 8, width - 16, height - 16);
+      ctx.restore(); ctx.imageSmoothingEnabled = false;
+    }
+    function containShot(image, x, y, width, height) {
+      panel(x, y, width, height, C.darkSurface, C.ink, 3);
+      const innerWidth = width - 16; const innerHeight = height - 16;
+      const scale = Math.min(innerWidth / image.naturalWidth, innerHeight / image.naturalHeight);
+      const drawWidth = image.naturalWidth * scale; const drawHeight = image.naturalHeight * scale;
+      ctx.save(); ctx.beginPath(); ctx.rect(x + 8, y + 8, innerWidth, innerHeight); ctx.clip(); ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(image, x + 8 + (innerWidth - drawWidth) / 2, y + 8 + (innerHeight - drawHeight) / 2, drawWidth, drawHeight);
+      ctx.restore(); ctx.imageSmoothingEnabled = false;
+    }
+    function flowPacket(x, y, fill, label = '') { pixel(x, y, 18, fill, C.ink); if (label) text(label, x + 9, y - 9, 14, C.ink, 'mono', 600, 'center'); }
+
+    function drawProblem(time) {
+      withAlpha(sceneAlpha(time, 0, 8), () => {
+        chapter('THE DISTINCTION', 1);
+        const enter = easeOut((time - .35) / .9);
+        withAlpha(enter, () => {
+          text('I did not need another AI news summary.', 54, 178, 54, C.ink, 'serif');
+          wrap('I needed to know what deserved attention next—and what evidence made that decision defensible.', 54, 240, 1080, 28, 34, C.ink, 'sans', 600, 2);
+        });
+        const sources = [
+          ['PAPERS', C.blue], ['REPOS', C.mint], ['MODELS', C.lilac], ['RELEASES', C.apricot], ['TRUSTED FEEDS', C.blue]
+        ];
+        sources.forEach((item, index) => {
+          const a = easeOut((time - (1.2 + index * .18)) / .7); const x = 54 + index * 225;
+          withAlpha(a, () => { panel(x, 350 + (1-a)*16, 200, 92, item[1]); text(item[0], x + 100, 406 + (1-a)*16, 18, C.ink, 'mono', 600, 'center'); });
+        });
+        const p = easeInOut((time - 3.2) / 3.7);
+        withAlpha(clamp((time - 2.7) / .6), () => {
+          line(64, 515, 1200, 515, C.ink, 2);
+          flowPacket(64 + p * 1070, 506, C.lilac);
+          text('THE DISTINCTION', 54, 568, 17, C.muted, 'mono', 600);
+          text('Collecting signals and making a decision are different jobs.', 54, 608, 30, C.ink, 'sans', 600);
+        });
+      });
+    }
+
+    function drawApp(time) {
+      withAlpha(sceneAlpha(time, 8, 18), () => {
+        chapter('SHOW THE APP', 2);
+        text('The app is a decision queue, not a feed.', 54, 132, 44, C.ink, 'serif');
+        const newsIn = easeOut((time - 8.7) / .75); const contentIn = easeOut((time - 10.2) / .75);
+        withAlpha(newsIn, () => {
+          pill('NEWS', 54, 172, C.blue, 92);
+          text('evidence-backed stories', 160, 195, 19, C.ink, 'sans', 600);
+          appShot(images.newsDaily, 54, 220, 500, 344, 700);
+        });
+        withAlpha(contentIn, () => {
+          pill('CONTENT', 676, 172, C.apricot, 112);
+          text('ideas awaiting a decision', 804, 195, 19, C.ink, 'sans', 600);
+          appShot(images.contentQueue, 676, 220, 500, 344, 700);
+          arrow(578, 392, 650, 392, C.ink, 3);
+        });
+        withAlpha(easeOut((time - 12.0) / .7), () => {
+          text('Inspect the sources.', 304, 610, 22, C.ink, 'sans', 600, 'center');
+          text('Approve the next action.', 926, 610, 22, C.ink, 'sans', 600, 'center');
+        });
+      });
+    }
+
+    function drawModels(time) {
+      withAlpha(sceneAlpha(time, 18, 29), () => {
+        chapter('TWO MODELS, TWO JOBS', 3);
+        text('Triage and synthesis are different jobs.', 54, 132, 43, C.ink, 'serif');
+        const stages = [
+          {x:54,w:190,fill:C.surface,k:'SOURCES',a:'papers · repos',b:'models · feeds'},
+          {x:292,w:250,fill:C.blue,k:'PARALLEL TRIAGE',a:DATA.triageModel,b:'cheap score per item'},
+          {x:590,w:290,fill:C.lilac,k:'STRUCTURED SYNTHESIS',a:DATA.synthesisModel,b:'one bounded map call'},
+          {x:928,w:298,fill:C.mint,k:'RESEARCHMAPV1',a:'stories · gaps · ideas',b:'sources stay attached'}
+        ];
+        stages.forEach((stage, index) => {
+          const a = easeOut((time - (19.0 + index * .35)) / .75);
+          withAlpha(a, () => {
+            panel(stage.x, 246, stage.w, 226, stage.fill); text(stage.k, stage.x + 20, 284, 16, C.ink, 'mono', 600); wrap(stage.a, stage.x + 20, 346, stage.w - 40, 22, 27, C.ink, 'sans', 600, 3); wrap(stage.b, stage.x + 20, 419, stage.w - 40, 18, 23, C.ink, 'sans', 400, 2);
+            if (index < stages.length - 1) arrow(stage.x + stage.w + 7, 359, stages[index+1].x - 8, 359, C.ink, 2);
+          });
+        });
+        const p = ((time - 21.0) % 3.4) / 3.4;
+        withAlpha(clamp((time - 20.6) / .5), () => flowPacket(70 + p * 1110, 511, p < .45 ? C.blue : p < .74 ? C.lilac : C.mint));
+        withAlpha(easeOut((time - 20.6) / .55), () => {
+          rect(292, 538, 588, 62, C.ink); text('W&B INFERENCE', 586, 577, 17, C.white, 'mono', 600, 'center');
+          text('One route for both stages.', 928, 555, 19, C.ink, 'sans', 600);
+          text('No silent model fallback.', 928, 585, 19, C.ink, 'sans', 600);
+        });
+      });
+    }
+
+    function drawUseful(time) {
+      withAlpha(sceneAlpha(time, 29, 40), () => {
+        chapter('THE DECISION BOUNDARY', 4);
+        text('A model recommendation is not an approval.', 54, 132, 43, C.ink, 'serif');
+        appShot(images.evidenceDetail, 54, 172, 584, 430, 760);
+        pill('EARLIER BUILD · HANDOFF BUG', 72, 190, C.coral, 290);
+        const questions = [
+          ['WHAT CHANGED?', C.blue],
+          ['WHAT SUPPORTS IT?', C.mint],
+          ['WHAT IS MISSING?', C.lilac]
+        ];
+        questions.forEach((item, index) => {
+          const a = easeOut((time - (30.2 + index * .36)) / .7); const y = 188 + index * 104;
+          withAlpha(a, () => { panel(686, y, 494, 82, item[1]); text(item[0], 710, y + 49, 20, C.ink, 'mono', 600); });
+        });
+        withAlpha(easeOut((time - 32.5) / .8), () => {
+          ctx.imageSmoothingEnabled = true; ctx.drawImage(images.widget, 686, 500, 282, 141); ctx.imageSmoothingEnabled = false;
+          text('DESKTOP WIDGET', 1000, 532, 16, C.muted, 'mono', 600);
+          text('read-only', 1000, 567, 22, C.ink, 'sans', 600);
+          text('no model calls', 1000, 598, 22, C.ink, 'sans', 600);
+          text('The evidence stays local until I choose the next action.', 686, 648, 17, C.ink, 'sans', 600);
+        });
+      });
+    }
+
+    function drawBuild(time) {
+      withAlpha(sceneAlpha(time, 40, 51), () => {
+        chapter('DIVIDING THE WORK', 5);
+        text('Codex wrote code. I kept the product boundary.', 54, 132, 43, C.ink, 'serif');
+        withAlpha(easeOut((time - 40.8) / .75), () => {
+          pill('HUMAN', 54, 172, C.apricot, 92);
+          text('defines the job and what may happen automatically', 162, 195, 20, C.ink, 'sans', 600);
+          panel(54, 218, 520, 134, C.blue);
+          text('AUTOMATIC RESEARCH', 78, 255, 16, C.ink, 'mono', 600);
+          wrap('Scheduled collection, triage, and synthesis may call the configured provider.', 78, 298, 468, 21, 26, C.ink, 'sans', 600, 2);
+          panel(54, 370, 520, 164, C.apricot);
+          text('EXPLICIT ACTIONS', 78, 407, 16, C.ink, 'mono', 600);
+          wrap('Generate a content brief. Publish. Hand work to GitHub.', 78, 450, 468, 21, 27, C.ink, 'sans', 600, 2);
+          text('The model may propose. A person decides what ships.', 78, 505, 18, C.ink, 'sans', 400);
+        });
+        const roles = [
+          ['CODEX', 'inspects · implements · tests the installed app', C.teal],
+          ['SIGNAL BRIEF', 'runs the recurring research workflow', C.mint],
+          ['WEAVE', 'records model calls and failing boundaries', C.lilac]
+        ];
+        roles.forEach((role, index) => {
+          const a = easeOut((time - (41.4 + index * .42)) / .75); const y = 190 + index * 122;
+          withAlpha(a, () => {
+            panel(620, y, 606, 100, role[2]); text(role[0], 642, y + 38, 17, C.ink, 'mono', 600); text(role[1], 642, y + 74, 21, C.ink, 'sans', 600);
+            if (index < roles.length - 1) arrow(923, y + 103, 923, y + 119, C.ink, 2);
+          });
+        });
+        withAlpha(easeOut((time - 43.0) / .6), () => {
+          rect(54, 564, 1172, 54, C.ink); text('SPECIFY → IMPLEMENT → RUN → INSPECT → REVISE', 640, 598, 18, C.white, 'mono', 600, 'center');
+        });
+      });
+    }
+
+    function drawTrace(time) {
+      withAlpha(sceneAlpha(time, 51, 64), () => {
+        chapter('THE FAILURE BOUNDARY', 6);
+        text('A green receipt did not mean the model path worked.', 54, 132, 43, C.ink, 'serif');
+        const steps = [
+          {x:54,w:244,fill:C.coral,k:'RUN 01',main:'107k-character prompt',sub:'timeout; fallback kept the app usable'},
+          {x:336,w:244,fill:C.coral,k:'RUN 02',main:'valid JSON shape',sub:'schema + identity checks failed'},
+          {x:618,w:244,fill:C.coral,k:'LOCAL REPLAY',main:'captured response',sub:'validator fixed without a new call'},
+          {x:900,w:326,fill:C.mint,k:'RUN 04',main:'39k-character prompt',sub:'validated map in ~77 seconds'}
+        ];
+        steps.forEach((step, index) => {
+          const a = easeOut((time - (52.0 + index * .4)) / .7);
+          withAlpha(a, () => { panel(step.x, 226, step.w, 216, step.fill); text(step.k, step.x + 20, 265, 16, C.ink, 'mono', 600); wrap(step.main, step.x + 20, 330, step.w - 40, 23, 28, C.ink, 'sans', 600, 2); wrap(step.sub, step.x + 20, 392, step.w - 40, 18, 22, C.ink, 'sans', 400, 2); if (index < 3) arrow(step.x + step.w + 7, 334, steps[index+1].x - 8, 334, C.ink, 2); });
+        });
+        const path = easeInOut(((time - 54.0) % 5.2) / 5.2);
+        withAlpha(clamp((time - 53.5) / .5), () => {
+          line(76, 490, 1184, 490, C.ink, 2); flowPacket(76 + path * 1090, 481, C.lilac, 'TRACE');
+        });
+        withAlpha(easeOut((time - 53.5) / .55), () => {
+          rect(54, 540, 1172, 72, C.ink); text('Trace the boundary. Replay the evidence. Fix the contract.', 640, 584, 24, C.white, 'sans', 600, 'center');
+        });
+      });
+    }
+
+    function drawResult(time) {
+      withAlpha(sceneAlpha(time, 64, 73), () => {
+        chapter('THE VERIFIED FIELD RUN', 7);
+        text('One bounded run produced a small queue to review.', 54, 132, 43, C.ink, 'serif');
+        appShot(images.weekly, 54, 170, 540, 430, 760);
+        const cards = [
+          [DATA.fieldRun.evidence_items, 'EVIDENCE ITEMS', C.blue],
+          [DATA.fieldRun.bounded_candidates, 'CANDIDATES', C.mint],
+          [DATA.fieldRun.evidence_lanes, 'EVIDENCE LANES', C.lilac],
+          [DATA.fieldRun.ranked_stories, 'RANKED STORIES', C.mint],
+          [DATA.fieldRun.opportunities, 'IDEAS TO REVIEW', C.apricot]
+        ];
+        cards.forEach((item, index) => {
+          const a = easeOut((time - (64.8 + index * .22)) / .65); const column = index % 3; const row = Math.floor(index / 3); const x = index < 3 ? 638 + column * 190 : 638 + (index - 3) * 280; const y = 186 + row * 154; const w = index >= 3 ? 262 : 166;
+          withAlpha(a, () => { panel(x, y, w, 126, item[2]); text(item[0], x + w / 2, y + 64, 38, C.ink, 'serif', 400, 'center'); text(item[1], x + w / 2, y + 98, 13, C.ink, 'mono', 600, 'center'); });
+        });
+        withAlpha(easeOut((time - 67.0) / .7), () => {
+          rect(638, 500, 356, 82, C.surface, C.ink, 2); text('MODEL OUTPUT', 662, 533, 15, C.muted, 'mono', 600); text('1 Pitch · 2 Investigate', 662, 562, 21, C.ink, 'sans', 600);
+          arrow(1008, 541, 1041, 541, C.ink, 2); rect(1055, 500, 171, 82, C.gold, C.ink, 2); text('HUMAN', 1140, 533, 15, C.ink, 'mono', 600, 'center'); text('decides', 1140, 562, 23, C.ink, 'sans', 600, 'center');
+        });
+      });
+    }
+
+    function drawLesson(time) {
+      withAlpha(sceneAlpha(time, 73, 80), () => {
+        chapter('THE OPERATING RULE', 8);
+        text('A generated brief is not a decision.', 54, 165, 58, C.ink, 'serif');
+        const a = easeOut((time - 73.8) / .8);
+        withAlpha(a, () => {
+          panel(54, 228, 545, 170, C.mint); text('RESEARCH PATH', 82, 270, 17, C.ink, 'mono', 600); text('sources → triage → candidate map', 82, 329, 26, C.ink, 'sans', 600); text('models propose ranked work', 82, 366, 21, C.ink, 'sans');
+          panel(627, 228, 599, 170, C.lilac); text('DECISION BOUNDARY', 655, 270, 17, C.ink, 'mono', 600); text('validate → inspect → approve', 655, 329, 26, C.ink, 'sans', 600); text('a person decides what moves forward', 655, 366, 21, C.ink, 'sans');
+        });
+        const packet = easeInOut(((time - 74.8) % 3.5) / 3.5);
+        withAlpha(clamp((time - 74.3) / .5), () => { line(88, 445, 1192, 445, C.ink, 2); flowPacket(88 + packet * 1084, 436, packet < .5 ? C.mint : C.lilac); });
+        withAlpha(easeOut((time - 75.2) / .7), () => {
+          rect(54, 526, 1172, 88, C.ink); text('PRESERVE EVIDENCE. REJECT INVALID OUTPUT. KEEP ACTIONS EXPLICIT.', 640, 580, 20, C.gold, 'mono', 600, 'center');
+        });
+      });
+    }
+
+    function render(time) {
+      const t = ((time % FILM.duration) + FILM.duration) % FILM.duration;
+      ctx.imageSmoothingEnabled = false; background(); drawProblem(t); drawApp(t); drawModels(t); drawUseful(t); drawBuild(t); drawTrace(t); drawResult(t); drawLesson(t); progress(t);
+      clock.value = `${formatTime(t)} / ${formatTime(FILM.duration)}`; if (!renderMode) scrub.value = String(t);
+    }
+    function currentTime(now = performance.now()) { return playing ? (anchorFilm + (now - anchorTime) / 1000) % FILM.duration : manualTime; }
+    function loop(now) { if (!renderMode) render(currentTime(now)); requestAnimationFrame(loop); }
+    function setPlaying(next) {
+      if (next === playing) return;
+      if (!next) { manualTime = currentTime(); playing = false; toggle.textContent = 'Play'; toggle.setAttribute('aria-label', 'Play animation'); }
+      else { anchorFilm = manualTime; anchorTime = performance.now(); playing = true; toggle.textContent = 'Pause'; toggle.setAttribute('aria-label', 'Pause animation'); }
+    }
+    toggle.addEventListener('click', () => setPlaying(!playing));
+    scrub.addEventListener('input', () => { manualTime = Number(scrub.value); anchorFilm = manualTime; anchorTime = performance.now(); render(manualTime); });
+    document.addEventListener('keydown', event => {
+      if (event.code === 'Space' && event.target !== scrub && event.target !== toggle) { event.preventDefault(); setPlaying(!playing); }
+      if ((event.code === 'ArrowLeft' || event.code === 'ArrowRight') && event.target !== scrub) { event.preventDefault(); setPlaying(false); manualTime = clamp(manualTime + (event.code === 'ArrowRight' ? 1 : -1), 0, FILM.duration - .01); scrub.value = String(manualTime); render(manualTime); }
+    });
+    window.setAnimationTime = seconds => { renderMode = true; document.body.classList.add('rendering'); playing = false; manualTime = Number(seconds) || 0; render(manualTime); return true; };
+    window.releaseAnimation = () => { renderMode = false; document.body.classList.remove('rendering'); anchorFilm = manualTime; anchorTime = performance.now(); playing = true; toggle.textContent = 'Pause'; toggle.setAttribute('aria-label', 'Pause animation'); return true; };
+
+    async function preload(name, src) { const image = new Image(); image.src = src; await image.decode(); images[name] = image; }
+    Promise.all([
+      document.fonts.ready,
+      preload('weekly', 'assets/news.png'),
+      preload('newsDaily', 'assets/news-daily.png'),
+      preload('contentQueue', 'assets/content-queue.png'),
+      preload('evidenceDetail', 'assets/evidence-detail.png'),
+      preload('widget', 'assets/desktop-widget.png')
+    ]).then(() => {
+      // Prime local screenshots in the canvas compositor before exposing the
+      // deterministic capture hook; first-use texture upload must not alter a frame.
+      render(FILM.posterTime);
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) { playing = false; manualTime = FILM.reducedMotionTime; toggle.textContent = 'Play'; toggle.setAttribute('aria-label', 'Play animation'); scrub.value = String(manualTime); render(manualTime); }
+      else render(0);
+      window.__animationReady = true;
+      requestAnimationFrame(loop);
+    });
+  </script>
+</body>
+</html>

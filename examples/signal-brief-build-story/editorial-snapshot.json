@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "status": "reviewed",
+  "title": "How I Built Signal Brief With Coding Agents",
+  "kicker": "HOW AGENT ENGINEERS WORK",
+  "dek": "I used one agent to build another, W&B Inference to run its model pipeline, and Weave traces to turn runtime failures into concrete engineering decisions.",
+  "content_pillar": {
+    "name": "How agent engineers work",
+    "promise": "Learn what credible practitioners are actually doing.",
+    "editorial_object": "The practitioner's experience and judgment—not a company endorsement."
+  },
+  "source": {
+    "repository": "https://github.com/LorenzoWandB/News-Research-Agent",
+    "source_commit": "55acb9419f7f40147f3a1affe47268dc8b8814b0",
+    "product_commit": "e6e0a35",
+    "repair_commit": "0aa060258ea0f063cf50024b256461ba2daf7d47",
+    "repair_commit_url": "https://github.com/LorenzoWandB/News-Research-Agent/commit/0aa060258ea0f063cf50024b256461ba2daf7d47",
+    "installed_app_identifier": "com.ashah.signalbrief",
+    "installed_app_verified_at": "2026-07-21T00:00:00-04:00",
+    "weave_project": "a-sh0ts/news-research-agent",
+    "weave_project_url": "https://wandb.ai/a-sh0ts/news-research-agent/weave/agents",
+    "inference_project": "wandb/news-research-agent",
+    "public_report_project": "wandb/news-research-agent"
+  },
+  "research_question": "How did a practitioner use a coding agent, W&B Inference, and Weave to build a production-shaped research agent and turn runtime failures into concrete engineering decisions?",
+  "practitioner_thesis": "Useful agents need two loops: one loop does the work, and another makes the work inspectable enough to improve safely.",
+  "product": {
+    "name": "Signal Brief",
+    "problem": "Finding AI news was easy; deciding what deserved attention or original work was the bottleneck.",
+    "solution": "Signal Brief turns source evidence into a small, inspectable decision queue.",
+    "sources": [
+      "papers",
+      "repositories",
+      "model releases",
+      "trusted AI sources"
+    ],
+    "surfaces": [
+      {
+        "name": "News",
+        "purpose": "Read five ranked stories with source links and why-they-matter context."
+      },
+      {
+        "name": "Content",
+        "purpose": "Review at most three evidence-backed ideas, inspect missing proof, and explicitly approve or hand off work."
+      },
+      {
+        "name": "Obsidian",
+        "purpose": "Preserve the larger evidence pool, research memory, and decisions locally."
+      },
+      {
+        "name": "Widget",
+        "purpose": "Expose a read-only, credential-free summary without making model calls."
+      }
+    ],
+    "human_boundary": "The models propose ranked stories and opportunities; the practitioner reviews evidence and explicitly decides what moves forward."
+  },
+  "pipeline": {
+    "provider": "W&B Inference",
+    "triage": {
+      "model": "openai/gpt-oss-20b",
+      "role": "Cheap parallel per-item relevance scoring."
+    },
+    "synthesis": {
+      "model": "openai/gpt-oss-120b",
+      "role": "Connect bounded evidence into ResearchMapV1, ranked stories, and editorial opportunities."
+    },
+    "briefing": {
+      "model": "openai/gpt-oss-120b",
+      "role": "Produce an explicit content brief only when the user requests it."
+    },
+    "sequence": [
+      "collect sources",
+      "canonicalize and preserve provenance",
+      "triage items",
+      "build ResearchMapV1",
+      "render briefing and decision queue",
+      "store receipt and Weave trace"
+    ],
+    "safeguards": [
+      "One selected provider per run with no silent provider fallback.",
+      "Structured model output is validated and treated as untrusted.",
+      "Stable source identities are checked before display.",
+      "Scheduled research runs may call the configured provider automatically; content-brief generation, publishing, and GitHub handoffs remain explicit user actions.",
+      "The widget is read-only and excludes credentials and private research state."
+    ]
+  },
+  "development_roles": [
+    {
+      "actor": "Human practitioner",
+      "color_role": "control",
+      "responsibility": "Define the product problem, trust boundaries, acceptable behavior, and what is worth shipping."
+    },
+    {
+      "actor": "Codex",
+      "color_role": "coding_agent",
+      "responsibility": "Inspect the repository, implement changes, run tests, and validate the installed application."
+    },
+    {
+      "actor": "Signal Brief",
+      "color_role": "runtime",
+      "responsibility": "Run the recurring collection, triage, synthesis, memory, and delivery workflow."
+    },
+    {
+      "actor": "Weave",
+      "color_role": "evidence",
+      "responsibility": "Record the runtime prompts, responses, latency, errors, and validation boundary."
+    }
+  ],
+  "weekly_runs": [
+    {
+      "id": "2026-07-20T15-58-49-039Z-weekly",
+      "weave_project": "a-sh0ts/news-research-agent",
+      "duration_ms": 301588,
+      "receipt_status": "succeeded",
+      "research_map_outcome": "timeout followed by grounded deterministic fallback",
+      "prompt_characters": 107000,
+      "prompt_characters_approximate": true,
+      "trace_access": "receipt-only",
+      "observed_failure": "The single 120B research-map request exceeded five minutes after receiving an oversized evidence prompt.",
+      "engineering_change": "Bound trailing evidence and novelty context rather than sending the full historical pool."
+    },
+    {
+      "id": "2026-07-20T16-05-59-927Z-weekly",
+      "weave_project": "a-sh0ts/news-research-agent",
+      "duration_ms": 107342,
+      "receipt_status": "succeeded",
+      "research_map_outcome": "model response captured; validator exposed schema-label and identity defects during replay",
+      "prompt_characters": 76000,
+      "prompt_characters_approximate": true,
+      "trace_access": "receipt-only",
+      "observed_failure": "The structured response echoed trendIndex:0 into prose, contained duplicate trusted IDs, and attached display copy to the wrong trusted source identity.",
+      "engineering_change": "Replay the captured response locally; repair only exact schema echoes, dedupe trusted identities, and replace mismatched display copy from the trusted source record."
+    },
+    {
+      "id": "2026-07-20T16-13-05-709Z-weekly",
+      "weave_project": "a-sh0ts/news-research-agent",
+      "duration_ms": 301792,
+      "receipt_status": "succeeded",
+      "research_map_outcome": "timeout followed by grounded deterministic fallback",
+      "prompt_characters": 76000,
+      "prompt_characters_approximate": true,
+      "trace_access": "receipt-only",
+      "observed_failure": "A smaller but still large prompt again exceeded five minutes.",
+      "engineering_change": "Compress the prompt below a tested 50,000-character ceiling while retaining 40 balanced current candidates."
+    },
+    {
+      "id": "2026-07-20T16-21-26-835Z-weekly",
+      "weave_project": "a-sh0ts/news-research-agent",
+      "duration_ms": 77679,
+      "receipt_status": "succeeded",
+      "research_map_outcome": "validated structured ResearchMapV1 with no receipt warnings",
+      "prompt_characters": 39000,
+      "prompt_characters_approximate": true,
+      "trace_access": "receipt-only",
+      "observed_failure": null,
+      "engineering_change": "The bounded prompt, validator, and trusted-display repairs produced the intended weekly map."
+    }
+  ],
+  "field_run": {
+    "run_id": "2026-07-20T16-21-26-835Z-weekly",
+    "started_at": "2026-07-20T16:21:26.835Z",
+    "finished_at": "2026-07-20T16:22:44.514Z",
+    "duration_ms": 77679,
+    "receipt_status": "succeeded",
+    "warnings": [],
+    "evidence_items": 245,
+    "bounded_candidates": 40,
+    "evidence_lanes": 5,
+    "signals": 9,
+    "trends": 5,
+    "confirmed_trends": 1,
+    "emerging_trends": 4,
+    "ranked_stories": 5,
+    "opportunities": 3,
+    "recommendations": {
+      "pitch": 1,
+      "investigate": 2,
+      "watch": 0
+    },
+    "triaged_new_items": 0,
+    "triage_note": "The run rebuilt the weekly map from 245 cached evidence items, so no new per-item triage calls were required during this receipt.",
+    "receipt_models": {
+      "triage": "openai/gpt-oss-20b",
+      "synthesis": "openai/gpt-oss-120b",
+      "briefing": "openai/gpt-oss-120b"
+    }
+  },
+  "development_changes": [
+    {
+      "problem": "Oversized evidence prompt",
+      "evidence": "107k characters and repeated five-minute endpoint timeouts",
+      "change": "Keep 40 balanced current candidates while reducing recent evidence and novelty history; add a prompt-size regression below 50k.",
+      "code_commit": "0aa060258ea0f063cf50024b256461ba2daf7d47"
+    },
+    {
+      "problem": "Structured output contained schema vocabulary as content",
+      "evidence": "trendIndex:0 appeared where an opportunity thesis belonged",
+      "change": "Reject invalid structured output generally, but repair only the exact known schema echo from grounded expectedValue.",
+      "code_commit": "0aa060258ea0f063cf50024b256461ba2daf7d47"
+    },
+    {
+      "problem": "Trusted identities and display text drifted apart",
+      "evidence": "Duplicate trusted IDs and a headline bound to the wrong source ID",
+      "change": "Dedupe known IDs, continue rejecting unknown IDs, and restore title/summary from the trusted source record when display copy mismatches.",
+      "code_commit": "0aa060258ea0f063cf50024b256461ba2daf7d47"
+    },
+    {
+      "problem": "The Content screen hid valid work",
+      "evidence": "The app opened daily context, defaulted to a Pitch-only filter, and vertically centered a clipped empty state",
+      "change": "Open the weekly research context, show all populated recommendations, and validate the installed native app after the code tests.",
+      "code_commit": "0aa060258ea0f063cf50024b256461ba2daf7d47"
+    }
+  ],
+  "practitioner_lessons": [
+    "Give cheap triage and expensive synthesis different jobs.",
+    "Treat structured model output as untrusted input.",
+    "Preserve stable evidence identities all the way to the UI.",
+    "Trace the boundary where source evidence becomes a decision.",
+    "Replay captured responses locally before paying for another model call.",
+    "Keep expensive or external actions explicit and human-controlled."
+  ],
+  "limitations": [
+    "This is a production engineering field report, not a controlled benchmark of coding-agent productivity or a causal comparison of observability tools.",
+    "The four receipts record top-level success because deterministic fallback is a successful product outcome; the research-map timeout and validation incidents are reconstructed from contemporaneous development notes and code changes.",
+    "Historical Weave conversation IDs and project identities are preserved in the receipts, but exact call URLs could not be reconstructed because the current Calls query returned no rows; every historical run is therefore labeled receipt-only, and prompt bodies, tokens, and costs are omitted.",
+    "Prompt-character counts are rounded from contemporaneous trace inspection and are marked approximate.",
+    "Later runs still show timeout and fallback behavior, so the iteration fixed specific boundaries without eliminating model or provider variability."
+  ],
+  "screenshots": [
+    {
+      "id": "news",
+      "path": "assets/news.png",
+      "surface": "Installed native News workflow",
+      "captured_from": "signal-brief-two-mode-walkthrough.mp4"
+    },
+    {
+      "id": "content",
+      "path": "assets/content.png",
+      "surface": "Installed native Content workflow",
+      "captured_from": "signal-brief-two-mode-walkthrough.mp4"
+    },
+    {
+      "id": "evidence",
+      "path": "assets/evidence.png",
+      "surface": "Installed native evidence review",
+      "captured_from": "signal-brief-two-mode-walkthrough.mp4"
+    }
+  ],
+  "publication": {
+    "film_slug": "signal-brief-agent-engineering",
+    "film_duration_seconds": 80,
+    "film_fps": 15,
+    "film_frames": 1200,
+    "article_filename": "how-i-built-signal-brief-with-coding-agents.md",
+    "report_title": "Building Signal Brief With Coding Agents: A Trace-Backed Engineering Field Report"
+  },
+  "evidence_sources": [
+    {
+      "id": "repo-readme",
+      "kind": "repository",
+      "locator": "README.md",
+      "supports": [
+        "product behavior",
+        "surfaces",
+        "data flow",
+        "human approval boundary"
+      ]
+    },
+    {
+      "id": "config",
+      "kind": "repository",
+      "locator": "config.yaml",
+      "supports": [
+        "provider",
+        "model identities",
+        "model responsibilities"
+      ]
+    },
+    {
+      "id": "repair-commit",
+      "kind": "git",
+      "locator": "0aa060258ea0f063cf50024b256461ba2daf7d47",
+      "supports": [
+        "prompt compaction",
+        "validator repair",
+        "identity repair",
+        "UI state repair",
+        "regression tests"
+      ]
+    },
+    {
+      "id": "weekly-receipts",
+      "kind": "run-receipt",
+      "locator": "2026-07-20T15-58-49-039Z-weekly through 2026-07-20T16-21-26-835Z-weekly (receipt-only)",
+      "supports": [
+        "run identity",
+        "duration",
+        "terminal status",
+        "model routes",
+        "evidence count",
+        "Weave project and conversation identity"
+      ]
+    },
+    {
+      "id": "build-thread",
+      "kind": "contemporaneous-development-record",
+      "locator": "private contemporaneous build record (reviewed; not published)",
+      "supports": [
+        "trace observations",
+        "prompt-size sequence",
+        "response replay",
+        "final ResearchMapV1 composition",
+        "installed-app validation"
+      ]
+    },
+    {
+      "id": "native-walkthrough",
+      "kind": "approved-screenshot-source",
+      "locator": "approved installed-app captures from July 21, 2026",
+      "supports": [
+        "News UI",
+        "Content UI",
+        "evidence review",
+        "explicit approval"
+      ]
+    }
+  ],
+  "content_sha256": "aff77cf4312ced691f578c5099f2371cfac6930afe66f6f763366b0c5c9b4a09"
+}

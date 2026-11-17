@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 520" role="img" aria-labelledby="title desc">
+  <title id="title">Readable detail from the installed Signal Brief News view</title>
+  <desc id="desc">A reflowed detail shows one ranked story with its source, summary, why-it-matters statement, and explicit Read source, Open note, and Develop into content actions.</desc>
+  <rect width="390" height="520" fill="#171A1F"/>
+  <g font-family="Source Sans 3, Arial, sans-serif" fill="#FDFDFD">
+    <rect x="18" y="18" width="354" height="54" rx="10" fill="#23262B" stroke="#626872"/>
+    <text x="34" y="41" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="700" fill="#FCBC32">NEWS · READING QUEUE</text>
+    <text x="34" y="61" font-size="14" fill="#C9CDD3">One ranked signal · source attached</text>
+
+    <rect x="18" y="88" width="354" height="414" rx="12" fill="#1A2230" stroke="#626872"/>
+    <text x="36" y="120" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="700" fill="#FCBC32">02 · GITHUB-TRENDING · JUL 20</text>
+    <text x="36" y="158" font-size="22" font-weight="700">SigNoz OpenTelemetry</text>
+    <text x="36" y="185" font-size="22" font-weight="700">Observability for AI Agents</text>
+    <text x="36" y="222" font-size="16" fill="#D6D9DE">OTel-native logs, metrics, and traces</text>
+    <text x="36" y="245" font-size="16" fill="#D6D9DE">for agent systems.</text>
+
+    <text x="36" y="290" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="700" fill="#AFCBFF">WHY IT MATTERS</text>
+    <text x="36" y="322" font-size="17" font-weight="600">It fills a missing observability layer</text>
+    <text x="36" y="347" font-size="17" font-weight="600">for agent pipelines.</text>
+
+    <rect x="36" y="392" width="96" height="42" rx="7" fill="#31343A"/>
+    <text x="84" y="418" text-anchor="middle" font-size="14">Read source</text>
+    <rect x="140" y="392" width="88" height="42" rx="7" fill="#31343A"/>
+    <text x="184" y="418" text-anchor="middle" font-size="14">Open note</text>
+    <rect x="36" y="446" width="240" height="42" rx="7" fill="#2F78FF"/>
+    <text x="156" y="472" text-anchor="middle" font-size="14" font-weight="600">Develop into content</text>
+  </g>
+</svg>

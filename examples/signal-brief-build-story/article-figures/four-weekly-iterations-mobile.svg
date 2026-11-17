@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 760" role="img" aria-labelledby="title desc">
+  <title id="title">Four observed weekly synthesis attempts</title>
+  <desc id="desc">The first and third calls timed out into fallback, the second response was rejected during replay, and the fourth produced a validated map. Prompt sizes are approximate and the attempts were not controlled.</desc>
+  <defs>
+    <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="#E4E6EB"/></pattern>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#171A1F"/></marker>
+  </defs>
+  <rect width="390" height="760" fill="#FDFDFD"/><rect width="390" height="760" fill="url(#grid)"/>
+  <g fill="#171A1F" font-family="Source Sans 3, Arial, sans-serif">
+    <text x="20" y="40" font-family="Source Serif Pro, Georgia, serif" font-size="25">Four runs. Three boundaries.</text>
+    <text x="20" y="66" fill="#5B616B" font-size="13">Approximate prompt size · receipt duration</text>
+
+    <rect x="20" y="96" width="350" height="118" rx="8" fill="#FFB8AA" stroke="#171A1F" stroke-width="2"/>
+    <text x="38" y="124" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700">RUN 01 · 107k · 302s</text>
+    <text x="38" y="154" font-size="20" font-weight="700">Synthesis timed out.</text>
+    <text x="38" y="179" font-size="14">Fallback kept the product usable.</text>
+    <text x="38" y="199" font-size="14">Change: bound the history.</text>
+    <line x1="195" y1="214" x2="195" y2="238" stroke="#171A1F" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="252" width="350" height="132" rx="8" fill="#FFB8AA" stroke="#171A1F" stroke-width="2"/>
+    <text x="38" y="280" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700">RUN 02 · 76k · 107s</text>
+    <text x="38" y="310" font-size="20" font-weight="700">Replay rejected the research.</text>
+    <text x="38" y="335" font-size="14">Schema echo · duplicate IDs</text>
+    <text x="38" y="355" font-size="14">headline bound to the wrong source</text>
+    <text x="38" y="375" font-size="14">Change: repair semantics + identity.</text>
+    <line x1="195" y1="384" x2="195" y2="408" stroke="#171A1F" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="422" width="350" height="118" rx="8" fill="#FFB8AA" stroke="#171A1F" stroke-width="2"/>
+    <text x="38" y="450" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700">RUN 03 · 76k · 302s</text>
+    <text x="38" y="480" font-size="20" font-weight="700">The next attempt timed out.</text>
+    <text x="38" y="505" font-size="14">Change: reduce this prompt below 50k</text>
+    <text x="38" y="525" font-size="14">and add a prompt-size regression.</text>
+    <line x1="195" y1="540" x2="195" y2="564" stroke="#171A1F" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="578" width="350" height="112" rx="8" fill="#AFE0C7" stroke="#171A1F" stroke-width="2"/>
+    <text x="38" y="606" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700">RUN 04 · 39k · 78s</text>
+    <text x="38" y="636" font-size="20" font-weight="700">Validated ResearchMapV1.</text>
+    <text x="38" y="661" font-size="14">No receipt warnings in this field run.</text>
+
+    <text x="20" y="722" fill="#5B616B" font-size="13">Observed sequence—not a prompt-length experiment.</text>
+    <text x="20" y="744" fill="#5B616B" font-size="13">Later runs still timed out and fell back.</text>
+  </g>
+</svg>
