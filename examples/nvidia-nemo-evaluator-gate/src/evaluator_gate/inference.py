@@ -27,8 +27,17 @@ def api_key() -> str:
 class ForgeInference:
     """One chat completion per call. Errors are returned, not raised, so the gate can count them."""
 
-    def __init__(self, project: str, model: str = DEFAULT_MODEL, timeout_seconds: float = 120):
-        self.project, self.model = project, model
+    def __init__(
+        self,
+        project: str,
+        model: str = DEFAULT_MODEL,
+        timeout_seconds: float = 120,
+        *,
+        enable_thinking: bool = False,
+    ):
+        self.project = project
+        self.model = model
+        self.enable_thinking = enable_thinking
         self.client = httpx.Client(
             timeout=httpx.Timeout(timeout_seconds, connect=10),
             transport=httpx.HTTPTransport(retries=1),
@@ -40,28 +49,42 @@ class ForgeInference:
 
     def ask(self, system: str, prompt: str, *, max_tokens: int = 1024, temperature: float = 0.0) -> dict:
         started = time.perf_counter()
-        record = {"requested_model": self.model, "max_tokens": max_tokens, "endpoint": INFERENCE_URL}
+        payload: dict = {
+            "model": self.model,
+            "messages": [{"role": "system", "content": system}, {"role": "user", "content": prompt}],
+            "max_tokens": max_tokens,
+            "temperature": temperature,
+        }
+        if "nemotron" in self.model.lower():
+            payload["chat_template_kwargs"] = {"enable_thinking": self.enable_thinking}
+        record = {
+            "requested_model": self.model,
+            "enable_thinking": self.enable_thinking,
+            "max_tokens": max_tokens,
+            "endpoint": INFERENCE_URL,
+        }
         try:
-            response = self.client.post(INFERENCE_URL + "/chat/completions", json={
-                "model": self.model,
-                "messages": [{"role": "system", "content": system}, {"role": "user", "content": prompt}],
-                "max_tokens": max_tokens,
-                "temperature": temperature,
-            })
+            response = self.client.post(INFERENCE_URL + "/chat/completions", json=payload)
             record["http_status"] = response.status_code
             response.raise_for_status()
             data = response.json()
             choice = data["choices"][0]
+            usage = data.get("usage") or {}
             record.update(
                 text=choice["message"].get("content") or "",
                 model=data.get("model"),
-                usage=data.get("usage") or {},
+                usage=usage,
                 finish_reason=choice.get("finish_reason"),
                 response_id=data.get("id"),
                 error=None,
             )
-        except Exception as exc:  # the gate records the failure class and keeps the row
-            record.update(text="", model=self.model, usage={}, finish_reason=None,
-                          error=type(exc).__name__)
+        except Exception as exc:  # keep failed calls in the denominator with their error class
+            record.update(
+                text="",
+                model=self.model,
+                usage={},
+                finish_reason=None,
+                error=type(exc).__name__,
+            )
         record["latency_ms"] = round((time.perf_counter() - started) * 1000, 1)
         return record

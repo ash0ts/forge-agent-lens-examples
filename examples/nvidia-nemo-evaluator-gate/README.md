@@ -1,64 +1,67 @@
 # A release gate you have seen say no
 
-A prompt change wants to ship. This example scores it with NVIDIA's NeMo Evaluator `exact_match` scorer on Forge Serverless Inference, applies a written policy, and publishes everything the policy looked at to one Forge run. The gate has to reject a deliberately bad prompt before anyone trusts its yes.
+Companion code and evidence for the CoreWeave Forge Report [**A release gate you have seen say no**](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/reports/A-release-gate-you-have-seen-say-no--VmlldzoxODMzMTAxMw==).
 
-Not reviewed by NVIDIA. Built on public NeMo Evaluator and Forge APIs.
+Scores a candidate support-routing prompt against the current one-line baseline using NVIDIA's NeMo Evaluator (`exact_match`) on Forge Serverless Inference, enforces a nine-check policy in `data/policy.json`, requires a deliberately broken negative-control prompt to be rejected, and logs the full decision record to one Forge run.
 
-## What you learn
+Built on public NeMo Evaluator and Forge APIs. Not reviewed by NVIDIA.
 
-- How to turn "the eval looked fine" into a policy with named checks that a CI job can read back from a Forge run summary.
-- Why a negative control belongs in every gate run. The control prompt answers `billing` for every ticket and scores 2/8; if the gate ever passes it, the gate is broken.
-- What a model drift looks like in evidence. The same baseline prompt scored 42/48 held-out on 2026-10-29 and 48/48 on 2026-11-18 on the same served model name. Both runs are published; neither is hidden.
+## What this example covers
+
+- Turning "the notebook looked fine" into nine named checks that a CI step (`evaluator-gate verify`) reads directly from a Forge run summary.
+- Running a negative control (`always answer "billing"`) inside every gate run so a broken scorer or loosened floor fails closed.
+- Logging latency and output tokens next to accuracy. When we extracted this package and forgot `chat_template_kwargs={"enable_thinking": False}`, the one-line baseline jumped from `42 / 48` to `48 / 48` by spending `18,830` output tokens (`~392` reasoning tokens and `3.0 s` per ticket) instead of `132` tokens (`179 ms` per ticket). Restoring `enable_thinking=False` reproduced `42 / 48` vs. `48 / 48` down to the same six ticket IDs.
 
 ## Forge surfaces, in reading order
 
-| Step | Surface | Live |
+Open the public [**saved Workspace view (`?nw=kzxnkpkxl5n`)**](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples?nw=kzxnkpkxl5n) (no login required):
+
+| Section | Surface | Live runs |
 | --- | --- | --- |
-| 1 | `release_gate/heldout` EvalTable: baseline, candidate, and control answers side by side with correctness scores | [live run `imy7ehrq`](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/runs/imy7ehrq) · [October replay `gv5j7kfg`](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/runs/gv5j7kfg) |
-| 2 | `release_gate/policy_checks` table and `gate/check/*` summary keys: the nine checks CI reads | same runs |
-| 3 | `release_gate/paired_changes`: which cases the candidate fixed or broke relative to baseline | same runs |
-| 4 | `release_gate/category_accuracy` and `release_gate/category_bar/*`: per-category accuracy against the 0.75 floor | same runs |
-| 5 | Artifacts `release-gate-inputs` (tickets, prompts, policy with SHA-256) and `release-gate-evidence` (journaled responses, report) | same runs |
+| 1 | `gate/ci_exit_code`, `gate/heldout_delta`, `gate/paired_regressions`, `control/correct` | [live no-thinking `e0ce3715`](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/runs/e0ce3715) · [live thinking-on `imy7ehrq`](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/runs/imy7ehrq) · [Oct 29 replay `gv5j7kfg`](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/runs/gv5j7kfg) |
+| 2 | `release_gate/heldout` `wandb.EvalTable`: baseline, candidate, and control outputs side by side | same three runs (public, loads signed out) |
+| 3 | `release_gate/policy_checks` (all 9 checks) and `release_gate/paired_changes` (the 6 fixed tickets) | same runs |
+| 4 | `baseline/heldout/latency_ms_p50` and `completion_tokens_total`: thinking-off vs. thinking-on cost | same runs |
+| 5 | `release_gate/category_accuracy` against the `0.75` per-queue floor + `release-gate-inputs` / `release-gate-evidence` artifacts | same runs |
 
-Project: [`wandb/nvidia-forge-examples`](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples).
+## Results on `nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B`
 
-## Results
-
-| Run | Baseline held-out | Candidate held-out | Control | Decision |
-| --- | --- | --- | --- | --- |
-| 2026-10-29 responses, replayed | 42/48 (inference 9/12, training 10/12, observability 11/12, billing 12/12) | 48/48 | 2/8, rejected | pass, delta +0.125 |
-| 2026-11-18 live | 48/48 | 48/48 | 2/8, rejected | pass, delta 0.0 |
-
-The live run passes on the "no regressions, meets floors" checks, not on improvement. `min_heldout_delta` is 0.0 in `data/policy.json`; set it above zero if your gate should demand a measurable gain.
+| Run | Thinking | Baseline held-out | Candidate held-out | Control | Baseline median ms | Held-out output tokens (base / cand) | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-10-29 capture, rescored (`gv5j7kfg`) | off | 42 / 48 (`billing` 12, `obs` 11, `train` 10, `inf` 9) | 48 / 48 | 2 / 8, rejected | 99.5 ms | 132 / 132 | pass (`+0.125`) |
+| 2026-11-18 live (`e0ce3715`) | off | 42 / 48 (same 6 tickets missed) | 48 / 48 | 2 / 8, rejected | 178.8 ms | 132 / 132 | pass (`+0.125`) |
+| 2026-11-18 live (`imy7ehrq`) | on | 48 / 48 | 48 / 48 | 2 / 8, rejected | 3,038.5 ms | 18,830 / 26,272 | pass (`0.000`) |
 
 ## Run it
 
 ```bash
 cd examples/nvidia-nemo-evaluator-gate
 uv sync
+uv run pytest -q
+
 export WANDB_API_KEY=...   # or ~/.netrc
 
-# 136 model calls (64 cases x 2 prompts + 8 control), then publish to Forge
+# Live gate (136 calls: 64 tickets x 2 prompts + 8 control, thinking off by default)
 uv run evaluator-gate run --project wandb/nvidia-forge-examples --output out/run-01
 
-# Re-score journaled responses with no model calls (offline), optionally publish
+# Optional: compare with Nemotron thinking enabled
+uv run evaluator-gate run --project wandb/nvidia-forge-examples --enable-thinking --output out/run-thinking
+
+# Offline replay of saved responses (no API key or model calls required)
 uv run evaluator-gate replay --responses evidence/live-2026-11-18/responses.jsonl --output out/replay
 
-# CI: read the decision from the run summary
-uv run evaluator-gate verify --run wandb/nvidia-forge-examples/imy7ehrq
+# CI check: read the stored decision from a Forge run summary
+uv run evaluator-gate verify --run wandb/nvidia-forge-examples/e0ce3715
 ```
 
-`replay` works offline from `evidence/*/responses.jsonl`. `run` and `verify` need a Forge API key.
+## Layout
 
-## How it is built
-
-- `data/tickets.json`: 64 hand-authored support tickets, 4 labels, 16 development + 48 held-out.
-- `data/prompts.json`: `baseline`, `candidate`, and the deliberately broken `control`.
-- `data/policy.json`: the gate. Floors, zero paired regressions, complete responses, strict label contract.
-- `src/evaluator_gate/gate.py`: collect (threaded, journaled), score with `nemo_evaluator` `exact_match`, summarize with Wilson 95% intervals, `decide()`.
-- `src/evaluator_gate/forge.py`: one `wandb.EvalTable`, four tables, bar plots, artifacts, summary keys, and `verify()`.
-- `nemo-evaluator` is pinned to a git revision because the `ScorerInput` API used here is newer than the PyPI release.
+- `data/tickets.json`, `data/prompts.json`, `data/policy.json`: frozen 64-ticket suite, prompts, and nine-check policy.
+- `src/evaluator_gate/gate.py`: threaded collection with JSONL journaling, `nemo_evaluator.exact_match` scoring, Wilson 95% intervals, token/latency summaries, and `decide()`.
+- `src/evaluator_gate/forge.py`: logs the `wandb.EvalTable`, policy/category/diff tables, input and evidence artifacts, and summary keys; implements `verify()`.
+- `scripts/build_workspace_views.py` and `scripts/draw_article_figures.py`: reproduce the saved Forge Workspace views and article figures.
+- `tests/test_gate.py`: offline unit tests covering replay reconciliation, paired regression holds, label-contract failures, and broken-control holds.
 
 ## Limits
 
-Synthetic tickets test this routing task, not general model quality. Held-out means excluded from prompt development, not secret from repository readers. Each request is attempted once; failures stay in the denominator. The gate deploys nothing.
+Synthetic hand-authored tickets test this four-queue routing task, not general model quality. Held-out means excluded from prompt authoring, not secret from repository readers. Each pair runs once and failures stay in the denominator. The gate writes an exit code and deploys nothing.

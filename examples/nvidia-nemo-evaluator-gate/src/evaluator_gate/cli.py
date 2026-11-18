@@ -7,18 +7,30 @@ import sys
 from pathlib import Path
 
 from .data import DATA_DIR, VARIANTS, load_policy, load_prompts, load_tickets, sha256
-from .gate import collect, decide, reconcile, report_markdown, run_control, score, stamp
+from .gate import collect, decide, evaluate_control, reconcile, report_markdown, run_control, score, stamp
 
 
-def build_result(cases, prompts, policy, records, *, model, control=None, mode) -> dict:
+def _infer_thinking(rows: list[dict]) -> bool | None:
+    explicit = [r.get("enable_thinking") for r in rows if isinstance(r.get("enable_thinking"), bool)]
+    if explicit:
+        return bool(explicit[0])
+    if any(r.get("reasoning_tokens", 0) > 0 for r in rows):
+        return True
+    if rows and all(0 < r.get("completion_tokens", 0) <= 8 for r in rows if r["state"] == "scored"):
+        return False
+    return None
+
+
+def build_result(cases, prompts, policy, records, *, model, enable_thinking: bool | None = None,
+                 control=None, mode: str) -> dict:
     rows, issues = reconcile(cases, records, VARIANTS)
     scorer = score(rows)
-    decision = decide(rows, issues, policy)
-    if control is not None:
-        decision["checks"]["negative_control_rejected"] = control["rejected"]
-        decision["decision"] = "pass" if all(decision["checks"].values()) else "hold"
+    decision = decide(rows, issues, policy, control=control)
+    if enable_thinking is None:
+        enable_thinking = _infer_thinking(rows)
     exit_code = 0 if decision["decision"] == "pass" else 1
-    return {"mode": mode, "created_at": stamp(), "model": model, "policy": policy, "scorer": scorer,
+    return {"mode": mode, "created_at": stamp(), "model": model, "enable_thinking": enable_thinking,
+            "policy": policy, "scorer": scorer,
             "tickets_sha256": sha256({"cases": cases}), "prompts_sha256": sha256(prompts),
             "decision": decision, "rows": rows, "control": control, "ci_exit_code": exit_code,
             "limitations": [
@@ -30,8 +42,7 @@ def build_result(cases, prompts, policy, records, *, model, control=None, mode) 
 
 
 def write_outputs(result: dict, output_dir: Path) -> None:
-    slim = {k: v for k, v in result.items()}
-    (output_dir / "result.json").write_text(json.dumps(slim, indent=2, sort_keys=True, default=str))
+    (output_dir / "result.json").write_text(json.dumps(result, indent=2, sort_keys=True, default=str))
     (output_dir / "report.md").write_text(report_markdown(result))
 
 
@@ -47,7 +58,7 @@ def cmd_run(args) -> int:
     output_dir = Path(args.output).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    client = ForgeInference(args.project, model=args.model)
+    client = ForgeInference(args.project, model=args.model, enable_thinking=args.enable_thinking)
     try:
         records = collect(cases, {v: prompts[v] for v in VARIANTS}, client.ask,
                           journal=output_dir / "responses.jsonl", max_tokens=args.max_tokens,
@@ -59,10 +70,12 @@ def cmd_run(args) -> int:
     finally:
         client.close()
 
-    result = build_result(cases, prompts, policy, records, model=args.model, control=control, mode="live")
+    result = build_result(cases, prompts, policy, records, model=args.model,
+                          enable_thinking=args.enable_thinking, control=control, mode="live")
     write_outputs(result, output_dir)
     receipt = publish(result, project=args.project, run_name=args.run_name, output_dir=output_dir, data_dir=data_dir)
     print(json.dumps({"decision": result["decision"]["decision"], "ci_exit_code": result["ci_exit_code"],
+                      "enable_thinking": args.enable_thinking,
                       "run_url": receipt["run_url"], "report": str(output_dir / "report.md")}, indent=2))
     return result["ci_exit_code"]
 
@@ -78,17 +91,8 @@ def cmd_replay(args) -> int:
     control = None
     control_path = source.with_name("control-responses.jsonl")
     if control_path.exists():
-        from .data import control_cases
-        from .gate import summarize
-        chosen = control_cases(cases)
         c_records = [json.loads(line) for line in control_path.read_text().splitlines() if line.strip()]
-        rows, issues = reconcile(chosen, c_records, ("control",))
-        c_scorer = score(rows)
-        metrics = summarize(rows)
-        control = {"prompt": prompts["control"], "rows": rows, "metrics": metrics, "scorer": c_scorer,
-                   "rejected": bool(not issues and metrics["accuracy"] is not None
-                                    and metrics["accuracy"] < policy["candidate_heldout_accuracy_min"]),
-                   "case_ids": [c["case_id"] for c in chosen]}
+        control = evaluate_control(cases, c_records, prompts, policy)
     model = next((r.get("model") for r in records if r.get("model")), "unknown")
     result = build_result(cases, prompts, policy, records, model=model, control=control, mode="replay")
     output_dir = Path(args.output).resolve()
@@ -118,6 +122,8 @@ def main(argv=None) -> int:
     run = sub.add_parser("run", help="Ask the model, score with NeMo Evaluator, log the gate to Forge.")
     run.add_argument("--project", required=True, help="entity/project in Forge")
     run.add_argument("--model", default="nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B")
+    run.add_argument("--enable-thinking", action="store_true",
+                     help="Enable Nemotron chain-of-thought reasoning (off by default for single-label routing).")
     run.add_argument("--output", required=True)
     run.add_argument("--run-name", default="release-gate")
     run.add_argument("--data-dir", default=str(DATA_DIR))

@@ -1,6 +1,6 @@
 """Forge Serverless Inference client. OpenAI-compatible; the only credential is WANDB_API_KEY.
 
-Relay wraps each call in an LLM scope; this client just makes the request and records what came back.
+Relay wraps each call in an LLM scope; this client sends the HTTP request and records what came back.
 """
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ def api_key() -> str:
 
 
 class ForgeInference:
-    """One chat completion per call. Errors are returned, not raised, so the gate can count them."""
+    """One chat completion per call. Transport or HTTP errors are returned on the record for the caller to handle."""
 
     def __init__(self, project: str, model: str = DEFAULT_MODEL, timeout_seconds: float = 120):
         self.project, self.model = project, model
@@ -64,7 +64,7 @@ class ForgeInference:
                 response_id=data.get("id"),
                 error=None,
             )
-        except Exception as exc:  # the gate records the failure class and keeps the row
+        except Exception as exc:  # return the error class so the agent loop can record it cleanly
             record.update(text="", model=self.model, usage={}, finish_reason=None,
                           error=type(exc).__name__)
         record["latency_ms"] = round((time.perf_counter() - started) * 1000, 1)

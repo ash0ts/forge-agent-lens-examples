@@ -45,7 +45,8 @@ def publish(result: dict, *, project: str, run_name: str, output_dir: Path, data
     entity, project_name = project.split("/", 1)
     decision = result["decision"]
     run = wandb.init(entity=entity, project=project_name, name=run_name, job_type="release-gate",
-                     config={"model": result["model"], "policy": result["policy"],
+                     config={"model": result["model"], "enable_thinking": result.get("enable_thinking"),
+                             "policy": result["policy"],
                              "tickets_sha256": result["tickets_sha256"], "prompts_sha256": result["prompts_sha256"],
                              "scorer": result["scorer"]},
                      settings=wandb.Settings(init_timeout=60))
@@ -63,9 +64,11 @@ def publish(result: dict, *, project: str, run_name: str, output_dir: Path, data
         run.log({"release_gate/heldout": heldout})
 
         every = wandb.Table(columns=["case_id", "split", "group", "variant", "ticket", "expected", "output",
-                                     "state", "correct", "latency_ms", "finish_reason"],
+                                     "state", "correct", "latency_ms", "completion_tokens", "reasoning_tokens",
+                                     "finish_reason"],
                             data=[[r["case_id"], r["split"], r["group"], r["variant"], r["prompt"], r["expected"],
                                    r.get("output", ""), r["state"], r.get("correct"), r.get("latency_ms"),
+                                   r.get("completion_tokens", 0), r.get("reasoning_tokens", 0),
                                    r.get("finish_reason")] for r in result["rows"]])
         run.log({"release_gate/all_responses": every})
 
@@ -90,6 +93,7 @@ def publish(result: dict, *, project: str, run_name: str, output_dir: Path, data
         run.log({"release_gate/paired_changes": regressions})
 
         summary = {"gate/decision": decision["decision"], "gate/ci_exit_code": result["ci_exit_code"],
+                   "gate/enable_thinking": result.get("enable_thinking"),
                    "gate/heldout_delta": decision["heldout_delta"],
                    "gate/paired_regressions": sum(p["regression"] for p in decision["heldout_pairs"]),
                    "gate/paired_improvements": sum(p["improvement"] for p in decision["heldout_pairs"])}
@@ -100,13 +104,15 @@ def publish(result: dict, *, project: str, run_name: str, output_dir: Path, data
                 summary[f"{v}/{split}/accuracy"] = m["accuracy"]
                 summary[f"{v}/{split}/correct"] = m["correct"]
                 summary[f"{v}/{split}/cases"] = m["cases"]
+                summary[f"{v}/{split}/latency_ms_p50"] = m["latency_ms_p50"]
+                summary[f"{v}/{split}/completion_tokens_total"] = m["completion_tokens_total"]
+                summary[f"{v}/{split}/reasoning_tokens_total"] = m["reasoning_tokens_total"]
             for g in LABELS:
                 summary[f"{v}/heldout/{g}/accuracy"] = decision["heldout_groups"][g][v]["accuracy"]
         if result.get("control"):
             summary["control/accuracy"] = result["control"]["metrics"]["accuracy"]
             summary["control/correct"] = result["control"]["metrics"]["correct"]
             summary["control/cases"] = result["control"]["metrics"]["cases"]
-            summary["gate/check/negative_control_rejected"] = result["control"]["rejected"]
         run.summary.update(summary)
 
         evidence = wandb.Artifact("release-gate-evidence", type="gate-evidence",
@@ -125,9 +131,18 @@ def publish(result: dict, *, project: str, run_name: str, output_dir: Path, data
 
 def verify(run_path: str) -> dict:
     """What CI reads: the decision as Forge stored it, not a local file."""
+    import time
+
     api = wandb.Api(timeout=30)
-    run = api.run(run_path)
-    summary = dict(run.summary)
+    summary: dict = {}
+    for _ in range(5):
+        run = api.run(run_path)
+        summary = dict(getattr(run.summary, "_json_dict", None) or run.summary)
+        if summary.get("gate/decision") is not None:
+            break
+        time.sleep(1.0)
     return {"run_path": run_path, "decision": summary.get("gate/decision"),
             "ci_exit_code": summary.get("gate/ci_exit_code"),
-            "checks": {k.removeprefix("gate/check/"): v for k, v in summary.items() if k.startswith("gate/check/")}}
+            "enable_thinking": summary.get("gate/enable_thinking"),
+            "checks": {k.removeprefix("gate/check/"): v for k, v in sorted(summary.items())
+                       if k.startswith("gate/check/")}}

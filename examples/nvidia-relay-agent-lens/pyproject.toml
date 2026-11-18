@@ -6,12 +6,16 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
   "nemo-relay==0.11.1",
   "coreweave>=0.1.0b0",
+  "weave>=0.51",
   "wandb[eval-table]>=0.25",
   "httpx>=0.28",
 ]
 
 [project.scripts]
 relay-agent-lens = "relay_agent_lens.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
 
 [build-system]
 requires = ["hatchling"]

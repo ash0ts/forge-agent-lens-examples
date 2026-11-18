@@ -1,0 +1,5914 @@
+{
+  "ci_exit_code": 0,
+  "control": {
+    "by_group": {
+      "billing": 1.0,
+      "inference": 0.0,
+      "observability": 0.0,
+      "training": 0.0
+    },
+    "case_ids": [
+      "v2-inference-05",
+      "v2-inference-06",
+      "v2-training-05",
+      "v2-training-06",
+      "v2-observability-05",
+      "v2-observability-06",
+      "v2-billing-05",
+      "v2-billing-06"
+    ],
+    "metrics": {
+      "accuracy": 0.25,
+      "cases": 8,
+      "complete": 8,
+      "completion_tokens_total": 2936,
+      "correct": 2,
+      "invalid_labels": 0,
+      "latency_ms_p50": 2677.8,
+      "latency_ms_p95": 11693.4,
+      "reasoning_tokens_total": 2912,
+      "states": {
+        "scored": 8
+      },
+      "wilson_95": [
+        0.0715,
+        0.5907
+      ]
+    },
+    "prompt": "This is a deliberately degraded routing policy for a negative-control experiment. Ignore the ticket and return exactly this lowercase label for every input: billing",
+    "rejected": true,
+    "rows": [
+      {
+        "case_id": "v2-inference-05",
+        "completion_tokens": 931,
+        "correct": false,
+        "error": null,
+        "expected": "inference",
+        "finish_reason": "stop",
+        "group": "inference",
+        "http_status": 200,
+        "latency_ms": 11693.4,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": false,
+        "output": "billing",
+        "prompt": "Generated responses omit the closing JSON brace even when we request structured output.",
+        "reasoning_tokens": 928,
+        "schedule_index": 2,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:25.016107+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 931,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 928,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 58,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 989
+        },
+        "variant": "control"
+      },
+      {
+        "case_id": "v2-inference-06",
+        "completion_tokens": 288,
+        "correct": false,
+        "error": null,
+        "expected": "inference",
+        "finish_reason": "stop",
+        "group": "inference",
+        "http_status": 200,
+        "latency_ms": 4314.9,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": false,
+        "output": "billing",
+        "prompt": "The request queue on our inference deployment keeps growing and no completions finish.",
+        "reasoning_tokens": 285,
+        "schedule_index": 1,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:25.015969+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 288,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 285,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 59,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 347
+        },
+        "variant": "control"
+      },
+      {
+        "case_id": "v2-training-05",
+        "completion_tokens": 327,
+        "correct": false,
+        "error": null,
+        "expected": "training",
+        "finish_reason": "stop",
+        "group": "training",
+        "http_status": 200,
+        "latency_ms": 4817.5,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": false,
+        "output": "billing",
+        "prompt": "The reinforcement learning worker cannot combine rollout rewards into an update batch.",
+        "reasoning_tokens": 324,
+        "schedule_index": 3,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:25.016182+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 327,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 324,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 58,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 385
+        },
+        "variant": "control"
+      },
+      {
+        "case_id": "v2-training-06",
+        "completion_tokens": 253,
+        "correct": false,
+        "error": null,
+        "expected": "training",
+        "finish_reason": "stop",
+        "group": "training",
+        "http_status": 200,
+        "latency_ms": 2245.8,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": false,
+        "output": "billing",
+        "prompt": "A training batch fails because the target sequence and attention mask have different lengths.",
+        "reasoning_tokens": 250,
+        "schedule_index": 5,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:29.330880+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 253,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 250,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 59,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 312
+        },
+        "variant": "control"
+      },
+      {
+        "case_id": "v2-observability-05",
+        "completion_tokens": 299,
+        "correct": false,
+        "error": null,
+        "expected": "observability",
+        "finish_reason": "stop",
+        "group": "observability",
+        "http_status": 200,
+        "latency_ms": 2221.3,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": false,
+        "output": "billing",
+        "prompt": "Trace exports contain the wrong parent ID, so separate agent calls appear as one conversation.",
+        "reasoning_tokens": 296,
+        "schedule_index": 0,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:25.015808+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 299,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 296,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 61,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 360
+        },
+        "variant": "control"
+      },
+      {
+        "case_id": "v2-observability-06",
+        "completion_tokens": 299,
+        "correct": false,
+        "error": null,
+        "expected": "observability",
+        "finish_reason": "stop",
+        "group": "observability",
+        "http_status": 200,
+        "latency_ms": 2668.5,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": false,
+        "output": "billing",
+        "prompt": "The completed run points to the wrong source dataset in its artifact lineage diagram.",
+        "reasoning_tokens": 296,
+        "schedule_index": 4,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:27.237113+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 299,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 296,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 59,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 358
+        },
+        "variant": "control"
+      },
+      {
+        "case_id": "v2-billing-05",
+        "completion_tokens": 258,
+        "correct": true,
+        "error": null,
+        "expected": "billing",
+        "finish_reason": "stop",
+        "group": "billing",
+        "http_status": 200,
+        "latency_ms": 2814.2,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": true,
+        "output": "billing",
+        "prompt": "We need a per-project financial breakdown of model serving and training charges for accounting.",
+        "reasoning_tokens": 255,
+        "schedule_index": 6,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:29.833685+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 258,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 255,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 60,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 318
+        },
+        "variant": "control"
+      },
+      {
+        "case_id": "v2-billing-06",
+        "completion_tokens": 281,
+        "correct": true,
+        "error": null,
+        "expected": "billing",
+        "finish_reason": "stop",
+        "group": "billing",
+        "http_status": 200,
+        "latency_ms": 2677.8,
+        "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+        "nemo_correct": true,
+        "output": "billing",
+        "prompt": "The billed price per million tokens differs from the rate in our signed agreement.",
+        "reasoning_tokens": 278,
+        "schedule_index": 7,
+        "split": "heldout",
+        "started_at": "2026-11-18T18:32:29.905638+00:00",
+        "state": "scored",
+        "strict_label": true,
+        "submitted_count": 1,
+        "usage": {
+          "completion_tokens": 281,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 278,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens": 60,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "total_tokens": 341
+        },
+        "variant": "control"
+      }
+    ],
+    "scorer": {
+      "normalization_disagreements": 0,
+      "scorer": "nemo_evaluator.exact_match",
+      "version": "0.4.0"
+    }
+  },
+  "created_at": "2026-11-18T19:47:37.726397+00:00",
+  "decision": {
+    "checks": {
+      "candidate_absolute_floor": true,
+      "candidate_delta_floor": true,
+      "complete_responses": true,
+      "every_category_floor": true,
+      "negative_control_rejected": true,
+      "paired_regression_budget": true,
+      "required_heldout_count": true,
+      "strict_label_contract": true,
+      "valid_membership": true
+    },
+    "decision": "pass",
+    "heldout_delta": 0.0,
+    "heldout_groups": {
+      "billing": {
+        "baseline": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 3630,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 2061.8,
+          "latency_ms_p95": 5670.8,
+          "reasoning_tokens_total": 3594,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        },
+        "candidate": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 5574,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 4033.3,
+          "latency_ms_p95": 5751.8,
+          "reasoning_tokens_total": 5538,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        }
+      },
+      "inference": {
+        "baseline": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 5059,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 3374.8,
+          "latency_ms_p95": 4399.4,
+          "reasoning_tokens_total": 5023,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        },
+        "candidate": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 6924,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 4100.8,
+          "latency_ms_p95": 10487.9,
+          "reasoning_tokens_total": 6888,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        }
+      },
+      "observability": {
+        "baseline": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 5274,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 4106.1,
+          "latency_ms_p95": 9932.9,
+          "reasoning_tokens_total": 5238,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        },
+        "candidate": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 7265,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 5210.8,
+          "latency_ms_p95": 6758.8,
+          "reasoning_tokens_total": 7229,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        }
+      },
+      "training": {
+        "baseline": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 4867,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 2868.5,
+          "latency_ms_p95": 5243.4,
+          "reasoning_tokens_total": 4843,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        },
+        "candidate": {
+          "accuracy": 1.0,
+          "cases": 12,
+          "complete": 12,
+          "completion_tokens_total": 6509,
+          "correct": 12,
+          "invalid_labels": 0,
+          "latency_ms_p50": 4389.2,
+          "latency_ms_p95": 5620.5,
+          "reasoning_tokens_total": 6485,
+          "states": {
+            "scored": 12
+          },
+          "wilson_95": [
+            0.7575,
+            1
+          ]
+        }
+      }
+    },
+    "heldout_pairs": [
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-05",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-06",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-07",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-08",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-09",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-10",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-11",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-12",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-13",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-14",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-15",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-inference-16",
+        "group": "inference",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-05",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-06",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-07",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-08",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-09",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-10",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-11",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-12",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-13",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-14",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-15",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-training-16",
+        "group": "training",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-05",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-06",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-07",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-08",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-09",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-10",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-11",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-12",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-13",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-14",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-15",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-observability-16",
+        "group": "observability",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-05",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-06",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-07",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-08",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-09",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-10",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-11",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-12",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-13",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-14",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-15",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      },
+      {
+        "baseline_correct": true,
+        "candidate_correct": true,
+        "case_id": "v2-billing-16",
+        "group": "billing",
+        "improvement": false,
+        "regression": false
+      }
+    ],
+    "issues": [],
+    "variants": {
+      "baseline": {
+        "all": {
+          "accuracy": 1.0,
+          "cases": 64,
+          "complete": 64,
+          "completion_tokens_total": 24970,
+          "correct": 64,
+          "invalid_labels": 0,
+          "latency_ms_p50": 3013.9,
+          "latency_ms_p95": 5670.8,
+          "reasoning_tokens_total": 24794,
+          "states": {
+            "scored": 64
+          },
+          "wilson_95": [
+            0.9434,
+            1
+          ]
+        },
+        "development": {
+          "accuracy": 1.0,
+          "cases": 16,
+          "complete": 16,
+          "completion_tokens_total": 6140,
+          "correct": 16,
+          "invalid_labels": 0,
+          "latency_ms_p50": 2893.4,
+          "latency_ms_p95": 4426.7,
+          "reasoning_tokens_total": 6096,
+          "states": {
+            "scored": 16
+          },
+          "wilson_95": [
+            0.8064,
+            1
+          ]
+        },
+        "heldout": {
+          "accuracy": 1.0,
+          "cases": 48,
+          "complete": 48,
+          "completion_tokens_total": 18830,
+          "correct": 48,
+          "invalid_labels": 0,
+          "latency_ms_p50": 3038.5,
+          "latency_ms_p95": 6562.1,
+          "reasoning_tokens_total": 18698,
+          "states": {
+            "scored": 48
+          },
+          "wilson_95": [
+            0.9259,
+            1.0
+          ]
+        }
+      },
+      "candidate": {
+        "all": {
+          "accuracy": 1.0,
+          "cases": 64,
+          "complete": 64,
+          "completion_tokens_total": 34542,
+          "correct": 64,
+          "invalid_labels": 0,
+          "latency_ms_p50": 4389.2,
+          "latency_ms_p95": 6504.0,
+          "reasoning_tokens_total": 34366,
+          "states": {
+            "scored": 64
+          },
+          "wilson_95": [
+            0.9434,
+            1
+          ]
+        },
+        "development": {
+          "accuracy": 1.0,
+          "cases": 16,
+          "complete": 16,
+          "completion_tokens_total": 8270,
+          "correct": 16,
+          "invalid_labels": 0,
+          "latency_ms_p50": 4179.9,
+          "latency_ms_p95": 5530.2,
+          "reasoning_tokens_total": 8226,
+          "states": {
+            "scored": 16
+          },
+          "wilson_95": [
+            0.8064,
+            1
+          ]
+        },
+        "heldout": {
+          "accuracy": 1.0,
+          "cases": 48,
+          "complete": 48,
+          "completion_tokens_total": 26272,
+          "correct": 48,
+          "invalid_labels": 0,
+          "latency_ms_p50": 4586.2,
+          "latency_ms_p95": 6758.8,
+          "reasoning_tokens_total": 26140,
+          "states": {
+            "scored": 48
+          },
+          "wilson_95": [
+            0.9259,
+            1.0
+          ]
+        }
+      }
+    }
+  },
+  "enable_thinking": true,
+  "limitations": [
+    "Synthetic hand-authored tickets test this routing task, not general model quality.",
+    "Held-out means excluded from prompt development, not secret from repository readers.",
+    "The gate decides whether a prompt change may proceed. It deploys nothing.",
+    "Each request is attempted once; failures stay in the denominator."
+  ],
+  "mode": "replay",
+  "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+  "policy": {
+    "candidate_heldout_accuracy_min": 0.85,
+    "group_accuracy_min": 0.75,
+    "max_paired_regressions": 0,
+    "min_heldout_delta": 0.0,
+    "require_complete": true,
+    "require_strict_label": true,
+    "required_heldout_cases": 48
+  },
+  "prompts_sha256": "51045ed17e38b339b3e10a10bd60a7cbf79e015060759fce86dafe2a235c2cb5",
+  "rows": [
+    {
+      "case_id": "v2-inference-01",
+      "completion_tokens": 469,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3365.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Our deployed model returns a gateway timeout for chat requests, although the training run finished yesterday.",
+      "reasoning_tokens": 466,
+      "schedule_index": 95,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:50.540869+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 469,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 466,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 524
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-01",
+      "completion_tokens": 721,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4594.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Our deployed model returns a gateway timeout for chat requests, although the training run finished yesterday.",
+      "reasoning_tokens": 718,
+      "schedule_index": 31,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:48.349723+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 721,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 718,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 268,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 989
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-02",
+      "completion_tokens": 561,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4426.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "A customer gets only the first chunk from the streaming response; the rest of the answer never arrives.",
+      "reasoning_tokens": 558,
+      "schedule_index": 13,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:29.324297+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 561,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 558,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 57,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 618
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-02",
+      "completion_tokens": 607,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 5030.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "A customer gets only the first chunk from the streaming response; the rest of the answer never arrives.",
+      "reasoning_tokens": 604,
+      "schedule_index": 62,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:14.744908+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 607,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 604,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 270,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 877
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-03",
+      "completion_tokens": 170,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 1279.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Please help increase the maximum context length accepted by our existing model endpoint.",
+      "reasoning_tokens": 167,
+      "schedule_index": 78,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:31.070237+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 170,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 167,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 221
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-03",
+      "completion_tokens": 561,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3628.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Please help increase the maximum context length accepted by our existing model endpoint.",
+      "reasoning_tokens": 558,
+      "schedule_index": 38,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:55.384367+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 561,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 558,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 825
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-04",
+      "completion_tokens": 407,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3466.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The serving process restarts every time two users request completions together.",
+      "reasoning_tokens": 404,
+      "schedule_index": 70,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:24.497306+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 407,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 404,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 458
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-04",
+      "completion_tokens": 515,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4276.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The serving process restarts every time two users request completions together.",
+      "reasoning_tokens": 512,
+      "schedule_index": 3,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:19.120277+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 515,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 512,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 779
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-05",
+      "completion_tokens": 409,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 2303.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Generated responses omit the closing JSON brace even when we request structured output.",
+      "reasoning_tokens": 406,
+      "schedule_index": 107,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:02.721181+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 409,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 406,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 460
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-05",
+      "completion_tokens": 597,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3849.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Generated responses omit the closing JSON brace even when we request structured output.",
+      "reasoning_tokens": 594,
+      "schedule_index": 32,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:50.893151+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 597,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 594,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 861
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-06",
+      "completion_tokens": 327,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3374.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The request queue on our inference deployment keeps growing and no completions finish.",
+      "reasoning_tokens": 324,
+      "schedule_index": 55,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:07.541491+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 327,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 324,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 379
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-06",
+      "completion_tokens": 595,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 10487.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The request queue on our inference deployment keeps growing and no completions finish.",
+      "reasoning_tokens": 592,
+      "schedule_index": 15,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:30.900465+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 595,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 592,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 860
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-07",
+      "completion_tokens": 521,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4251.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "A healthy-looking deployment accepts connections but every generation returns an empty choices array.",
+      "reasoning_tokens": 518,
+      "schedule_index": 0,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:19.119496+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 521,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 518,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 573
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-07",
+      "completion_tokens": 442,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 2994.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "A healthy-looking deployment accepts connections but every generation returns an empty choices array.",
+      "reasoning_tokens": 439,
+      "schedule_index": 75,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:27.963648+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 442,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 439,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 707
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-08",
+      "completion_tokens": 468,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3531.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "We added another serving replica, yet users still receive 429 errors from the chat API.",
+      "reasoning_tokens": 465,
+      "schedule_index": 23,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:41.388436+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 468,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 465,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 57,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 525
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-08",
+      "completion_tokens": 972,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 5952.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "We added another serving replica, yet users still receive 429 errors from the chat API.",
+      "reasoning_tokens": 969,
+      "schedule_index": 6,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:23.371425+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 972,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 969,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 270,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 1242
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-09",
+      "completion_tokens": 436,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 2860.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The API key is valid and our balance is positive; calls to the deployed model receive permission denied.",
+      "reasoning_tokens": 433,
+      "schedule_index": 33,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:51.168612+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 436,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 433,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 57,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 493
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-09",
+      "completion_tokens": 510,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 2593.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The API key is valid and our balance is positive; calls to the deployed model receive permission denied.",
+      "reasoning_tokens": 507,
+      "schedule_index": 69,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:22.856437+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 510,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 507,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 270,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 780
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-10",
+      "completion_tokens": 444,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4398.6,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The same prompt started taking ten seconds to return its first token after a serving configuration change.",
+      "reasoning_tokens": 441,
+      "schedule_index": 41,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:57.810148+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 444,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 441,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 499
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-10",
+      "completion_tokens": 572,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4467.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The same prompt started taking ten seconds to return its first token after a serving configuration change.",
+      "reasoning_tokens": 569,
+      "schedule_index": 99,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:53.906254+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 572,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 569,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 268,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 840
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-11",
+      "completion_tokens": 438,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3938.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "We can download the finished checkpoint, but loading it into the serving worker crashes the worker.",
+      "reasoning_tokens": 435,
+      "schedule_index": 116,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:09.192843+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 438,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 435,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 493
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-11",
+      "completion_tokens": 714,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4083.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "We can download the finished checkpoint, but loading it into the serving worker crashes the worker.",
+      "reasoning_tokens": 711,
+      "schedule_index": 17,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:33.751051+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 714,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 711,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 268,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 982
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-12",
+      "completion_tokens": 397,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 3259.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "We want incoming chat traffic split evenly between two existing endpoint versions.",
+      "reasoning_tokens": 394,
+      "schedule_index": 30,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:47.908920+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 397,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 394,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 50,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 447
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-12",
+      "completion_tokens": 586,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4100.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "We want incoming chat traffic split evenly between two existing endpoint versions.",
+      "reasoning_tokens": 583,
+      "schedule_index": 11,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:26.799651+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 586,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 583,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 263,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 849
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-13",
+      "completion_tokens": 277,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 2461.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Inference responses truncate at 128 tokens despite the documented larger output limit.",
+      "reasoning_tokens": 274,
+      "schedule_index": 46,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:00.974271+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 277,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 274,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 332
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-13",
+      "completion_tokens": 136,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 497.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Inference responses truncate at 128 tokens despite the documented larger output limit.",
+      "reasoning_tokens": 133,
+      "schedule_index": 47,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:01.168593+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 136,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 133,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 268,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 404
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-14",
+      "completion_tokens": 447,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4399.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Requests containing an image fail at the multimodal completion endpoint before generation starts.",
+      "reasoning_tokens": 444,
+      "schedule_index": 91,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:46.684738+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 447,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 444,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 499
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-14",
+      "completion_tokens": 529,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 5137.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Requests containing an image fail at the multimodal completion endpoint before generation starts.",
+      "reasoning_tokens": 526,
+      "schedule_index": 97,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:51.811752+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 529,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 526,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 794
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-15",
+      "completion_tokens": 478,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 1743.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Please fix the completion API rejecting a model ID that appears in its own catalog.",
+      "reasoning_tokens": 475,
+      "schedule_index": 110,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:04.484919+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 478,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 475,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 531
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-15",
+      "completion_tokens": 700,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 5308.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "Please fix the completion API rejecting a model ID that appears in its own catalog.",
+      "reasoning_tokens": 697,
+      "schedule_index": 71,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:24.678292+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 700,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 697,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 966
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-inference-16",
+      "completion_tokens": 417,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 4391.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The model server stops responding when its prompt cache fills; monitoring continues to work.",
+      "reasoning_tokens": 414,
+      "schedule_index": 84,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:37.570704+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 417,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 414,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 470
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-inference-16",
+      "completion_tokens": 571,
+      "correct": true,
+      "error": null,
+      "expected": "inference",
+      "finish_reason": "stop",
+      "group": "inference",
+      "http_status": 200,
+      "latency_ms": 7622.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "inference",
+      "prompt": "The model server stops responding when its prompt cache fills; monitoring continues to work.",
+      "reasoning_tokens": 568,
+      "schedule_index": 112,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:05.113564+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 571,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 568,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 837
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-01",
+      "completion_tokens": 228,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2240.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Please fix a fine-tuning job that fails when parsing its JSONL training examples.",
+      "reasoning_tokens": 226,
+      "schedule_index": 93,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:47.713838+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 228,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 226,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 54,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 282
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-01",
+      "completion_tokens": 525,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2855.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Please fix a fine-tuning job that fails when parsing its JSONL training examples.",
+      "reasoning_tokens": 523,
+      "schedule_index": 16,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:31.352119+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 525,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 523,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 267,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 792
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-02",
+      "completion_tokens": 380,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3228.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Our optimizer produces non-finite gradients on its second update.",
+      "reasoning_tokens": 378,
+      "schedule_index": 94,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:49.954534+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 380,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 378,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 49,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 429
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-02",
+      "completion_tokens": 419,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3213.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Our optimizer produces non-finite gradients on its second update.",
+      "reasoning_tokens": 417,
+      "schedule_index": 52,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:06.608645+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 419,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 417,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 262,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 681
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-03",
+      "completion_tokens": 355,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3203.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "We need to restart learning from saved optimizer state rather than beginning at step zero.",
+      "reasoning_tokens": 353,
+      "schedule_index": 85,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:38.270170+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 355,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 353,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 408
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-03",
+      "completion_tokens": 413,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3429.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "We need to restart learning from saved optimizer state rather than beginning at step zero.",
+      "reasoning_tokens": 411,
+      "schedule_index": 27,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:44.920035+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 413,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 411,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 679
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-04",
+      "completion_tokens": 401,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2866.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The fine-tuning scheduler has left our accepted job pending without a trainer allocation.",
+      "reasoning_tokens": 399,
+      "schedule_index": 39,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:55.479438+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 401,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 399,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 454
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-04",
+      "completion_tokens": 555,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3254.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The fine-tuning scheduler has left our accepted job pending without a trainer allocation.",
+      "reasoning_tokens": 553,
+      "schedule_index": 58,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:10.916312+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 555,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 553,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 821
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-05",
+      "completion_tokens": 403,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3305.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The reinforcement learning worker cannot combine rollout rewards into an update batch.",
+      "reasoning_tokens": 401,
+      "schedule_index": 68,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:22.350484+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 403,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 401,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 454
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-05",
+      "completion_tokens": 381,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3893.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The reinforcement learning worker cannot combine rollout rewards into an update batch.",
+      "reasoning_tokens": 379,
+      "schedule_index": 54,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:07.452182+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 381,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 379,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 645
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-06",
+      "completion_tokens": 312,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2409.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "A training batch fails because the target sequence and attention mask have different lengths.",
+      "reasoning_tokens": 310,
+      "schedule_index": 117,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:12.735580+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 312,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 310,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 364
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-06",
+      "completion_tokens": 503,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 4941.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "A training batch fails because the target sequence and attention mask have different lengths.",
+      "reasoning_tokens": 501,
+      "schedule_index": 81,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:36.526160+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 503,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 501,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 768
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-07",
+      "completion_tokens": 476,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3164.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The trainer exits during gradient synchronization between its allocated GPUs.",
+      "reasoning_tokens": 474,
+      "schedule_index": 105,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:59.556721+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 476,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 474,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 49,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 525
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-07",
+      "completion_tokens": 645,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 4922.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The trainer exits during gradient synchronization between its allocated GPUs.",
+      "reasoning_tokens": 643,
+      "schedule_index": 57,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:09.822457+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 645,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 643,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 262,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 907
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-08",
+      "completion_tokens": 347,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2607.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Our run reaches its final update but the training worker never writes model weights to a checkpoint.",
+      "reasoning_tokens": 345,
+      "schedule_index": 102,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:56.949199+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 347,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 345,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 402
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-08",
+      "completion_tokens": 522,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 4643.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Our run reaches its final update but the training worker never writes model weights to a checkpoint.",
+      "reasoning_tokens": 520,
+      "schedule_index": 109,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:04.335094+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 522,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 520,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 268,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 790
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-09",
+      "completion_tokens": 308,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2868.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Please adjust gradient accumulation for the next epoch of this supervised fine-tuning job.",
+      "reasoning_tokens": 306,
+      "schedule_index": 1,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:19.119895+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 308,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 306,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 361
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-09",
+      "completion_tokens": 507,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 4722.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Please adjust gradient accumulation for the next epoch of this supervised fine-tuning job.",
+      "reasoning_tokens": 505,
+      "schedule_index": 66,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:19.775083+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 507,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 505,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 773
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-10",
+      "completion_tokens": 693,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 4811.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The dataset preparation stage rejects our conversations because some assistant turns have null content.",
+      "reasoning_tokens": 691,
+      "schedule_index": 125,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:19.758519+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 693,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 691,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 745
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-10",
+      "completion_tokens": 567,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 5620.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The dataset preparation stage rejects our conversations because some assistant turns have null content.",
+      "reasoning_tokens": 565,
+      "schedule_index": 72,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:25.449705+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 567,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 565,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 832
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-11",
+      "completion_tokens": 417,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2526.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The teacher target file loads, but distillation fails while matching targets to student examples.",
+      "reasoning_tokens": 415,
+      "schedule_index": 76,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:29.986633+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 417,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 415,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 470
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-11",
+      "completion_tokens": 905,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3808.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The teacher target file loads, but distillation fails while matching targets to student examples.",
+      "reasoning_tokens": 903,
+      "schedule_index": 10,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:26.769243+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 905,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 903,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 1171
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-12",
+      "completion_tokens": 483,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2964.6,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Our dashboard accurately shows a rising validation loss; we need help with overfitting and training data.",
+      "reasoning_tokens": 481,
+      "schedule_index": 113,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:06.228190+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 483,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 481,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 57,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 540
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-12",
+      "completion_tokens": 450,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 4389.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Our dashboard accurately shows a rising validation loss; we need help with overfitting and training data.",
+      "reasoning_tokens": 448,
+      "schedule_index": 67,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:20.289085+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 450,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 448,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 270,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 720
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-13",
+      "completion_tokens": 371,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3628.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The inference deployment is healthy, but a separate adapter-training job runs out of GPU memory in backpropagation.",
+      "reasoning_tokens": 369,
+      "schedule_index": 12,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:27.723894+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 371,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 369,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 60,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 431
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-13",
+      "completion_tokens": 442,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3903.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The inference deployment is healthy, but a separate adapter-training job runs out of GPU memory in backpropagation.",
+      "reasoning_tokens": 440,
+      "schedule_index": 111,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:05.025056+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 442,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 440,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 273,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 715
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-14",
+      "completion_tokens": 339,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 1730.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The saved optimizer state is incompatible with the resumed training process.",
+      "reasoning_tokens": 337,
+      "schedule_index": 8,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:25.038493+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 339,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 337,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 49,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 388
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-14",
+      "completion_tokens": 418,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2549.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The saved optimizer state is incompatible with the resumed training process.",
+      "reasoning_tokens": 416,
+      "schedule_index": 53,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:06.945464+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 418,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 416,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 262,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 680
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-15",
+      "completion_tokens": 291,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 2726.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The training service refuses a dataset artifact before it starts the first optimization step.",
+      "reasoning_tokens": 289,
+      "schedule_index": 124,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:19.521827+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 291,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 289,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 343
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-15",
+      "completion_tokens": 447,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 3067.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "The training service refuses a dataset artifact before it starts the first optimization step.",
+      "reasoning_tokens": 445,
+      "schedule_index": 37,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:54.742563+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 447,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 445,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 712
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-training-16",
+      "completion_tokens": 427,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 5243.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Rewards differ between rollouts, but the RL trainer incorrectly receives zero for every update.",
+      "reasoning_tokens": 425,
+      "schedule_index": 49,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:02.208753+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 427,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 425,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 482
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-training-16",
+      "completion_tokens": 722,
+      "correct": true,
+      "error": null,
+      "expected": "training",
+      "finish_reason": "stop",
+      "group": "training",
+      "http_status": 200,
+      "latency_ms": 4707.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "training",
+      "prompt": "Rewards differ between rollouts, but the RL trainer incorrectly receives zero for every update.",
+      "reasoning_tokens": 720,
+      "schedule_index": 103,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:58.374063+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 722,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 720,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 268,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 990
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-01",
+      "completion_tokens": 467,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 3402.6,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The agent finishes correctly, but its trace tree omits every tool-call span.",
+      "reasoning_tokens": 464,
+      "schedule_index": 7,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:23.397056+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 467,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 464,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 520
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-01",
+      "completion_tokens": 467,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4348.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The agent finishes correctly, but its trace tree omits every tool-call span.",
+      "reasoning_tokens": 464,
+      "schedule_index": 96,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:51.084206+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 467,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 464,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 733
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-02",
+      "completion_tokens": 505,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 3408.6,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The evaluation job finished and saved scores; the results page displays a blank table.",
+      "reasoning_tokens": 502,
+      "schedule_index": 83,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:37.479942+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 505,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 502,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 558
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-02",
+      "completion_tokens": 592,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4179.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The evaluation job finished and saved scores; the results page displays a blank table.",
+      "reasoning_tokens": 589,
+      "schedule_index": 29,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:47.297235+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 592,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 589,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 858
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-03",
+      "completion_tokens": 383,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 2790.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Our metrics exporter stopped sending loss history while optimization continues normally.",
+      "reasoning_tokens": 380,
+      "schedule_index": 40,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:55.939198+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 383,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 380,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 50,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 433
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-03",
+      "completion_tokens": 620,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 5530.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Our metrics exporter stopped sending loss history while optimization continues normally.",
+      "reasoning_tokens": 617,
+      "schedule_index": 118,
+      "split": "development",
+      "started_at": "2026-11-18T18:32:12.961739+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 620,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 617,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 263,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 883
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-04",
+      "completion_tokens": 397,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 2906.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "A report link gives viewers an error even though the underlying run is visible.",
+      "reasoning_tokens": 394,
+      "schedule_index": 26,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:44.391024+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 397,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 394,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 449
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-04",
+      "completion_tokens": 518,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4787.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "A report link gives viewers an error even though the underlying run is visible.",
+      "reasoning_tokens": 515,
+      "schedule_index": 115,
+      "split": "development",
+      "started_at": "2026-11-18T18:32:08.978115+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 518,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 515,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 783
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-05",
+      "completion_tokens": 342,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4106.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Trace exports contain the wrong parent ID, so separate agent calls appear as one conversation.",
+      "reasoning_tokens": 339,
+      "schedule_index": 50,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:03.435382+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 342,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 339,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 54,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 396
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-05",
+      "completion_tokens": 579,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 6390.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Trace exports contain the wrong parent ID, so separate agent calls appear as one conversation.",
+      "reasoning_tokens": 576,
+      "schedule_index": 119,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:13.131593+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 579,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 576,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 267,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 846
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-06",
+      "completion_tokens": 380,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 2908.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The completed run points to the wrong source dataset in its artifact lineage diagram.",
+      "reasoning_tokens": 377,
+      "schedule_index": 98,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:53.182949+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 380,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 377,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 432
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-06",
+      "completion_tokens": 550,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4586.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The completed run points to the wrong source dataset in its artifact lineage diagram.",
+      "reasoning_tokens": 547,
+      "schedule_index": 56,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:09.494911+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 550,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 547,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 815
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-07",
+      "completion_tokens": 468,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4949.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Response payloads include token usage but those counters are missing from saved spans.",
+      "reasoning_tokens": 465,
+      "schedule_index": 59,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:11.345183+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 468,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 465,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 520
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-07",
+      "completion_tokens": 772,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 6107.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Response payloads include token usage but those counters are missing from saved spans.",
+      "reasoning_tokens": 769,
+      "schedule_index": 24,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:41.801779+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 772,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 769,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 1037
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-08",
+      "completion_tokens": 479,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4613.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Two model versions are incorrectly combined into a single latency chart series.",
+      "reasoning_tokens": 476,
+      "schedule_index": 121,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:15.145419+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 479,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 476,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 50,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 529
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-08",
+      "completion_tokens": 679,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 6758.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Two model versions are incorrectly combined into a single latency chart series.",
+      "reasoning_tokens": 676,
+      "schedule_index": 86,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:40.888611+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 679,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 676,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 263,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 942
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-09",
+      "completion_tokens": 374,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 3038.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The agent handled a tool exception, yet the corresponding recorded span incorrectly says success.",
+      "reasoning_tokens": 371,
+      "schedule_index": 51,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:03.570099+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 374,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 371,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 427
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-09",
+      "completion_tokens": 515,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 6504.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The agent handled a tool exception, yet the corresponding recorded span incorrectly says success.",
+      "reasoning_tokens": 512,
+      "schedule_index": 22,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:40.767033+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 515,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 512,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 781
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-10",
+      "completion_tokens": 428,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4997.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "A finished evaluation's saved row table will not open in the dashboard.",
+      "reasoning_tokens": 425,
+      "schedule_index": 120,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:13.765094+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 428,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 425,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 479
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-10",
+      "completion_tokens": 715,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4330.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "A finished evaluation's saved row table will not open in the dashboard.",
+      "reasoning_tokens": 712,
+      "schedule_index": 106,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:00.783158+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 715,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 712,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 979
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-11",
+      "completion_tokens": 457,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 6562.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "We need to remove customer email addresses from prompts before our trace exporter stores them.",
+      "reasoning_tokens": 454,
+      "schedule_index": 63,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:16.294349+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 457,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 454,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 54,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 511
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-11",
+      "completion_tokens": 658,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 3967.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "We need to remove customer email addresses from prompts before our trace exporter stores them.",
+      "reasoning_tokens": 655,
+      "schedule_index": 20,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:37.834764+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 658,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 655,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 267,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 925
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-12",
+      "completion_tokens": 454,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 2591.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The serving endpoint responds quickly; its monitoring panel displays stale latency samples.",
+      "reasoning_tokens": 451,
+      "schedule_index": 5,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:22.594927+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 454,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 451,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 505
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-12",
+      "completion_tokens": 546,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 5255.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The serving endpoint responds quickly; its monitoring panel displays stale latency samples.",
+      "reasoning_tokens": 543,
+      "schedule_index": 60,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:14.081177+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 546,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 543,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 810
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-13",
+      "completion_tokens": 652,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 9932.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The training checkpoint exists, but the experiment page's link to that artifact returns a broken URL.",
+      "reasoning_tokens": 649,
+      "schedule_index": 74,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:27.637810+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 652,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 649,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 56,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 708
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-13",
+      "completion_tokens": 595,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4088.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The training checkpoint exists, but the experiment page's link to that artifact returns a broken URL.",
+      "reasoning_tokens": 592,
+      "schedule_index": 19,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:36.678902+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 595,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 592,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 269,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 864
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-14",
+      "completion_tokens": 426,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 9123.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Our invoice matches the contract, but the usage chart renders the wrong date range.",
+      "reasoning_tokens": 423,
+      "schedule_index": 14,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:30.578167+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 426,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 423,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 479
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-14",
+      "completion_tokens": 569,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 5391.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Our invoice matches the contract, but the usage chart renders the wrong date range.",
+      "reasoning_tokens": 566,
+      "schedule_index": 90,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:46.420384+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 569,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 566,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 835
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-15",
+      "completion_tokens": 426,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 3050.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Successful retries create duplicate copies of the same call in our trace explorer.",
+      "reasoning_tokens": 423,
+      "schedule_index": 4,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:21.988415+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 426,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 423,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 478
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-15",
+      "completion_tokens": 560,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 4013.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "Successful retries create duplicate copies of the same call in our trace explorer.",
+      "reasoning_tokens": 557,
+      "schedule_index": 80,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:32.512765+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 560,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 557,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 825
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-observability-16",
+      "completion_tokens": 388,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 2535.6,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The model answers correctly, but the observability integration assigns its spans to the wrong project.",
+      "reasoning_tokens": 385,
+      "schedule_index": 35,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:52.943805+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 388,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 385,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 55,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 443
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-observability-16",
+      "completion_tokens": 527,
+      "correct": true,
+      "error": null,
+      "expected": "observability",
+      "finish_reason": "stop",
+      "group": "observability",
+      "http_status": 200,
+      "latency_ms": 5210.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "observability",
+      "prompt": "The model answers correctly, but the observability integration assigns its spans to the wrong project.",
+      "reasoning_tokens": 524,
+      "schedule_index": 88,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:41.473886+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 527,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 524,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 268,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 795
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-01",
+      "completion_tokens": 297,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2893.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please correct the legal company name printed on our latest invoice.",
+      "reasoning_tokens": 294,
+      "schedule_index": 92,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:47.647432+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 297,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 294,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 49,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 346
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-01",
+      "completion_tokens": 488,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 4722.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please correct the legal company name printed on our latest invoice.",
+      "reasoning_tokens": 485,
+      "schedule_index": 122,
+      "split": "development",
+      "started_at": "2026-11-18T18:32:18.492050+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 488,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 485,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 262,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 750
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-02",
+      "completion_tokens": 293,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2628.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The finance team needs to replace the expired card used for account payments.",
+      "reasoning_tokens": 290,
+      "schedule_index": 42,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:58.345901+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 293,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 290,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 344
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-02",
+      "completion_tokens": 436,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 3564.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The finance team needs to replace the expired card used for account payments.",
+      "reasoning_tokens": 433,
+      "schedule_index": 45,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:00.005824+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 436,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 433,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 700
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-03",
+      "completion_tokens": 245,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 1641.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We paid for additional credits yesterday, but the purchased balance has not been applied.",
+      "reasoning_tokens": 242,
+      "schedule_index": 82,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:36.628431+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 245,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 242,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 298
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-03",
+      "completion_tokens": 424,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 3907.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We paid for additional credits yesterday, but the purchased balance has not been applied.",
+      "reasoning_tokens": 421,
+      "schedule_index": 34,
+      "split": "development",
+      "started_at": "2026-11-18T18:30:51.477161+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 424,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 421,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 690
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-04",
+      "completion_tokens": 582,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2540.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please explain why our invoice charged twice for the same reserved GPU period.",
+      "reasoning_tokens": 579,
+      "schedule_index": 126,
+      "split": "development",
+      "started_at": "2026-11-18T18:32:22.248736+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 582,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 579,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 633
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-04",
+      "completion_tokens": 409,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 5350.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please explain why our invoice charged twice for the same reserved GPU period.",
+      "reasoning_tokens": 406,
+      "schedule_index": 100,
+      "split": "development",
+      "started_at": "2026-11-18T18:31:55.432346+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 409,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 406,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 673
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-05",
+      "completion_tokens": 338,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 3013.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We need a per-project financial breakdown of model serving and training charges for accounting.",
+      "reasoning_tokens": 335,
+      "schedule_index": 65,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:19.336535+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 338,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 335,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 391
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-05",
+      "completion_tokens": 559,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 4832.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We need a per-project financial breakdown of model serving and training charges for accounting.",
+      "reasoning_tokens": 556,
+      "schedule_index": 123,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:18.762286+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 559,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 556,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 825
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-06",
+      "completion_tokens": 289,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 5670.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The billed price per million tokens differs from the rate in our signed agreement.",
+      "reasoning_tokens": 286,
+      "schedule_index": 77,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:30.957634+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 289,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 286,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 342
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-06",
+      "completion_tokens": 431,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 4033.3,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The billed price per million tokens differs from the rate in our signed agreement.",
+      "reasoning_tokens": 428,
+      "schedule_index": 114,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:08.928437+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 431,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 428,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 697
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-07",
+      "completion_tokens": 420,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 3622.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We cancelled a training run at noon and want to dispute charges for the following hour.",
+      "reasoning_tokens": 417,
+      "schedule_index": 28,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:47.271043+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 420,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 417,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 54,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 474
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-07",
+      "completion_tokens": 357,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 5130.2,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We cancelled a training run at noon and want to dispute charges for the following hour.",
+      "reasoning_tokens": 354,
+      "schedule_index": 79,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:32.349728+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 357,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 354,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 267,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 624
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-08",
+      "completion_tokens": 256,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 1981.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please issue a receipt for the credit purchase recorded on our bank statement.",
+      "reasoning_tokens": 253,
+      "schedule_index": 73,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:25.656386+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 256,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 253,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 307
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-08",
+      "completion_tokens": 430,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 3474.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please issue a receipt for the credit purchase recorded on our bank statement.",
+      "reasoning_tokens": 427,
+      "schedule_index": 2,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:19.120132+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 430,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 427,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 694
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-09",
+      "completion_tokens": 293,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2155.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Our accounts-payable team needs a purchase order reference added to the next bill.",
+      "reasoning_tokens": 290,
+      "schedule_index": 44,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:59.012847+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 293,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 290,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 54,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 347
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-09",
+      "completion_tokens": 471,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2470.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Our accounts-payable team needs a purchase order reference added to the next bill.",
+      "reasoning_tokens": 468,
+      "schedule_index": 18,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:34.208027+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 471,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 468,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 267,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 738
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-10",
+      "completion_tokens": 276,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 3187.9,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The usage totals are correct, but our invoice lists the wrong tax jurisdiction.",
+      "reasoning_tokens": 273,
+      "schedule_index": 101,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:56.091122+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 276,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 273,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 328
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-10",
+      "completion_tokens": 512,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 5279.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The usage totals are correct, but our invoice lists the wrong tax jurisdiction.",
+      "reasoning_tokens": 509,
+      "schedule_index": 48,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:01.666468+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 512,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 509,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 777
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-11",
+      "completion_tokens": 308,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 1276.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please move payment reminders to the finance department's new billing contact.",
+      "reasoning_tokens": 305,
+      "schedule_index": 43,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:58.729752+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 308,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 305,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 359
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-11",
+      "completion_tokens": 578,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 5751.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please move payment reminders to the finance department's new billing contact.",
+      "reasoning_tokens": 575,
+      "schedule_index": 89,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:41.962003+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 578,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 575,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 842
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-12",
+      "completion_tokens": 301,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 1910.5,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Our contract grants a service credit that has not appeared on this month's invoice.",
+      "reasoning_tokens": 298,
+      "schedule_index": 36,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:54.028647+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 301,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 298,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 53,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 354
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-12",
+      "completion_tokens": 488,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 4953.1,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Our contract grants a service credit that has not appeared on this month's invoice.",
+      "reasoning_tokens": 485,
+      "schedule_index": 87,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:41.467302+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 488,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 485,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 266,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 754
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-13",
+      "completion_tokens": 322,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2627.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The bank rejected our payment; how do we settle the outstanding account balance?",
+      "reasoning_tokens": 319,
+      "schedule_index": 21,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:39.701487+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 322,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 319,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 52,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 374
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-13",
+      "completion_tokens": 525,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2537.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "The bank rejected our payment; how do we settle the outstanding account balance?",
+      "reasoning_tokens": 522,
+      "schedule_index": 9,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:25.186428+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 525,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 522,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 265,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 790
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-14",
+      "completion_tokens": 270,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2061.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Our finance team needs a refund for an accidental duplicate credit purchase.",
+      "reasoning_tokens": 267,
+      "schedule_index": 25,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:30:42.329192+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 270,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 267,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 50,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 320
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-14",
+      "completion_tokens": 445,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 3511.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Our finance team needs a refund for an accidental duplicate credit purchase.",
+      "reasoning_tokens": 442,
+      "schedule_index": 64,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:16.777356+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 445,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 442,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 263,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 708
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-15",
+      "completion_tokens": 289,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 1403.7,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please change the invoice currency to match the currency specified in our agreement.",
+      "reasoning_tokens": 286,
+      "schedule_index": 108,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:03.081236+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 289,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 286,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 51,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 340
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-15",
+      "completion_tokens": 441,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 5056.0,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "Please change the invoice currency to match the currency specified in our agreement.",
+      "reasoning_tokens": 438,
+      "schedule_index": 104,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:59.279050+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 441,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 438,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 264,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 705
+      },
+      "variant": "candidate"
+    },
+    {
+      "case_id": "v2-billing-16",
+      "completion_tokens": 268,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 1800.4,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We were charged for a reserved resource outside the contracted reservation dates.",
+      "reasoning_tokens": 265,
+      "schedule_index": 127,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:32:23.214406+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 268,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 265,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 50,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 318
+      },
+      "variant": "baseline"
+    },
+    {
+      "case_id": "v2-billing-16",
+      "completion_tokens": 337,
+      "correct": true,
+      "error": null,
+      "expected": "billing",
+      "finish_reason": "stop",
+      "group": "billing",
+      "http_status": 200,
+      "latency_ms": 2606.8,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+      "nemo_correct": true,
+      "output": "billing",
+      "prompt": "We were charged for a reserved resource outside the contracted reservation dates.",
+      "reasoning_tokens": 334,
+      "schedule_index": 61,
+      "split": "heldout",
+      "started_at": "2026-11-18T18:31:14.170575+00:00",
+      "state": "scored",
+      "strict_label": true,
+      "submitted_count": 1,
+      "usage": {
+        "completion_tokens": 337,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 334,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens": 263,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "total_tokens": 600
+      },
+      "variant": "candidate"
+    }
+  ],
+  "scorer": {
+    "normalization_disagreements": 0,
+    "scorer": "nemo_evaluator.exact_match",
+    "version": "0.4.0"
+  },
+  "tickets_sha256": "362f02b7c25f15e980aa57e637b1442f5e2578eb34a620f1d0d965954abcc7c7"
+}

@@ -12,6 +12,9 @@ dependencies = [
 [project.scripts]
 evaluator-gate = "evaluator_gate.cli:main"
 
+[dependency-groups]
+dev = ["pytest>=8"]
+
 [tool.uv.sources]
 nemo-evaluator = { git = "https://github.com/NVIDIA-NeMo/Evaluator.git", rev = "ea35ba36756abd59de201f60af8a2feba014744d" }
 
