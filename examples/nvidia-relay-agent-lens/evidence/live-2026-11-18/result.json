@@ -1,0 +1,257 @@
+{
+  "conversation_id": "ff8af1e6-681c-4b65-8f65-5a7f2113a270",
+  "project": "wandb/nvidia-forge-examples",
+  "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B",
+  "seed": 11,
+  "cases": [
+    {
+      "case_id": "paid_total_by_country-0",
+      "task_id": "paid_total_by_country",
+      "question": "Return each country and the sum of amount_cents for paid orders only. Include only countries with paid orders. Order by country.",
+      "status": "completed",
+      "answer": [
+        [
+          "GB",
+          1498
+        ],
+        [
+          "US",
+          3252
+        ]
+      ],
+      "expected": [
+        [
+          "GB",
+          1498
+        ],
+        [
+          "US",
+          3252
+        ]
+      ],
+      "correct": true,
+      "fault_injected": false,
+      "turns": 3,
+      "wall_ms": 10963.3,
+      "steps": [
+        {
+          "turn": 0,
+          "action": {
+            "action": "schema"
+          },
+          "output": {
+            "schema": "CREATE TABLE customers (\n  id INTEGER PRIMARY KEY, name TEXT NOT NULL, country TEXT NOT NULL\n)\nCREATE TABLE orders (\n  id INTEGER PRIMARY KEY, customer_id INTEGER NOT NULL,\n  amount_cents INTEGER NOT NULL, status TEXT NOT NULL\n)"
+          }
+        },
+        {
+          "turn": 1,
+          "action": {
+            "action": "query",
+            "sql": "SELECT c.country, SUM(o.amount_cents) AS total_amount_cents FROM orders o JOIN customers c ON o.customer_id = c.id WHERE o.status = 'paid' GROUP BY c.country ORDER BY c.country;"
+          },
+          "output": {
+            "rows": [
+              [
+                "GB",
+                1498
+              ],
+              [
+                "US",
+                3252
+              ]
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "action": {
+            "action": "finish",
+            "answer": [
+              [
+                "GB",
+                1498
+              ],
+              [
+                "US",
+                3252
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "no_paid_orders-1",
+      "task_id": "no_paid_orders",
+      "question": "Return id and name for every customer who has no paid orders, including customers with no orders at all. Order by id.",
+      "status": "completed",
+      "answer": [
+        [
+          3,
+          "customer_3"
+        ],
+        [
+          4,
+          "customer_4"
+        ],
+        [
+          6,
+          "customer_6"
+        ]
+      ],
+      "expected": [
+        [
+          3,
+          "customer_3"
+        ],
+        [
+          4,
+          "customer_4"
+        ],
+        [
+          6,
+          "customer_6"
+        ]
+      ],
+      "correct": true,
+      "fault_injected": false,
+      "turns": 3,
+      "wall_ms": 25015.6,
+      "steps": [
+        {
+          "turn": 0,
+          "action": {
+            "action": "schema"
+          },
+          "output": {
+            "schema": "CREATE TABLE customers (\n  id INTEGER PRIMARY KEY, name TEXT NOT NULL, country TEXT NOT NULL\n)\nCREATE TABLE orders (\n  id INTEGER PRIMARY KEY, customer_id INTEGER NOT NULL,\n  amount_cents INTEGER NOT NULL, status TEXT NOT NULL\n)"
+          }
+        },
+        {
+          "turn": 1,
+          "action": {
+            "action": "query",
+            "sql": "SELECT c.id, c.name FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id AND o.status = 'paid') ORDER BY c.id;"
+          },
+          "output": {
+            "rows": [
+              [
+                3,
+                "customer_3"
+              ],
+              [
+                4,
+                "customer_4"
+              ],
+              [
+                6,
+                "customer_6"
+              ]
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "action": {
+            "action": "finish",
+            "answer": [
+              [
+                3,
+                "customer_3"
+              ],
+              [
+                4,
+                "customer_4"
+              ],
+              [
+                6,
+                "customer_6"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "largest_paid_order-2",
+      "task_id": "largest_paid_order",
+      "question": "Return the id and amount_cents of the largest paid order. If amounts tie, return the smallest order id.",
+      "status": "completed",
+      "answer": [
+        [
+          1106,
+          1244
+        ]
+      ],
+      "expected": [
+        [
+          1106,
+          1244
+        ]
+      ],
+      "correct": true,
+      "fault_injected": true,
+      "turns": 4,
+      "wall_ms": 20880.7,
+      "steps": [
+        {
+          "turn": 0,
+          "action": {
+            "action": "schema"
+          },
+          "output": {
+            "schema": "CREATE TABLE customers (\n  id INTEGER PRIMARY KEY, name TEXT NOT NULL, country TEXT NOT NULL\n)\nCREATE TABLE orders (\n  id INTEGER PRIMARY KEY, customer_id INTEGER NOT NULL,\n  amount_cents INTEGER NOT NULL, status TEXT NOT NULL\n)"
+          }
+        },
+        {
+          "turn": 1,
+          "action": {
+            "action": "query",
+            "sql": "SELECT id, amount_cents FROM orders WHERE status = 'paid' ORDER BY amount_cents DESC, id ASC LIMIT 1;"
+          },
+          "error": "TimeoutError: Injected one-time database timeout"
+        },
+        {
+          "turn": 2,
+          "action": {
+            "action": "query",
+            "sql": "SELECT id, amount_cents FROM orders WHERE status = 'paid' ORDER BY amount_cents DESC, id ASC LIMIT 1;"
+          },
+          "output": {
+            "rows": [
+              [
+                1106,
+                1244
+              ]
+            ]
+          }
+        },
+        {
+          "turn": 3,
+          "action": {
+            "action": "finish",
+            "answer": [
+              [
+                1106,
+                1244
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "span_records": 7,
+  "metrics": {
+    "tasks": 3,
+    "correct": 3,
+    "fault_injected": 1,
+    "model_calls": 10
+  },
+  "agent_lens_url": "https://forge.coreweave.com/agent-lens/wandb/nvidia-forge-examples/conversations/ff8af1e6-681c-4b65-8f65-5a7f2113a270",
+  "limitations": [
+    "One agent, three tasks, one synthetic SQLite database.",
+    "The timeout is injected on purpose to show recovery; it is not a measured failure rate.",
+    "This shows Relay's GenAI export reaching Agent Lens, not Relay's general compatibility."
+  ]
+}

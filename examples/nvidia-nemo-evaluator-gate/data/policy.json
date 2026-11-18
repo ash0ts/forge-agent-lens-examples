@@ -1,0 +1,9 @@
+{
+  "candidate_heldout_accuracy_min": 0.85,
+  "group_accuracy_min": 0.75,
+  "max_paired_regressions": 0,
+  "min_heldout_delta": 0.0,
+  "require_complete": true,
+  "require_strict_label": true,
+  "required_heldout_cases": 48
+}

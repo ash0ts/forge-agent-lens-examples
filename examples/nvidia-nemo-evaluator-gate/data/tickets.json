@@ -1,0 +1,462 @@
+{
+  "cases": [
+    {
+      "case_id": "v2-inference-01",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "Our deployed model returns a gateway timeout for chat requests, although the training run finished yesterday.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-inference-02",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "A customer gets only the first chunk from the streaming response; the rest of the answer never arrives.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-inference-03",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "Please help increase the maximum context length accepted by our existing model endpoint.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-inference-04",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "The serving process restarts every time two users request completions together.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-inference-05",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "Generated responses omit the closing JSON brace even when we request structured output.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-06",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "The request queue on our inference deployment keeps growing and no completions finish.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-07",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "A healthy-looking deployment accepts connections but every generation returns an empty choices array.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-08",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "We added another serving replica, yet users still receive 429 errors from the chat API.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-09",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "The API key is valid and our balance is positive; calls to the deployed model receive permission denied.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-10",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "The same prompt started taking ten seconds to return its first token after a serving configuration change.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-11",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "We can download the finished checkpoint, but loading it into the serving worker crashes the worker.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-12",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "We want incoming chat traffic split evenly between two existing endpoint versions.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-13",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "Inference responses truncate at 128 tokens despite the documented larger output limit.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-14",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "Requests containing an image fail at the multimodal completion endpoint before generation starts.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-15",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "Please fix the completion API rejecting a model ID that appears in its own catalog.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-inference-16",
+      "expected": "inference",
+      "group": "inference",
+      "prompt": "The model server stops responding when its prompt cache fills; monitoring continues to work.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-01",
+      "expected": "training",
+      "group": "training",
+      "prompt": "Please fix a fine-tuning job that fails when parsing its JSONL training examples.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-training-02",
+      "expected": "training",
+      "group": "training",
+      "prompt": "Our optimizer produces non-finite gradients on its second update.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-training-03",
+      "expected": "training",
+      "group": "training",
+      "prompt": "We need to restart learning from saved optimizer state rather than beginning at step zero.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-training-04",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The fine-tuning scheduler has left our accepted job pending without a trainer allocation.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-training-05",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The reinforcement learning worker cannot combine rollout rewards into an update batch.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-06",
+      "expected": "training",
+      "group": "training",
+      "prompt": "A training batch fails because the target sequence and attention mask have different lengths.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-07",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The trainer exits during gradient synchronization between its allocated GPUs.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-08",
+      "expected": "training",
+      "group": "training",
+      "prompt": "Our run reaches its final update but the training worker never writes model weights to a checkpoint.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-09",
+      "expected": "training",
+      "group": "training",
+      "prompt": "Please adjust gradient accumulation for the next epoch of this supervised fine-tuning job.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-10",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The dataset preparation stage rejects our conversations because some assistant turns have null content.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-11",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The teacher target file loads, but distillation fails while matching targets to student examples.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-12",
+      "expected": "training",
+      "group": "training",
+      "prompt": "Our dashboard accurately shows a rising validation loss; we need help with overfitting and training data.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-13",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The inference deployment is healthy, but a separate adapter-training job runs out of GPU memory in backpropagation.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-14",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The saved optimizer state is incompatible with the resumed training process.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-15",
+      "expected": "training",
+      "group": "training",
+      "prompt": "The training service refuses a dataset artifact before it starts the first optimization step.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-training-16",
+      "expected": "training",
+      "group": "training",
+      "prompt": "Rewards differ between rollouts, but the RL trainer incorrectly receives zero for every update.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-01",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "The agent finishes correctly, but its trace tree omits every tool-call span.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-observability-02",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "The evaluation job finished and saved scores; the results page displays a blank table.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-observability-03",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "Our metrics exporter stopped sending loss history while optimization continues normally.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-observability-04",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "A report link gives viewers an error even though the underlying run is visible.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-observability-05",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "Trace exports contain the wrong parent ID, so separate agent calls appear as one conversation.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-06",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "The completed run points to the wrong source dataset in its artifact lineage diagram.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-07",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "Response payloads include token usage but those counters are missing from saved spans.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-08",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "Two model versions are incorrectly combined into a single latency chart series.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-09",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "The agent handled a tool exception, yet the corresponding recorded span incorrectly says success.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-10",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "A finished evaluation's saved row table will not open in the dashboard.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-11",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "We need to remove customer email addresses from prompts before our trace exporter stores them.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-12",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "The serving endpoint responds quickly; its monitoring panel displays stale latency samples.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-13",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "The training checkpoint exists, but the experiment page's link to that artifact returns a broken URL.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-14",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "Our invoice matches the contract, but the usage chart renders the wrong date range.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-15",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "Successful retries create duplicate copies of the same call in our trace explorer.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-observability-16",
+      "expected": "observability",
+      "group": "observability",
+      "prompt": "The model answers correctly, but the observability integration assigns its spans to the wrong project.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-01",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Please correct the legal company name printed on our latest invoice.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-billing-02",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "The finance team needs to replace the expired card used for account payments.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-billing-03",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "We paid for additional credits yesterday, but the purchased balance has not been applied.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-billing-04",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Please explain why our invoice charged twice for the same reserved GPU period.",
+      "split": "development"
+    },
+    {
+      "case_id": "v2-billing-05",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "We need a per-project financial breakdown of model serving and training charges for accounting.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-06",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "The billed price per million tokens differs from the rate in our signed agreement.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-07",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "We cancelled a training run at noon and want to dispute charges for the following hour.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-08",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Please issue a receipt for the credit purchase recorded on our bank statement.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-09",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Our accounts-payable team needs a purchase order reference added to the next bill.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-10",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "The usage totals are correct, but our invoice lists the wrong tax jurisdiction.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-11",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Please move payment reminders to the finance department's new billing contact.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-12",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Our contract grants a service credit that has not appeared on this month's invoice.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-13",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "The bank rejected our payment; how do we settle the outstanding account balance?",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-14",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Our finance team needs a refund for an accidental duplicate credit purchase.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-15",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "Please change the invoice currency to match the currency specified in our agreement.",
+      "split": "heldout"
+    },
+    {
+      "case_id": "v2-billing-16",
+      "expected": "billing",
+      "group": "billing",
+      "prompt": "We were charged for a reserved resource outside the contracted reservation dates.",
+      "split": "heldout"
+    }
+  ],
+  "description": "Sixty-four hand-authored synthetic support tickets for a four-way routing task. Sixteen development tickets are shown to prompt authors; forty-eight held-out tickets are reserved for the gate.",
+  "labels": [
+    "inference",
+    "training",
+    "observability",
+    "billing"
+  ],
+  "schema": "forge-routing-dataset/v1",
+  "source": "hand_authored_synthetic_tickets",
+  "version": "routing-64-v2"
+}
