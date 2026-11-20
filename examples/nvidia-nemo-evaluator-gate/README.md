@@ -2,9 +2,9 @@
 
 Companion code and evidence for the CoreWeave Forge Report [**A release gate you have seen say no**](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/reports/A-release-gate-you-have-seen-say-no--VmlldzoxODMzMTAxMw==).
 
-Scores a candidate support-routing prompt against the current one-line baseline using NVIDIA's NeMo Evaluator (`exact_match`) on Forge Serverless Inference, enforces a nine-check policy in `data/policy.json`, requires a deliberately broken negative-control prompt to be rejected, and logs the full decision record to one Forge run.
+Scores a candidate support-routing prompt against the current one-line baseline using NVIDIA NeMo Evaluator (`exact_match`) on CoreWeave Forge Serverless Inference, enforces a nine-check policy in `data/policy.json`, requires a deliberately broken negative-control prompt to be rejected, and logs the full decision record to one Forge run.
 
-Built on public NeMo Evaluator and Forge APIs. Not reviewed by NVIDIA.
+Built on the public NVIDIA NeMo Evaluator library and CoreWeave Forge APIs. Not reviewed by NVIDIA.
 
 ## What this example covers
 

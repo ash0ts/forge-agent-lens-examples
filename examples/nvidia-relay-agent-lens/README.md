@@ -2,9 +2,9 @@
 
 Companion code and evidence for the CoreWeave Forge Report [**Watch an agent survive a tool timeout**](https://forge.coreweave.com/wandb/wandb/nvidia-forge-examples/reports/Watch-an-agent-survive-a-tool-timeout--VmlldzoxODMzMTAxNA==).
 
-Runs a small SQLite agent on Forge Serverless Inference inside NVIDIA's NeMo Relay runtime (`nemo-relay==0.11.1`) and exports OpenTelemetry GenAI spans straight to CoreWeave Agent Lens (`type="gen_ai"`, no collector). One database query is forced to fail with a `TimeoutError` so you can inspect the error span, the retry, and the verified answer in one conversation.
+Runs a small SQLite agent on CoreWeave Forge Serverless Inference inside the NVIDIA NeMo Relay runtime (`nemo-relay==0.11.1`) and exports OpenTelemetry GenAI spans straight to CoreWeave Agent Lens (`type="gen_ai"`, no collector). One database query is forced to fail with a `TimeoutError` so you can inspect the error span, the retry, and the verified answer in one conversation.
 
-Built on the public `nemo-relay` SDK and Forge APIs. Not reviewed by NVIDIA.
+Built on the public NVIDIA NeMo Relay SDK (`nemo-relay`) and CoreWeave Forge APIs. Not reviewed by NVIDIA.
 
 ## What this example covers
 
