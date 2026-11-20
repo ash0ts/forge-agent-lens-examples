@@ -31,3 +31,6 @@
 [submodule "studies/fugue"]
 	path = studies/fugue
 	url = https://github.com/ash0ts/fugue.git
+[submodule "studies/agentnerf"]
+	path = studies/agentnerf
+	url = https://github.com/ash0ts/agentnerf.git
