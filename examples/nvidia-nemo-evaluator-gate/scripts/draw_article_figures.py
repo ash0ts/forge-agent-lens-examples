@@ -270,9 +270,92 @@ def timeline_figure(out_path: Path) -> Path:
     return d.save(out_path)
 
 
+def thinking_tradeoff_figure(out_path: Path) -> Path:
+    runs = [
+        (
+            "2026-10-29 replay (gv5j7kfg)",
+            "enable_thinking = False",
+            "42/48 → 48/48",
+            99.5,
+            106.2,
+            132,
+            132,
+            False,
+        ),
+        (
+            "2026-11-18 live (e0ce3715)",
+            "enable_thinking = False",
+            "42/48 → 48/48",
+            178.8,
+            191.4,
+            132,
+            132,
+            False,
+        ),
+        (
+            "2026-11-18 live (imy7ehrq)",
+            "enable_thinking = True (flag omitted)",
+            "48/48 → 48/48",
+            3038.5,
+            4586.2,
+            18830,
+            26272,
+            True,
+        ),
+    ]
+    d = Illustration("Cost of leaving default thinking enabled on the 48-ticket gate", width=1200, height=560)
+    d.text("REQUEST FLAG AUDIT / 48 HELD-OUT TICKETS ON NEMOTRON 3.5 LIGHTNING", 36, 14, size=14, mono=True, width=820, fill=C["muted"])
+    d.text("Dropping enable_thinking=False bought 48/48 on the one-line prompt at 143x the output tokens.", 36, 38, size=23, weight=600, width=1128)
+    d.line(36, 82, 1164, 82, stroke=C["line"])
+
+    d.text("Run & request config", 36, 98, size=15, weight=600, width=300, fill=C["muted"])
+    d.text("Held-out", 346, 98, size=15, weight=600, width=130, fill=C["muted"])
+    d.text("Median latency (ms, max 5,000)", 492, 98, size=15, weight=600, width=310, fill=C["muted"])
+    d.text("Output tokens (48 tickets, max 28,000)", 828, 98, size=15, weight=600, width=336, fill=C["muted"])
+    d.line(36, 128, 1164, 128, stroke=C["line"])
+
+    lat_w = 240.0
+    tok_w = 240.0
+    for idx, (label, flag_note, acc_str, base_ms, cand_ms, base_tok, cand_tok, warn) in enumerate(runs):
+        y = 148 + idx * 108
+        bg = C["white"] if not warn else "#FDF4EE"
+        border = C["line"] if not warn else C["accent"]
+        d.rect(36, y, 1128, 92, fill=bg, stroke=border, sw=1.8 if warn else 1.2)
+        d.text(label, 50, y + 14, size=15.5, weight=600, width=285)
+        d.text(flag_note, 50, y + 44, size=13, mono=True, width=285, fill=C["accent"] if warn else C["muted"])
+        d.text(acc_str, 346, y + 28, size=14.5, mono=True, weight=600, width=132, fill=C["ink"])
+
+        # Baseline + Candidate latency bars
+        b_lw = max(4.0, (base_ms / 5000.0) * lat_w)
+        c_lw = max(4.0, (cand_ms / 5000.0) * lat_w)
+        d.rect(492, y + 18, b_lw, 18, fill=C["accent"] if warn else C["ink"], stroke="none")
+        d.text(f"base {base_ms:,.1f} ms", 492 + b_lw + 8, y + 18, size=12.5, mono=True, width=135)
+        d.rect(492, y + 48, c_lw, 18, fill=C["accent"] if warn else C["candidate_a"], stroke="none")
+        d.text(f"cand {cand_ms:,.1f} ms", 492 + c_lw + 8, y + 48, size=12.5, mono=True, width=135)
+
+        # Baseline + Candidate token bars
+        b_tw = max(4.0, (base_tok / 28000.0) * tok_w)
+        c_tw = max(4.0, (cand_tok / 28000.0) * tok_w)
+        d.rect(828, y + 18, b_tw, 18, fill=C["accent"] if warn else C["ink"], stroke="none")
+        d.text(f"{base_tok:,} tok", 828 + b_tw + 8, y + 18, size=12.5, mono=True, width=105)
+        d.rect(828, y + 48, c_tw, 18, fill=C["accent"] if warn else C["candidate_a"], stroke="none")
+        d.text(f"{cand_tok:,} tok", 828 + c_tw + 8, y + 48, size=12.5, mono=True, width=105)
+
+    d.line(36, 482, 1164, 482, stroke=C["line"])
+    d.rect(36, 502, 18, 14, fill=C["ink"], stroke="none")
+    d.text("baseline prompt", 62, 499, size=14, width=140)
+    d.rect(218, 502, 18, 14, fill=C["candidate_a"], stroke="none")
+    d.text("candidate prompt (thinking off)", 244, 499, size=14, width=240)
+    d.rect(504, 502, 18, 14, fill=C["accent"], stroke="none")
+    d.text("thinking left on (unpinned client flag)", 530, 499, size=14, width=300)
+    d.text("Source: Forge runs gv5j7kfg, e0ce3715, imy7ehrq.", 842, 500, size=13.5, width=322, fill=C["muted"])
+    return d.save(out_path)
+
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--output", type=Path, default=Path("out/figures"))
     args = p.parse_args()
     print(gate_figure(args.output / "gate-device.svg"))
     print(timeline_figure(args.output / "span-timeline.svg"))
+    print(thinking_tradeoff_figure(args.output / "thinking-cost-tradeoff.svg"))
