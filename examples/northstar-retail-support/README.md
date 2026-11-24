@@ -150,10 +150,10 @@ the questions and threshold against held-out, human-reviewed conversations.
 
 ## Close the loop: evaluate Insights failure clusters in Forge
 
-Companion script [`eval_clustered_failures.py`](eval_clustered_failures.py) takes the two recurring failure clusters Agent Lens Insights surfaced in **“Where Do Agent Lens Insights Come From?”** (`Redundant confirmation of authorized actions` and `Partial processing of multi-part requests`), runs baseline vs. repaired prompt contracts on **Forge Serverless Inference** while tracing each turn with the `coreweave` Forge SDK (`coreweave.forge.agentlens.tracing`), and logs a `wandb.EvalTable` to your CoreWeave Forge Workspace:
+Companion script [`eval_clustered_failures.py`](eval_clustered_failures.py) evaluates 24 trace-grounded multi-step tool-calling cases (`8` post-approval executions, `8` multi-part requests combining a staged write with remaining lookups or orders, and `8` first-turn prepare-and-confirm safety boundaries) surfaced by Agent Lens Insights in **“Where Do Agent Lens Insights Come From?”** (`Redundant confirmation of authorized actions` and `Partial processing of multi-part requests`). It compares `baseline-v10`, `prompt-only-calibrated`, and `calibrated-plus-controller` on **Forge Serverless Inference** (`zai-org/GLM-5.3-Flash`), traces every turn with `coreweave.forge.agentlens.tracing`, and logs side-by-side `wandb.EvalTable` artifacts to CoreWeave Forge ([live public Workspace](https://forge.coreweave.com/wandb/wandb/northstar-insights-eval?nw=3k12g7c0sg2)):
 
 ```bash
-pip install "coreweave==0.1.0b0" openai wandb
+pip install coreweave openai "wandb[eval-table]"
 export WANDB_API_KEY=YOUR_WANDB_API_KEY
 
 # Offline dry-run check
