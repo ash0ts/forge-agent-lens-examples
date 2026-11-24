@@ -12,17 +12,17 @@ Every arm trains on the same **pointer-chasing** task over permutations of 12 no
 
 ### Four controlled arms (`four-arms-v1`)
 
-1. **`arm_a_standard`** — 4 distinct untied transformer blocks (`204,684` parameters), 1 pass, 1 emitted token (`~20.1%` unseen $k=5..8$).
-2. **`arm_b_looped_fixed`** — 1 weight-tied block applied fixed $T=4$ times (`54,732` parameters, 3.7x smaller), 1 emitted token (`~18.4%` unseen $k=5..8$).
-3. **`arm_c_looped_extrap`** — Same 1 weight-tied block (`54,732` parameters) trained at $T=k$ ($k \le 4$) and dialed to $T=5..8$ loops at test time with 0 chain-of-thought tokens (`71.06% ± 14.25%` unseen $k=5..8$, `98.57%` internal logit-lens intermediate hop accuracy).
-4. **`arm_d_scratchpad`** — 2-layer causal transformer (`104,716` parameters) that writes every intermediate hop out loud as tokens (`99.42%` unseen $k=5..8$ at `8` sequential decode steps for $k=8$).
+1. **`arm_a_standard`** — 4 distinct untied transformer blocks (`204,684` parameters), 1 pass, 1 emitted token (`21.81% ± 1.63%` unseen $k=5..8$, `22.17% ± 0.83%` on `seed=9090` holdout).
+2. **`arm_b_looped_fixed`** — 1 weight-tied block applied fixed $T=4$ times (`54,732` parameters, 3.7x smaller), 1 emitted token (`20.38% ± 1.44%` unseen $k=5..8$, `19.30% ± 1.14%` holdout).
+3. **`arm_c_looped_extrap`** — Same 1 weight-tied block (`54,732` parameters) trained at $T=k$ ($k \le 4$) and dialed to $T=5..8$ loops at test time with 0 chain-of-thought tokens (`86.98% ± 7.61%` unseen $k=5..8$, `87.11% ± 8.57%` holdout, `95.67%` internal logit-lens intermediate hop accuracy at $k=4$).
+4. **`arm_d_scratchpad`** — 2-layer causal transformer (`104,716` parameters) that writes every intermediate hop out loud as tokens (`99.42% ± 0.41%` unseen $k=5..8$, `99.25% ± 0.58%` holdout at `8` sequential decode steps for $k=8$).
 
 ### Autoresearch rounds (`autoresearch-v1`)
 
 Starting from `arm_c_looped_extrap`, ARIA tests hypotheses for unseen $k=5..8$ extrapolation under a 65k-parameter, 1-token budget:
-- **Round 1 (`auto_r1_input_inject`)**: full input injection `x + 1.0 * x0` ([Yang et al., 2023](https://arxiv.org/abs/2311.12424)) — raises the 3-seed mean from `71.06%` to `84.54%`, while regressing seed 0 (`78.23% -> 57.33%`) because `x = x0` makes pass 1 see `2 * x0`.
-- **Round 2 (`auto_r2_gated`)**: per-pass learned residual gating `x + sigmoid(gate(x)) * (block(x + x0) - x)` (mirroring gated progressive updates in [Z.ai's GLM-5.4](https://z.ai/blog/glm-5.4), `58,892` parameters) — recovers worst-seed accuracy (`62.99%`) and tightens variance (`13.97%` std) at `82.75%` mean.
-- **Round 3 (`auto_r3_half_inject`)**: half-strength input injection `x + 0.5 * x0` (`54,732` parameters, zero added parameters) — reaches **`98.76% ± 0.60%`** on unseen $k=5..8$ (`24/24` unseen Weave Evaluation rows), matching the 8-token scratchpad within `0.7` percentage points using half the parameters and 1 emitted token.
+- **Round 1 (`auto_r1_input_inject`)**: full input injection `x + 1.0 * x0` ([Yang et al., 2023](https://arxiv.org/abs/2311.12424)) — pushes seeds 1–2 above `98%`, while regressing seed 0 (`76.56% -> 57.33%`, `84.54% ± 19.24%` 3-seed mean) because `x = x0` makes pass 1 see `2 * x0`.
+- **Round 2 (`auto_r2_gated`)**: per-pass learned residual gating `x + sigmoid(gate(x)) * (block(x + x0) - x)` (mirroring gated progressive updates in [Z.ai's GLM-5.4](https://z.ai/blog/glm-5.4), `58,892` parameters) — settles at `82.75% ± 13.97%` (`83.62% ± 13.48%` holdout) as sigmoid saturation starves late passes of the clean graph anchor.
+- **Round 3 (`auto_r3_half_inject`)**: half-strength input injection `x + 0.5 * x0` (`54,732` parameters, zero added parameters) — reaches **`98.76% ± 0.60%`** on unseen $k=5..8$ (**`98.31% ± 0.32%`** on untouched `seed=9090` holdout, `24/24` unseen Weave Evaluation rows, `100.00%` logit-lens legibility), matching the 8-token scratchpad within `0.7` percentage points in `1` emitted token (`71.9 ms` vs `205.8 ms` mean latency in Weave, `2.9x` faster).
 
 ## Routing Codex CLI through CoreWeave Forge Serverless Inference
 
@@ -30,8 +30,27 @@ Starting from `arm_c_looped_extrap`, ARIA tests hypotheses for unseen $k=5..8$ e
 
 ```bash
 export WANDB_API_KEY="..."
-purokishi --config looped-transformer-aria-lab/proxy/purokishi.yaml --frozen &
+export PUROKISHI_API_KEY="local-purokishi"
+purokishi -config looped-transformer-aria-lab/proxy/purokishi.yaml -frozen &
 python3 looped-transformer-aria-lab/proxy/codex_namespace_bridge.py &
+```
+
+Point Codex CLI (`~/.codex/config.toml` or an isolated `CODEX_HOME`) at the local bridge and hosted W&B MCP Server:
+
+```toml
+model = "moonshotai/Kimi-K2.7-Code"
+model_provider = "forge_inference"
+
+[model_providers.forge_inference]
+name = "CoreWeave Forge Serverless Inference"
+base_url = "http://127.0.0.1:18079/v1"
+env_key = "PUROKISHI_API_KEY"
+wire_api = "responses"
+http_headers = { "OpenAI-Project" = "wandb/looped-transformer-study" }
+
+[mcp_servers.wandb]
+url = "https://mcp.withwandb.com/mcp"
+bearer_token_env_var = "WANDB_API_KEY"
 ```
 
 ## Run benchmark locally without credentials

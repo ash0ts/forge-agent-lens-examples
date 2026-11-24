@@ -1,7 +1,7 @@
 {
   "project": {
     "entity": "wandb",
-    "project": "looped-transformer-lab",
+    "project": "looped-transformer-study",
     "group_four_arms": "four-arms-v1",
     "group_autoresearch": "autoresearch-v1",
     "seeds": [0, 1, 2],
