@@ -8,7 +8,7 @@ This directory holds the reproducible CPU benchmark, proxy configuration, arm de
 
 Every arm trains on the same **pointer-chasing** task over permutations of 12 nodes:
 - **Train only on $k \in \{1, 2, 3, 4\}$ hops** (`3` seeds `0,1,2`, `800` AdamW steps, `d_model=64`, `n_heads=4`).
-- **Evaluate on held-out `seed=2026`** across $k \in \{1..4\}$ (in-distribution) and **$k \in \{5, 6, 7, 8\}$ (unseen depth extrapolation)**, plus an untouched post-selection holdout (`seed=9090`) and a 48-example Weave Evaluation (`seed=7777`) per arm.
+- **Evaluate on held-out `seed=2026`** across $k \in \{1..4\}$ (in-distribution) and **$k \in \{5, 6, 7, 8\}$ (unseen depth extrapolation)**, alongside a second independent graph split (`seed=9090`) and a 48-example Weave Evaluation (`seed=7777`) per arm.
 
 ### Four controlled arms (`four-arms-v1`)
 
@@ -22,7 +22,7 @@ Every arm trains on the same **pointer-chasing** task over permutations of 12 no
 Starting from `arm_c_looped_extrap`, ARIA tests hypotheses for unseen $k=5..8$ extrapolation under a 65k-parameter, 1-token budget:
 - **Round 1 (`auto_r1_input_inject`)**: full input injection `x + 1.0 * x0` ([Yang et al., 2023](https://arxiv.org/abs/2311.12424)) — pushes seeds 1–2 above `98%`, while regressing seed 0 (`76.56% -> 57.33%`, `84.54% ± 19.24%` 3-seed mean) because `x = x0` makes pass 1 see `2 * x0`.
 - **Round 2 (`auto_r2_gated`)**: per-pass learned residual gating `x + sigmoid(gate(x)) * (block(x + x0) - x)` (mirroring gated progressive updates in [Z.ai's GLM-5.4](https://z.ai/blog/glm-5.4), `58,892` parameters) — settles at `82.75% ± 13.97%` (`83.62% ± 13.48%` holdout) as sigmoid saturation starves late passes of the clean graph anchor.
-- **Round 3 (`auto_r3_half_inject`)**: half-strength input injection `x + 0.5 * x0` (`54,732` parameters, zero added parameters) — reaches **`98.76% ± 0.60%`** on unseen $k=5..8$ (**`98.31% ± 0.32%`** on untouched `seed=9090` holdout, `24/24` unseen Weave Evaluation rows, `100.00%` logit-lens legibility), matching the 8-token scratchpad within `0.7` percentage points in `1` emitted token (`71.9 ms` vs `205.8 ms` mean latency in Weave, `2.9x` faster).
+- **Round 3 (`auto_r3_half_inject`)**: half-strength input injection `x + 0.5 * x0` (`54,732` parameters, zero added parameters, specified in Turn 3) — reaches **`98.76% ± 0.60%`** on unseen $k=5..8$ (**`98.31% ± 0.32%`** on the second `seed=9090` split, `24/24` unseen Weave Evaluation rows, `100.00%` logit-lens legibility), matching the 8-token scratchpad within `0.7` percentage points in `1` emitted token (`71.9 ms` vs `205.8 ms` mean latency in Weave, `2.9x` faster). ARIA explicitly flags two caveats in its writeup: halving `x0` on every pass does not isolate pass-1 scaling from later passes, and `seed=9090` was inspected across rounds rather than held back until final selection.
 
 ## Routing Codex CLI through CoreWeave Forge Serverless Inference
 
