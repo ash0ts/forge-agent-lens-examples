@@ -1,0 +1,92 @@
+{
+  "project": {
+    "entity": "wandb",
+    "project": "looped-transformer-lab",
+    "group_four_arms": "four-arms-v1",
+    "group_autoresearch": "autoresearch-v1",
+    "seeds": [0, 1, 2],
+    "steps": 800,
+    "task": "k-hop pointer chasing over N=12 nodes; trained on k in {1,2,3,4}, evaluated on k in {1..4} (in-dist) and k in {5..8} (unseen depth extrapolation)"
+  },
+  "arms": [
+    {
+      "id": "arm_a_standard",
+      "aria_title": "Looped Lab — Arm A: Standard 4-Layer Transformer",
+      "cli_args": "--arm arm_a_standard --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
+      "question": "Baseline fixed-depth circuit: 4 distinct untied blocks applied once."
+    },
+    {
+      "id": "arm_b_looped_fixed",
+      "aria_title": "Looped Lab — Arm B: Weight-Tied Looped (Fixed T=4)",
+      "cli_args": "--arm arm_b_looped_fixed --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
+      "question": "Isolates weight tying at equal compute: 1 shared block applied 4 times (~3.7x fewer parameters)."
+    },
+    {
+      "id": "arm_c_looped_extrap",
+      "aria_title": "Looped Lab — Arm C: Adaptive Test-Time Loops (T=k up to 8)",
+      "cli_args": "--arm arm_c_looped_extrap --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
+      "question": "Tests dialing extra loop iterations at inference on unseen 5..8 hop chains with zero emitted CoT tokens."
+    },
+    {
+      "id": "arm_d_scratchpad",
+      "aria_title": "Looped Lab — Arm D: Think-Out-Loud Scratchpad CoT",
+      "cli_args": "--arm arm_d_scratchpad --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
+      "question": "Standard causal model that writes every intermediate hop as an emitted token: readable by text monitors, k sequential decode steps."
+    }
+  ],
+  "verified_references": {
+    "papers": [
+      {
+        "arxiv_id": "1807.03819",
+        "url": "https://arxiv.org/abs/1807.03819",
+        "title": "Universal Transformers",
+        "authors": "Mostafa Dehghani, Stephan Gouws, Oriol Vinyals, Jakob Uszkoreit, Lukasz Kaiser",
+        "year": 2018
+      },
+      {
+        "arxiv_id": "2311.12424",
+        "url": "https://arxiv.org/abs/2311.12424",
+        "title": "Looped Transformers are Better at Learning Learning Algorithms",
+        "authors": "Liu Yang, Kangwook Lee, Robert Nowak, Dimitris Papailiopoulos",
+        "year": 2023
+      },
+      {
+        "arxiv_id": "2409.15647",
+        "url": "https://arxiv.org/abs/2409.15647",
+        "title": "Looped Transformers for Length Generalization",
+        "authors": "Ying Fan, Yilun Du, Kannan Ramchandran, Kangwook Lee",
+        "year": 2024
+      },
+      {
+        "arxiv_id": "2502.17416",
+        "url": "https://arxiv.org/abs/2502.17416",
+        "title": "Reasoning with Latent Thoughts: On the Power of Looped Transformers",
+        "authors": "Nikunj Saunshi, Nishanth Dikkala, Zhiyuan Li, Sanjiv Kumar, Sashank J. Reddi",
+        "year": 2025
+      }
+    ],
+    "shipped_models_fact_check": [
+      {
+        "model": "Thinking Machines Lab — Inkling 2 Mini",
+        "status": "verified_primary_source",
+        "release_date": "2026-11-20",
+        "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+        "model_card": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+        "verified_details": "24-layer MoE (26.4B total, 3.4B active); middle 12 layers (blocks 2-3) run 3 times with shared weights for 48 layer applications per token. Companion variable-loop checkpoint studied serial reasoning out to 10 loops and CoT monitorability vs factual recall."
+      },
+      {
+        "model": "Z.ai — GLM-5.4",
+        "status": "verified_primary_source",
+        "release_date": "2026-11-23",
+        "url": "https://z.ai/blog/glm-5.4",
+        "docs_url": "https://docs.z.ai/guides/llm/glm-5.4",
+        "verified_details": "750B Loop Transformer adapting GLM-5 by looping 28 shared layers across 2 iterations with per-token gated progressive residual updates (to prevent activation-norm blowup) and a hybrid KV cache; controlled ablations published on a 30B test model."
+      },
+      {
+        "model": "OpenAI frontier reasoning models",
+        "status": "unconfirmed",
+        "verified_details": "No primary OpenAI publication confirms a looped-transformer architecture; omitted from factual claims."
+      }
+    ]
+  }
+}

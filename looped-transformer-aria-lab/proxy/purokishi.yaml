@@ -1,0 +1,40 @@
+server:
+  host: 127.0.0.1
+  port: 18080
+
+ui:
+  enabled: true
+  auto_open: false
+  path: /ui
+
+api:
+  path: /api
+
+forward_proxy:
+  mitm:
+    enabled: false
+
+providers:
+  wandb:
+    base_url: https://api.inference.wandb.ai/v1
+    api_key_env: WANDB_API_KEY
+
+rules:
+  - name: route-kimi-with-glm-fallback
+    enabled: true
+    if: 'request.model == "moonshotai/Kimi-K2.7-Code"'
+    do:
+      - type: proxy
+        provider: wandb
+        model: moonshotai/Kimi-K2.7-Code
+      - type: fallback
+        provider: wandb
+        model: zai-org/GLM-5.3
+    then: stop
+  - name: route-any-to-wandb
+    enabled: true
+    do:
+      - type: proxy
+        provider: wandb
+        model: moonshotai/Kimi-K2.7-Code
+    then: stop
