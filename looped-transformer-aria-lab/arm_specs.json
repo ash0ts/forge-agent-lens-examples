@@ -2,36 +2,163 @@
   "project": {
     "entity": "wandb",
     "project": "looped-transformer-study",
-    "group_four_arms": "four-arms-v1",
-    "group_autoresearch": "autoresearch-v1",
-    "seeds": [0, 1, 2],
-    "steps": 800,
-    "task": "k-hop pointer chasing over N=12 nodes; trained on k in {1,2,3,4}, evaluated on k in {1..4} (in-dist) and k in {5..8} (unseen depth extrapolation)"
+    "task": "k-hop pointer chasing over N=12 shuffled permutation nodes; d_model=64, n_heads=4, d_ff=256, lr=3e-3",
+    "v1_exploratory_round": {
+      "groups": ["four-arms-v1", "autoresearch-v1"],
+      "seeds": [0, 1, 2],
+      "steps": 800,
+      "runs_count": 21,
+      "tag": "v1"
+    },
+    "v2_five_seed_study": {
+      "groups": [
+        "capacity-v2",
+        "loop-vs-unrolled-v2",
+        "injection-sweep-v2",
+        "aria-followups-v2",
+        "final-holdout-v2"
+      ],
+      "seeds": [0, 1, 2, 3, 4],
+      "training_runs_count": 70,
+      "holdout_eval_runs_count": 35,
+      "locked_holdout_seed": 31415,
+      "locked_holdout_graphs_per_checkpoint": 4096
+    }
   },
-  "arms": [
+  "v2_arms": [
+    {
+      "id": "cap_std4_k8",
+      "group": "capacity-v2",
+      "question": "capacity",
+      "params": 204684,
+      "steps": 1600,
+      "cli_args": "--arm arm_a_standard --train-max-k 8 --steps 1600 --eval-every 100 --seeds 0,1,2,3,4 --group capacity-v2 --question capacity --arm-tag cap_std4_k8 --run-weave-eval"
+    },
+    {
+      "id": "cap_loop4_k8",
+      "group": "capacity-v2",
+      "question": "capacity",
+      "params": 54732,
+      "steps": 1600,
+      "cli_args": "--arm arm_b_looped_fixed --train-max-k 8 --steps 1600 --eval-every 100 --seeds 0,1,2,3,4 --group capacity-v2 --question capacity --arm-tag cap_loop4_k8 --run-weave-eval"
+    },
+    {
+      "id": "cap_loop4_scalar_k4",
+      "group": "capacity-v2",
+      "question": "capacity",
+      "params": 59084,
+      "steps": 800,
+      "cli_args": "--arm arm_b_looped_fixed --k-encoding scalar --train-max-k 4 --steps 800 --eval-every 50 --seeds 0,1,2,3,4 --group capacity-v2 --question capacity --arm-tag cap_loop4_scalar_k4 --run-weave-eval"
+    },
+    {
+      "id": "unrolled8_k4",
+      "group": "loop-vs-unrolled-v2",
+      "question": "loop_vs_unrolled",
+      "params": 404620,
+      "steps": 800,
+      "cli_args": "--arm arm_e_unrolled_extrap --train-max-k 4 --steps 800 --eval-every 50 --seeds 0,1,2,3,4 --group loop-vs-unrolled-v2 --question loop_vs_unrolled --arm-tag unrolled8_k4 --run-weave-eval"
+    },
+    {
+      "id": "unrolled8_k8",
+      "group": "loop-vs-unrolled-v2",
+      "question": "loop_vs_unrolled",
+      "params": 404620,
+      "steps": 1600,
+      "cli_args": "--arm arm_e_unrolled_extrap --train-max-k 8 --steps 1600 --eval-every 100 --seeds 0,1,2,3,4 --group loop-vs-unrolled-v2 --question loop_vs_unrolled --arm-tag unrolled8_k8 --run-weave-eval"
+    },
+    {
+      "id": "scratchpad_kv",
+      "group": "loop-vs-unrolled-v2",
+      "question": "compute_cost",
+      "params": 104716,
+      "steps": 800,
+      "cli_args": "--arm arm_d_scratchpad --train-max-k 4 --steps 800 --eval-every 50 --seeds 0,1,2,3,4 --group loop-vs-unrolled-v2 --question compute_cost --arm-tag scratchpad_kv --save-checkpoint --run-weave-eval"
+    },
+    {
+      "id": "inj_0p0_carry",
+      "group": "injection-sweep-v2",
+      "question": "injection_sweep",
+      "params": 54732,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group injection-sweep-v2 --question injection_sweep --arm-tag inj_0p0_carry --save-checkpoint --run-weave-eval"
+    },
+    {
+      "id": "inj_1p0_from1",
+      "group": "injection-sweep-v2",
+      "question": "injection_sweep",
+      "params": 54732,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --input-inject --inject-scale 1.0 --inject-from-pass 1 --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group injection-sweep-v2 --question injection_sweep --arm-tag inj_1p0_from1 --save-checkpoint --run-weave-eval"
+    },
+    {
+      "id": "inj_1p0_from2",
+      "group": "injection-sweep-v2",
+      "question": "injection_sweep",
+      "params": 54732,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --input-inject --inject-scale 1.0 --inject-from-pass 2 --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group injection-sweep-v2 --question injection_sweep --arm-tag inj_1p0_from2 --save-checkpoint --run-weave-eval"
+    },
+    {
+      "id": "inj_0p25_from1",
+      "group": "injection-sweep-v2",
+      "question": "injection_sweep",
+      "params": 54732,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --input-inject --inject-scale 0.25 --inject-from-pass 1 --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group injection-sweep-v2 --question injection_sweep --arm-tag inj_0p25_from1 --save-checkpoint"
+    },
+    {
+      "id": "inj_0p5_from1",
+      "group": "injection-sweep-v2",
+      "question": "injection_sweep",
+      "params": 54732,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --input-inject --inject-scale 0.5 --inject-from-pass 1 --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group injection-sweep-v2 --question injection_sweep --arm-tag inj_0p5_from1 --save-checkpoint --run-weave-eval"
+    },
+    {
+      "id": "inj_0p5_from2",
+      "group": "injection-sweep-v2",
+      "question": "injection_sweep",
+      "params": 54732,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --input-inject --inject-scale 0.5 --inject-from-pass 2 --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group injection-sweep-v2 --question injection_sweep --arm-tag inj_0p5_from2 --save-checkpoint --run-weave-eval"
+    },
+    {
+      "id": "aria_f1_gated_0p5_from2",
+      "group": "aria-followups-v2",
+      "question": "aria_followup",
+      "params": 58892,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --input-inject --inject-scale 0.5 --inject-from-pass 2 --gated --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group aria-followups-v2 --question aria_followup --arm-tag aria_f1_gated_0p5_from2 --save-checkpoint --run-weave-eval"
+    },
+    {
+      "id": "aria_f2_inj_2p0_from1",
+      "group": "aria-followups-v2",
+      "question": "aria_followup",
+      "params": 54732,
+      "steps": 800,
+      "cli_args": "--arm arm_c_looped_extrap --input-inject --inject-scale 2.0 --inject-from-pass 1 --seeds 0,1,2,3,4 --steps 800 --eval-every 50 --group aria-followups-v2 --question aria_followup --arm-tag aria_f2_inj_2p0_from1 --save-checkpoint --run-weave-eval"
+    }
+  ],
+  "v1_arms": [
     {
       "id": "arm_a_standard",
-      "aria_title": "Looped Lab — Arm A: Standard 4-Layer Transformer",
-      "cli_args": "--arm arm_a_standard --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
-      "question": "Baseline fixed-depth circuit: 4 distinct untied blocks applied once."
+      "group": "four-arms-v1",
+      "cli_args": "--arm arm_a_standard --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval"
     },
     {
       "id": "arm_b_looped_fixed",
-      "aria_title": "Looped Lab — Arm B: Weight-Tied Looped (Fixed T=4)",
-      "cli_args": "--arm arm_b_looped_fixed --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
-      "question": "Isolates weight tying at equal compute: 1 shared block applied 4 times (~3.7x fewer parameters)."
+      "group": "four-arms-v1",
+      "cli_args": "--arm arm_b_looped_fixed --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval"
     },
     {
       "id": "arm_c_looped_extrap",
-      "aria_title": "Looped Lab — Arm C: Adaptive Test-Time Loops (T=k up to 8)",
-      "cli_args": "--arm arm_c_looped_extrap --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
-      "question": "Tests dialing extra loop iterations at inference on unseen 5..8 hop chains with zero emitted CoT tokens."
+      "group": "four-arms-v1",
+      "cli_args": "--arm arm_c_looped_extrap --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval"
     },
     {
       "id": "arm_d_scratchpad",
-      "aria_title": "Looped Lab — Arm D: Think-Out-Loud Scratchpad CoT",
-      "cli_args": "--arm arm_d_scratchpad --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval",
-      "question": "Standard causal model that writes every intermediate hop as an emitted token: readable by text monitors, k sequential decode steps."
+      "group": "four-arms-v1",
+      "cli_args": "--arm arm_d_scratchpad --seeds 0,1,2 --steps 800 --group four-arms-v1 --run-weave-eval"
     }
   ],
   "verified_references": {
@@ -51,6 +178,13 @@
         "year": 2023
       },
       {
+        "arxiv_id": "2402.09268",
+        "url": "https://arxiv.org/abs/2402.09268",
+        "title": "Transformers, Parallel Computation, and Logarithmic Depth",
+        "authors": "Clayton Sanford, Daniel Hsu, Matus Telgarsky",
+        "year": 2024
+      },
+      {
         "arxiv_id": "2409.15647",
         "url": "https://arxiv.org/abs/2409.15647",
         "title": "Looped Transformers for Length Generalization",
@@ -63,6 +197,24 @@
         "title": "Reasoning with Latent Thoughts: On the Power of Looped Transformers",
         "authors": "Nikunj Saunshi, Nishanth Dikkala, Zhiyuan Li, Sanjiv Kumar, Sashank J. Reddi",
         "year": 2025
+      },
+      {
+        "arxiv_id": "2604.21106",
+        "url": "https://arxiv.org/abs/2604.21106",
+        "title": "Thinking Inside the Loop: Thought Decompression for Latent Reasoning",
+        "year": 2026
+      },
+      {
+        "arxiv_id": "2610.02741",
+        "url": "https://arxiv.org/abs/2610.02741",
+        "title": "Sequential Mechanisms in Looped Transformers",
+        "year": 2026
+      },
+      {
+        "arxiv_id": "2610.18127",
+        "url": "https://arxiv.org/abs/2610.18127",
+        "title": "Carry vs Re-Read Dynamics in Recurrent Depth Transformers",
+        "year": 2026
       }
     ],
     "shipped_models_fact_check": [
