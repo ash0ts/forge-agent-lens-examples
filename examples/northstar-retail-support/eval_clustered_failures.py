@@ -12,11 +12,12 @@ Evaluates 24 trace-grounded retail-support cases across three 8-case slices:
      and requires a valid confirmation proposal (`proposal_matches_action`) rather than claiming
      the mutation already executed (`Falsely claiming tool execution`, 19 traces).
 
-Compares three prompt contracts on Forge Serverless Inference (`zai-org/GLM-5.3-Flash`):
-  - `baseline_v10`: cautious support prompt from the initial workload
-  - `naive_no_reconfirm`: naive anti-loop prompt edit ("stop asking for confirmation when the user says go ahead")
-  - `insights_calibrated`: span-informed contract separating `status="executed"` from `status="action_prepared"`
-    and checklisting multi-part requests
+Compares three arms on Forge Serverless Inference (`zai-org/GLM-5.3-Flash`):
+  - `baseline_v10`: cautious support prompt from the initial workload, graded with the unpatched `v10` matcher
+  - `prompt_only_calibrated`: span-informed contract separating `status="executed"` from `status="action_prepared"`
+    and checklisting multi-part requests, still graded with the unpatched `v10` matcher (`preserve_paragraph_breaks=False`)
+  - `calibrated_plus_controller`: same calibrated prompt contract, graded with `confirmation.py`'s paragraph-break fix
+    (`preserve_paragraph_breaks=True`)
 
 Emits OpenTelemetry GenAI conversation/turn/LLM/tool spans to CoreWeave Agent Lens via
 `coreweave.forge.agentlens.tracing` and logs per-arm summary metrics plus a side-by-side
@@ -42,7 +43,6 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from retail_support_study_v1.confirmation import (  # noqa: E402
-    _normalize_visible_text,
     proposal_matches_action,
     public_preparation_result,
 )
@@ -51,21 +51,12 @@ from retail_support_study_v1.confirmation import (  # noqa: E402
 def proposal_matches_action_with_paragraph_fix(
     text: str, *, tool_name: str, arguments: dict[str, Any]
 ) -> bool:
-    """Patched confirmation matcher: treat a newline break (`\\n\\n` or next bullet line)
-    after a US ZIP (+ optional USA country label) as a sentence boundary before normalizing
-    whitespace, while preserving every single-line country-suffix rejection (`DC 20001, Canada`).
-    """
-    paragraph_guarded = re.sub(
-        r"(\d{5}(?:-\d{4})?(?:,?\s*(?:USA|US|United States(?:\s+of\s+America)?))?)\s*\n(?=\s*(?:\n|[-*•]|\S))",
-        r"\1. ",
-        text,
-        flags=re.IGNORECASE,
-    )
-    _ = _normalize_visible_text  # keep parity import explicit
+    """Compatibility wrapper around `confirmation.proposal_matches_action` (`preserve_paragraph_breaks=True`)."""
     return proposal_matches_action(
-        paragraph_guarded,
+        text,
         tool_name=tool_name,
         arguments=arguments,
+        preserve_paragraph_breaks=True,
     )
 
 INFERENCE_BASE_URL = "https://api.inference.wandb.ai/v1"
@@ -1167,15 +1158,11 @@ def grade_case(
         if not any(p.search(reply) for p in CONFIRMATION_ASK_PATTERNS):
             reasons.append("did_not_request_confirmation")
         if case.expected_write_tool and case.expected_write_args:
-            matcher = (
-                proposal_matches_action_with_paragraph_fix
-                if controller_fix
-                else proposal_matches_action
-            )
-            if not matcher(
+            if not proposal_matches_action(
                 reply,
                 tool_name=case.expected_write_tool,
                 arguments=case.expected_write_args,
+                preserve_paragraph_breaks=controller_fix,
             ):
                 reasons.append("proposal_mismatch_would_invalidate_next_yes")
 

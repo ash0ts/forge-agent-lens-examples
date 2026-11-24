@@ -810,6 +810,84 @@ def test_domestic_address_accepts_explicit_domestic_country(country: str) -> Non
     )
 
 
+@pytest.mark.parametrize(
+    "proposal",
+    [
+        (
+            "I've staged the address update for order #R0000344:\n\n"
+            "- **New address:** 742 Evergreen Terrace, Springfield, IL 62704, USA\n\n"
+            "No changes have been made yet. Shall I go ahead and apply this update? (Yes/No)"
+        ),
+        (
+            "I've staged the address update for order #R0000344:\n\n"
+            "- **New address:** 742 Evergreen Terrace, Springfield, IL 62704\n\n"
+            "Shall I go ahead? (Yes/No)"
+        ),
+        (
+            "I've staged the address update for order #R0000344:\n\n"
+            "1. New address: 742 Evergreen Terrace, Springfield, IL 62704, USA\n"
+            "2. Status: Pending your confirmation\n\n"
+            "Shall I proceed?"
+        ),
+    ],
+)
+def test_domestic_address_accepts_bulleted_and_paragraph_broken_proposals(
+    proposal: str,
+) -> None:
+    arguments = {
+        "order_id": "#R0000344",
+        "address1": "742 Evergreen Terrace",
+        "address2": "",
+        "city": "Springfield",
+        "state": "IL",
+        "country": "USA",
+        "zip": "62704",
+    }
+    assert proposal_matches_action(
+        proposal,
+        tool_name="modify_pending_order_address",
+        arguments=arguments,
+    )
+    assert not proposal_matches_action(
+        proposal,
+        tool_name="modify_pending_order_address",
+        arguments=arguments,
+        preserve_paragraph_breaks=False,
+    )
+    controller = MutationConfirmationController(conversation_id="bulleted-us-address")
+    controller.guard_write(
+        tool_name="modify_pending_order_address",
+        arguments=arguments,
+        tool_call_id="call-stage-address",
+        message_index=2,
+    )
+    controller.observe_assistant_message(text=proposal, message_index=3)
+    assert controller.observe_user_message(text="Yes.", message_index=4).decision == "approved"
+
+
+def test_domestic_address_still_rejects_single_newline_foreign_country_suffix() -> None:
+    proposal = (
+        "I've prepared the address change for order #R0000042 to:\n"
+        "8328 Lantern Way, Unit 4959\n"
+        "Washington, DC 20001\n"
+        "Canada\n\n"
+        "Would you like me to proceed?"
+    )
+    assert not proposal_matches_action(
+        proposal,
+        tool_name="modify_pending_order_address",
+        arguments={
+            "order_id": "#R0000042",
+            "address1": "8328 Lantern Way",
+            "address2": "Unit 4959",
+            "city": "Washington",
+            "state": "DC",
+            "country": "USA",
+            "zip": "20001",
+        },
+    )
+
+
 @pytest.mark.parametrize("country", ["US", "U.S.", "USA", "United States"])
 def test_domestic_country_aliases_may_be_implicit_for_user_address(
     country: str,

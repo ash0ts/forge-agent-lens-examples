@@ -262,8 +262,18 @@ _REASON_TERMS: dict[str, tuple[str, ...]] = {
 }
 
 
-def _normalize_visible_text(value: Any) -> str:
-    normalized = unicodedata.normalize("NFKC", str(value)).casefold()
+_PARAGRAPH_OR_LIST_BREAK = re.compile(
+    r"(?<=[A-Za-z0-9])[ \t]*\r?\n(?:[ \t]*\r?\n+|[ \t]*(?=-[- \t]|[*•][ \t]|\d+[.)][ \t]))"
+)
+
+
+def _normalize_visible_text(
+    value: Any, *, preserve_paragraph_breaks: bool = False
+) -> str:
+    raw = str(value)
+    if preserve_paragraph_breaks:
+        raw = _PARAGRAPH_OR_LIST_BREAK.sub(". ", raw)
+    normalized = unicodedata.normalize("NFKC", raw).casefold()
     return " ".join(normalized.replace("’", "'").split())
 
 
@@ -463,7 +473,11 @@ def _does_not_name_wrong_item(
 
 
 def proposal_matches_action(
-    text: str, *, tool_name: str, arguments: Mapping[str, Any]
+    text: str,
+    *,
+    tool_name: str,
+    arguments: Mapping[str, Any],
+    preserve_paragraph_breaks: bool = True,
 ) -> bool:
     """Check the visible action and its deterministically observable targets.
 
@@ -476,7 +490,9 @@ def proposal_matches_action(
     separate review concerns.
     """
 
-    normalized = _normalize_visible_text(text)
+    normalized = _normalize_visible_text(
+        text, preserve_paragraph_breaks=preserve_paragraph_breaks
+    )
     terms = _ACTION_TERMS.get(tool_name, ())
     if not terms or not any(term in normalized for term in terms):
         return False
